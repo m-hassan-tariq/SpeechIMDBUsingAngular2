@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechIMDB", "SpeechIMDB\SpeechIMDB.csproj", "{AD03AC25-5933-48FC-8217-986AD28D2473}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechIMDB.Service", "SpeechIMDB.Service\SpeechIMDB.Service.csproj", "{952C6C13-043F-456A-8775-63C1C3446087}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechIMDB.BAL", "SpeechIMDB.BAL\SpeechIMDB.BAL.csproj", "{10FA2B55-5934-4CF8-8E0F-08A1D24DE6FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechIMDB.DomainClasses", "SpeechIMDB.DomainClasses\SpeechIMDB.DomainClasses.csproj", "{3E9DC63A-3EE2-4855-888A-C59367C14E88}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD03AC25-5933-48FC-8217-986AD28D2473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD03AC25-5933-48FC-8217-986AD28D2473}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD03AC25-5933-48FC-8217-986AD28D2473}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD03AC25-5933-48FC-8217-986AD28D2473}.Release|Any CPU.Build.0 = Release|Any CPU
+		{952C6C13-043F-456A-8775-63C1C3446087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{952C6C13-043F-456A-8775-63C1C3446087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{952C6C13-043F-456A-8775-63C1C3446087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{952C6C13-043F-456A-8775-63C1C3446087}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10FA2B55-5934-4CF8-8E0F-08A1D24DE6FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10FA2B55-5934-4CF8-8E0F-08A1D24DE6FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10FA2B55-5934-4CF8-8E0F-08A1D24DE6FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10FA2B55-5934-4CF8-8E0F-08A1D24DE6FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E9DC63A-3EE2-4855-888A-C59367C14E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E9DC63A-3EE2-4855-888A-C59367C14E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E9DC63A-3EE2-4855-888A-C59367C14E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E9DC63A-3EE2-4855-888A-C59367C14E88}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

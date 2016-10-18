@@ -1,0 +1,240 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="icon-container">
+                <a [routerLink]="['/movie/searchMovieList']">
+                    <span class="ti-arrow-circle-left"></span>
+                    <span class="icon-name"> Back</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12">
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+            <div class="card card-user">
+                <div class="image">
+                    <img src="{{movieDetailModel.poster != 'N/A' ? movieDetailModel.poster: '../../../../Image/notavailable.svg.png'}}" alt="..." />
+                </div>
+                <div class="content">
+                    <div class="author">
+                        <img class="avatar border-white" src="{{movieDetailModel.poster != 'N/A' ? movieDetailModel.poster: '../../../../Image/imagenotavail.png'}}" alt="..." />
+                        <h3 class="title">
+                            {{movieDetailModel.title}}
+                            <br />
+                            <a href="http://www.imdb.com/title/{{movieDetailModel.imdbID}}" target="_blank">
+                                <small>
+                                    {{movieDetailModel.runtime}} | {{movieDetailModel.genre}} | {{movieDetailModel.released}} ({{movieDetailModel.country}})
+                                </small>
+                            </a>
+                        </h3>
+                    </div>
+                    <p class="description text-center">
+                        {{movieDetailModel.actors}}
+                    </p>
+                </div>
+                <hr>
+                <div class="text-center">
+                    <div class="row">
+                        <div class="col-md-3 col-md-offset-1">
+                            <h5>{{movieDetailModel.type}}<br /><small>Type</small></h5>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>{{movieDetailModel.country}}<br /><small>Country</small></h5>
+                        </div>
+                        <div class="col-md-3">
+                            <h5>{{movieDetailModel.year}}<br /><small>Year</small></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="header">
+                    <h4 class="title"><b>IMDB Stats</b></h4>
+                </div>
+                <div class="content">
+                    <ul class="list-unstyled team-members">
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <div class="avatar">
+                                        <img src="../../../../Image/imdb_rating.jpeg" alt="Circle Image" style="width:50px; height:50px"
+                                             class="img-circle img-no-padding img-responsive">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    {{movieDetailModel.imdbRating}}
+                                    <br />
+                                    <span class="text-success"><small>Rating</small></span>
+                                </div>
+                                <div class="col-xs-3 text-right">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <div class="avatar">
+                                        <img src="../../../../Image/imdb_votes.png" alt="Circle Image" style="width:50px; height:50px"
+                                             class="img-circle img-no-padding img-responsive">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    {{movieDetailModel.imdbVotes}}
+                                    <br />
+                                    <span class="text-success"><small>Votes</small></span>
+                                </div>
+                                <div class="col-xs-3 text-right">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <div class="avatar">
+                                        <img src="../../../../Image/imdb_logo.jpeg" alt="Circle Image" style="width:50px; height:50px"
+                                             class="img-circle img-no-padding img-responsive">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a href="http://www.imdb.com/title/{{movieDetailModel.imdbID}}" target="_blank">
+                                        {{movieDetailModel.imdbID}}
+                                    </a>
+                                    <br />
+                                    <span class="text-success"><small>IMDB Link</small></span>
+                                </div>
+                                <div class="col-xs-3 text-right">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-5">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title"><b>{{movieDetailModel.title}} </b>Details</h4>
+                </div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Director</label>
+                                <div class="alert alert-warning">
+                                    <span><b> {{movieDetailModel.director}}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Writer</label>
+                                <div class="alert alert-warning">
+                                    <span><b> {{movieDetailModel.writer}}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Released</label>
+                                <div class="alert alert-warning">
+                                    <span><b> {{movieDetailModel.released}}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Runtime</label>
+                                <div class="alert alert-warning">
+                                    <span><b> {{movieDetailModel.runtime}}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Genre</label>
+                                <div class="alert alert-warning">
+                                    <span><b> {{movieDetailModel.genre}}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Rated</label>
+                                <div class="alert alert-warning">
+                                    <span><b> {{movieDetailModel.rated}}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Language</label>
+                                <div class="alert alert-warning">
+                                    <span><b> {{movieDetailModel.language}}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Awards</label>
+                                <div class="alert alert-warning">
+                                    <span><b> {{movieDetailModel.awards}}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Metascore</label>
+                                <label class="form-control border-input">{{movieDetailModel.metascore}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title"><b>Poster</b></h4>
+                </div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img src="{{movieDetailModel.poster != 'N/A' ? movieDetailModel.poster: '../../../../Image/photonotavailable.jpg'}}" alt="..." />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="header">
+                    <h4 class="title"><b>Plot</b></h4>
+                </div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="">
+                                {{movieDetailModel.plot}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

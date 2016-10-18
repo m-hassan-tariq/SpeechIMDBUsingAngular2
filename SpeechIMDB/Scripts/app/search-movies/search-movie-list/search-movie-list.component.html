@@ -1,0 +1,60 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="icon-container">
+                <a [routerLink]="['/movie/searchMovie']">
+                    <span class="ti-arrow-circle-left"></span>
+                    <span class="icon-name"> Back</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12">
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">{{movieListModel.response == "True" ? "Feeling lucky?" : "Nope !! We couldnt found anything, Try again !!!"}}</h4>
+                    <p class="category">{{movieListModel.response == "True" ? "Total Records: " + movieListModel.totalResults : "No record."}}</p>
+                </div>
+                <div class="content table-responsive" *ngIf="movieListModel.totalResults > 0">
+                    <table class="table table-striped">
+                        <thead>
+                        <th>Title</th>
+                        <th>Year</th>
+                        <th>imdbID</th>
+                        <th>Type</th>
+                        <th>Poster</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let movie of movieListModel.search">
+                                <td>
+                                    <a (click)="gotoMovieDetail(movie.imdbID)">
+                                        {{movie.title}}
+                                    </a>
+                                </td>
+                                <td>
+                                    {{movie.year}}
+                                </td>
+                                <td>
+                                    {{movie.imdbID}}
+                                </td>
+                                <td>
+                                    {{movie.type}}
+                                </td>
+                                <td>
+                                    <a [routerLink]="['/movie/searchMovieDetail', movie.imdbID]">
+                                        <img src="{{movie.poster != 'N/A' ? movie.poster: '../../../../Image/notavailable.svg.png'}}"
+                                             style="height: 150px; width: 150px" />
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
