@@ -9,7 +9,7 @@ import { DashboardMainModule } from './dashboard/dashboard.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule  } from './app-routing.module';
 import { PageTitleService } from './shared/service/page-title.service';
-import { AlertService } from './shared/service/alert.service';
+import { AlertService, ToasterService } from './shared/service/alert.service';
 import { WebApiObservableService } from './shared/service/web-api-observable.service';
 import { WebApiPromiseService } from './shared/service/web-api-promise.service';
 
@@ -33,6 +33,7 @@ import { WebApiPromiseService } from './shared/service/web-api-promise.service';
     providers: [
         PageTitleService,
         AlertService,
+        ToasterService,
         WebApiObservableService,
         WebApiPromiseService
     ],

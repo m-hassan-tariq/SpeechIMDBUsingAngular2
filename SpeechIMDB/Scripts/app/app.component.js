@@ -12,9 +12,11 @@ var core_1 = require('@angular/core');
 var page_title_service_1 = require('./shared/service/page-title.service');
 var alert_service_1 = require('./shared/service/alert.service');
 var AppComponent = (function () {
-    function AppComponent(pageTitleService, alertService) {
+    function AppComponent(pageTitleService, alertService, toasterService) {
         this.pageTitleService = pageTitleService;
         this.alertService = alertService;
+        this.toasterService = toasterService;
+        this.objToaster = [];
     }
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -30,14 +32,22 @@ var AppComponent = (function () {
         this.alertService.showAlert(false, null);
     };
     AppComponent.prototype.ngAfterViewChecked = function () {
-        //console.log("new ngAfterViewChecked: " + this.pageTitleService.getTitle())
+    };
+    AppComponent.prototype.ngAfterContentInit = function () {
+    };
+    AppComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        this.toasterService.toasterStatus.subscribe(function (val) {
+            if (val)
+                _this.objToaster.push(val);
+        });
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
             templateUrl: '../../Scripts/app/app.component.html'
         }), 
-        __metadata('design:paramtypes', [page_title_service_1.PageTitleService, alert_service_1.AlertService])
+        __metadata('design:paramtypes', [page_title_service_1.PageTitleService, alert_service_1.AlertService, alert_service_1.ToasterService])
     ], AppComponent);
     return AppComponent;
 }());

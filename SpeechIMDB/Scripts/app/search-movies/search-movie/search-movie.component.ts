@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SearchMovieModel } from '../shared/model/search-movie.model';
 import { MovieListModel } from '../shared/model/movie.model';
 import { PageTitleService } from '../../shared/service/page-title.service';
+import { ToasterService } from '../../shared/service/alert.service';
 import { SearchMovieParameterDataService } from '../shared/service/search-movie-parameter-store.service';
 import { SearchMovieListDataService } from '../shared/service/search-movie-list-store.service';
 import * as _ from "lodash";
@@ -23,7 +24,8 @@ export class SearchMovieComponent implements OnInit, DoCheck {
         private searchMovieListDataService: SearchMovieListDataService,
         private pageTitleService: PageTitleService,
         private router: Router,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private toasterService: ToasterService) {
         this.model = new SearchMovieModel("", "", "");
         this.oldModel = new SearchMovieModel("", "", "");
         this.changeDetected = false;
@@ -37,6 +39,7 @@ export class SearchMovieComponent implements OnInit, DoCheck {
 
         //service to set title of page
         this.pageTitleService.setTitle("Search Movies");
+        this.toasterService.showToaster("info", "Search Movie", "Search your movie");
     }
 
     ngDoCheck() {

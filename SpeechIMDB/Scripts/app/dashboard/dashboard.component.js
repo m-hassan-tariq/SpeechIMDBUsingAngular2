@@ -9,13 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var alert_service_1 = require('../shared/service/alert.service');
 var page_title_service_1 = require('../shared/service/page-title.service');
 var DashboardComponent = (function () {
-    function DashboardComponent(pageTitleService) {
+    function DashboardComponent(pageTitleService, alertService) {
         this.pageTitleService = pageTitleService;
+        this.alertService = alertService;
     }
     DashboardComponent.prototype.ngOnInit = function () {
         this.pageTitleService.setTitle("Dashboard");
+        this.alertService.showAlert(true, "Welcome User - Dashboard has been loaded");
     };
     Object.defineProperty(DashboardComponent.prototype, "diagnostic", {
         get: function () {
@@ -29,7 +32,7 @@ var DashboardComponent = (function () {
             selector: 'search-movie-list',
             templateUrl: '../../Scripts/app/dashboard/dashboard.component.html'
         }), 
-        __metadata('design:paramtypes', [page_title_service_1.PageTitleService])
+        __metadata('design:paramtypes', [page_title_service_1.PageTitleService, alert_service_1.AlertService])
     ], DashboardComponent);
     return DashboardComponent;
 }());

@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { MovieDetailModel } from '../shared/model/movie-detail.model'
 import { PageTitleService } from '../../shared/service/page-title.service';
+import { AlertService, AlertMessage, ToasterService } from '../../shared/service/alert.service';
 import { WebApiObservableService } from '../../shared/service/web-api-observable.service';
 import { WebApiPromiseService } from '../../shared/service/web-api-promise.service';
 
@@ -17,15 +18,17 @@ export class SearchMovieDetailComponent implements OnInit {
     constructor(private route: ActivatedRoute,
         private pageTitleService: PageTitleService,
         private movieService: WebApiObservableService,
-        private moviePromiseService: WebApiPromiseService) {
+        private moviePromiseService: WebApiPromiseService,
+        private alertService: AlertService) {
         
     }
 
     ngOnInit() {
         //get data from resolve feature of routing
         this.route.data.forEach((data: { resolvedMovieDetail: MovieDetailModel }) => {
-            //console.log(data.resolvedMovieDetail)
-            this.movieDetailModel = data.resolvedMovieDetail;         
+            this.movieDetailModel = data.resolvedMovieDetail;
+            if (this.movieDetailModel)
+                this.alertService.showAlert(true, "Details of " + this.movieDetailModel.title + " has been laoded.");
         });
 
         //recieving parametes from url for testing

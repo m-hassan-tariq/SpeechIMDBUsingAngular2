@@ -17,3 +17,17 @@ export class AlertService {
         this.alertStatus.next(alertObj);
     }
 }
+
+@Injectable()
+export class ToasterService {
+    public toasterStatus: BehaviorSubject<Message> = new BehaviorSubject<Message>(null);
+
+    showToaster(type: string, header: string, content: string) {
+        let toasterObj: Message = { severity: type, summary: header, detail: content };
+        this.toasterStatus.next(toasterObj);
+    }
+
+    hideToaster() {
+        this.toasterStatus.next(null);
+    }
+}

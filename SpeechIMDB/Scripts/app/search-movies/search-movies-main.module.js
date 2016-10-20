@@ -42,6 +42,9 @@ var SearchMoviesMainModule = (function () {
                 get_movie_detail_resolve_service_1.GetMovieDetailResolve,
                 search_movie_parameter_store_service_1.SearchMovieParameterDataService,
                 search_movie_list_store_service_1.SearchMovieListDataService
+            ],
+            schemas: [
+                core_1.CUSTOM_ELEMENTS_SCHEMA
             ]
         }), 
         __metadata('design:paramtypes', [])

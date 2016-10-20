@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
 import { PageTitleService } from '../shared/service/page-title.service';
-import { AlertService, AlertMessage } from '../shared/service/alert.service';
+import { ToasterService } from '../shared/service/alert.service';
 
 @Component({
     selector: 'search-movie-list',
@@ -12,16 +12,12 @@ export class DashboardComponent2 implements OnInit {
 
     constructor(
         private pageTitleService: PageTitleService,
-        private alertService: AlertService) {
+        private toasterService: ToasterService) {
     }
 
     ngOnInit() {
         this.pageTitleService.setTitle("Dashboard2");
-        this.alertService.showAlert( true, 'Welcome User - Dashbaord2 Page has been loaded');
-    }
-
-    showInfo() {
-        this.alertService.showAlert(true, 'Welcome User - Dashbaord2 Page has been loaded');
+        this.toasterService.showToaster("info", "Homepage", "Dashboard has been loaded");
     }
 
     get diagnostic() : string {

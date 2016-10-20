@@ -1,8 +1,11 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
+import { Message } from 'primeng/primeng';
+
 import { MovieListModel } from '../shared/model/movie.model';
 import { PageTitleService } from '../../shared/service/page-title.service';
+import { ToasterService } from '../../shared/service/alert.service';
 import { WebApiObservableService } from '../../shared/service/web-api-observable.service';
 import { WebApiPromiseService } from '../../shared/service/web-api-promise.service';
 
@@ -14,11 +17,13 @@ import { WebApiPromiseService } from '../../shared/service/web-api-promise.servi
 export class SearchMovieListComponent implements OnInit {
     movieListModel: MovieListModel;
     errorMessage: string;
+    msgs: Message[] = [];
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
         private pageTitleService: PageTitleService,
+        private toasterService: ToasterService,
         private movieService: WebApiObservableService,
         private moviePromiseService: WebApiPromiseService) {
     }
@@ -27,6 +32,7 @@ export class SearchMovieListComponent implements OnInit {
         //get data from resolve feature of routing
         this.route.data.forEach((data: { resolvedAllMovieList: MovieListModel }) => {
             this.movieListModel = data.resolvedAllMovieList;
+            this.toasterService.showToaster("info", "Search Result", this.movieListModel.totalResults + ' record(s) found');
         });
 
         //service to set title of page

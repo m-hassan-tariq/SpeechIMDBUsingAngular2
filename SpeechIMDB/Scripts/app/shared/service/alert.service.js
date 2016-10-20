@@ -31,4 +31,22 @@ var AlertService = (function () {
     return AlertService;
 }());
 exports.AlertService = AlertService;
+var ToasterService = (function () {
+    function ToasterService() {
+        this.toasterStatus = new BehaviorSubject_1.BehaviorSubject(null);
+    }
+    ToasterService.prototype.showToaster = function (type, header, content) {
+        var toasterObj = { severity: type, summary: header, detail: content };
+        this.toasterStatus.next(toasterObj);
+    };
+    ToasterService.prototype.hideToaster = function () {
+        this.toasterStatus.next(null);
+    };
+    ToasterService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], ToasterService);
+    return ToasterService;
+}());
+exports.ToasterService = ToasterService;
 //# sourceMappingURL=alert.service.js.map

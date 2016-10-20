@@ -42,6 +42,7 @@ var AppModule = (function () {
             providers: [
                 page_title_service_1.PageTitleService,
                 alert_service_1.AlertService,
+                alert_service_1.ToasterService,
                 web_api_observable_service_1.WebApiObservableService,
                 web_api_promise_service_1.WebApiPromiseService
             ],

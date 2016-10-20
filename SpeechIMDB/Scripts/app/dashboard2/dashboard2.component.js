@@ -12,16 +12,13 @@ var core_1 = require('@angular/core');
 var page_title_service_1 = require('../shared/service/page-title.service');
 var alert_service_1 = require('../shared/service/alert.service');
 var DashboardComponent2 = (function () {
-    function DashboardComponent2(pageTitleService, alertService) {
+    function DashboardComponent2(pageTitleService, toasterService) {
         this.pageTitleService = pageTitleService;
-        this.alertService = alertService;
+        this.toasterService = toasterService;
     }
     DashboardComponent2.prototype.ngOnInit = function () {
         this.pageTitleService.setTitle("Dashboard2");
-        this.alertService.showAlert(true, 'Welcome User - Dashbaord2 Page has been loaded');
-    };
-    DashboardComponent2.prototype.showInfo = function () {
-        this.alertService.showAlert(true, 'Welcome User - Dashbaord2 Page has been loaded');
+        this.toasterService.showToaster("info", "Homepage", "Dashboard has been loaded");
     };
     Object.defineProperty(DashboardComponent2.prototype, "diagnostic", {
         get: function () {
@@ -35,7 +32,7 @@ var DashboardComponent2 = (function () {
             selector: 'search-movie-list',
             templateUrl: '../../Scripts/app/dashboard2/dashboard2.component.html'
         }), 
-        __metadata('design:paramtypes', [page_title_service_1.PageTitleService, alert_service_1.AlertService])
+        __metadata('design:paramtypes', [page_title_service_1.PageTitleService, alert_service_1.ToasterService])
     ], DashboardComponent2);
     return DashboardComponent2;
 }());

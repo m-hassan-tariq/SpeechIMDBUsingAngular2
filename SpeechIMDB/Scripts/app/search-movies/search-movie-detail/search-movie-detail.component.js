@@ -11,21 +11,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var page_title_service_1 = require('../../shared/service/page-title.service');
+var alert_service_1 = require('../../shared/service/alert.service');
 var web_api_observable_service_1 = require('../../shared/service/web-api-observable.service');
 var web_api_promise_service_1 = require('../../shared/service/web-api-promise.service');
 var SearchMovieDetailComponent = (function () {
-    function SearchMovieDetailComponent(route, pageTitleService, movieService, moviePromiseService) {
+    function SearchMovieDetailComponent(route, pageTitleService, movieService, moviePromiseService, alertService) {
         this.route = route;
         this.pageTitleService = pageTitleService;
         this.movieService = movieService;
         this.moviePromiseService = moviePromiseService;
+        this.alertService = alertService;
     }
     SearchMovieDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         //get data from resolve feature of routing
         this.route.data.forEach(function (data) {
-            //console.log(data.resolvedMovieDetail)
             _this.movieDetailModel = data.resolvedMovieDetail;
+            if (_this.movieDetailModel)
+                _this.alertService.showAlert(true, "Details of " + _this.movieDetailModel.title + " has been laoded.");
         });
         //recieving parametes from url for testing
         this.route.params.forEach(function (params) {
@@ -45,7 +48,7 @@ var SearchMovieDetailComponent = (function () {
             selector: 'search-movie-detail',
             templateUrl: '../../Scripts/app/search-movies/search-movie-detail/search-movie-detail.component.html'
         }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, page_title_service_1.PageTitleService, web_api_observable_service_1.WebApiObservableService, web_api_promise_service_1.WebApiPromiseService])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, page_title_service_1.PageTitleService, web_api_observable_service_1.WebApiObservableService, web_api_promise_service_1.WebApiPromiseService, alert_service_1.AlertService])
     ], SearchMovieDetailComponent);
     return SearchMovieDetailComponent;
 }());
