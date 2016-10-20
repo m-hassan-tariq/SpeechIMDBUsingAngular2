@@ -2235,6 +2235,7 @@
     <Content Include="Scripts\app\search-movies\search-movie-list\search-movie-list.component.html" />
     <Content Include="Scripts\app\search-movies\search-movie\search-movie.component.html" />
     <Content Include="Scripts\app\app.component.html" />
+    <Content Include="Scripts\lib\tether.js" />
     <Content Include="Scripts\systemjs.config.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

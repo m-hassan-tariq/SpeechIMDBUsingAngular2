@@ -7,7 +7,7 @@
         paths: {
             // paths serve as alias
             'npm:': '/node_modules/',
-            'tether': 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.js'
+            'tether': '/Scripts/lib/tether.js'
         },
         // map tells the System loader where to look for things
         map: {
