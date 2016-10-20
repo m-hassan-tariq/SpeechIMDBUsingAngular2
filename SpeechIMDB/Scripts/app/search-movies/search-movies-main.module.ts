@@ -1,7 +1,6 @@
 ﻿import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { SearchMoviesRoutingModule } from './search-movies-main-routing.module';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
@@ -18,7 +17,6 @@ import { SearchMovieListDataService } from './shared/service/search-movie-list-s
         CommonModule,
         FormsModule,
         SearchMoviesRoutingModule,
-        NgbModule
     ],
     declarations: [
         SearchMovieMainComponent,

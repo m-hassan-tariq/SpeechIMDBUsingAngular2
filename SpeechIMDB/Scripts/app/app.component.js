@@ -10,15 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var page_title_service_1 = require('./shared/service/page-title.service');
+var alert_service_1 = require('./shared/service/alert.service');
 var AppComponent = (function () {
-    function AppComponent(pageTitleService) {
+    function AppComponent(pageTitleService, alertService) {
         this.pageTitleService = pageTitleService;
+        this.alertService = alertService;
     }
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.pageTitleService.title.subscribe(function (pageTitle) {
             _this.header = pageTitle;
         });
+        this.alertService.alertStatus.subscribe(function (val) {
+            _this.objAlert = { show: val.show, message: val.message };
+        });
+    };
+    AppComponent.prototype.onCloseAlert = function (reason) {
+        var objCloseAlert = { show: false, message: '' };
+        this.alertService.showAlert(false, null);
     };
     AppComponent.prototype.ngAfterViewChecked = function () {
         //console.log("new ngAfterViewChecked: " + this.pageTitleService.getTitle())
@@ -28,7 +37,7 @@ var AppComponent = (function () {
             selector: 'my-app',
             templateUrl: '../../Scripts/app/app.component.html'
         }), 
-        __metadata('design:paramtypes', [page_title_service_1.PageTitleService])
+        __metadata('design:paramtypes', [page_title_service_1.PageTitleService, alert_service_1.AlertService])
     ], AppComponent);
     return AppComponent;
 }());

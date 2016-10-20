@@ -20,6 +20,12 @@ namespace SpeechIMDB
             );
 
             routes.MapRoute(
+                name: "homeDashboard2",
+                url: "dashboard2/{*.}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "searchMovie",
                 url: "movie/{*.}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

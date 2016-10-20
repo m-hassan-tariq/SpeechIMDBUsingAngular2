@@ -6,7 +6,8 @@
     System.config({
         paths: {
             // paths serve as alias
-            'npm:': '/node_modules/'
+            'npm:': '/node_modules/',
+            'tether': 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.js'
         },
         // map tells the System loader where to look for things
         map: {
@@ -23,6 +24,8 @@
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             '@ng-bootstrap/ng-bootstrap': 'npm:/@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
             // other libraries
+            'ng-lightning/ng-lightning': 'npm:ng-lightning/bundles/ng-lightning.umd.js',
+            'primeng': 'npm:primeng',
             'lodash': 'npm:lodash',
             'rxjs': 'npm:rxjs'
         },
@@ -30,6 +33,12 @@
         packages: {
             app: {
                 main: './main.js',
+                defaultExtension: 'js'
+            },
+            primeng: {
+                defaultExtension: 'js'
+            },
+            'ng-lightning': {
                 defaultExtension: 'js'
             },
             lodash: {

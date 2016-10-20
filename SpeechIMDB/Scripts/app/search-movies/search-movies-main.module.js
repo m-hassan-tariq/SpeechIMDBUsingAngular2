@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var forms_1 = require('@angular/forms');
-var ng_bootstrap_1 = require('@ng-bootstrap/ng-bootstrap');
 var search_movies_main_routing_module_1 = require('./search-movies-main-routing.module');
 var search_movie_component_1 = require('./search-movie/search-movie.component');
 var search_movie_list_component_1 = require('./search-movie-list/search-movie-list.component');
@@ -31,7 +30,6 @@ var SearchMoviesMainModule = (function () {
                 common_1.CommonModule,
                 forms_1.FormsModule,
                 search_movies_main_routing_module_1.SearchMoviesRoutingModule,
-                ng_bootstrap_1.NgbModule
             ],
             declarations: [
                 search_movies_main_component_1.SearchMovieMainComponent,

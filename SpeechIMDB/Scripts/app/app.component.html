@@ -83,7 +83,15 @@
                 </div>
             </div>
         </nav>
+
         <div class="content">
+            <div class="slds-notify_container">
+                <ngl-notification *ngIf="objAlert.show" type="alert" severity="error" (nglNotificationClose)="onCloseAlert($event)" timeout="5000" class="slds-theme--alert-texture">
+                    <h2>{{objAlert.message}}</h2>
+                </ngl-notification>
+            </div>
+
+           <!-- <p-growl [value]="msgs" sticky="sticky"></p-growl>-->
             <router-outlet></router-outlet>
         </div>
         <footer class="footer">
