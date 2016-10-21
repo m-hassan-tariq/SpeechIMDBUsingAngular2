@@ -19,19 +19,18 @@
                 <div class="content">
                     <div class="author">
                         <img class="avatar border-white" src="{{movieDetailModel.poster != 'N/A' ? movieDetailModel.poster: '../../../../Image/imagenotavail.png'}}" alt="..." />
-                        <h3 class="title">
+                        <p class="description text-center">
                             {{movieDetailModel.title}}
-                            <br />
+                        </p>
+                        <h3 class="title">
                             <a href="http://www.imdb.com/title/{{movieDetailModel.imdbID}}" target="_blank">
-                                <small>
-                                    {{movieDetailModel.runtime}} | {{movieDetailModel.genre}} | {{movieDetailModel.released}} ({{movieDetailModel.country}})
-                                </small>
+                                {{movieDetailModel.runtime}} | {{movieDetailModel.genre}} | {{movieDetailModel.released}}
                             </a>
+                            <br />
+                            <br />
+                            {{movieDetailModel.actors}}
                         </h3>
                     </div>
-                    <p class="description text-center">
-                        {{movieDetailModel.actors}}
-                    </p>
                 </div>
                 <hr>
                 <div class="text-center">
@@ -98,10 +97,10 @@
                                 </div>
                                 <div class="col-xs-6">
                                     <a href="http://www.imdb.com/title/{{movieDetailModel.imdbID}}" target="_blank">
-                                        {{movieDetailModel.imdbID}}
+                                        Checkout on IMDB
                                     </a>
                                     <br />
-                                    <span class="text-success"><small>IMDB Link</small></span>
+                                    <span class="text-success"><small>IMDB ID - {{movieDetailModel.imdbID}}</small></span>
                                 </div>
                                 <div class="col-xs-3 text-right">
                                 </div>
