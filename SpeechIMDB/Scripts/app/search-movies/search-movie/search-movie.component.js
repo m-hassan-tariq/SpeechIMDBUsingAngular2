@@ -27,8 +27,8 @@ var SearchMovieComponent = (function () {
         this.route = route;
         this.toasterService = toasterService;
         this.breadcrumbService = breadcrumbService;
-        this.model = new search_movie_model_1.SearchMovieModel("", "", "");
-        this.oldModel = new search_movie_model_1.SearchMovieModel("", "", "");
+        this.model = new search_movie_model_1.SearchMovieModel("", "", "", 1);
+        this.oldModel = new search_movie_model_1.SearchMovieModel("", "", "", 1);
         this.changeDetected = false;
     }
     SearchMovieComponent.prototype.ngOnInit = function () {

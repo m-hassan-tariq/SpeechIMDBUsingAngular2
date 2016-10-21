@@ -12,5 +12,7 @@ namespace SpeechIMDB.DomainClasses
         public string Year { set; get; }
 
         public string Type { set; get; }
+
+        public int Page { set; get; }
     }
 }

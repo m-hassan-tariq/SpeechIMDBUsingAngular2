@@ -22,7 +22,7 @@ var GetAllMoviesResolve = (function () {
         this.movieService = movieService;
         this.moviePromiseService = moviePromiseService;
         this.loaderService = loaderService;
-        this.searchMovieModel = new search_movie_model_1.SearchMovieModel("", "", "");
+        this.searchMovieModel = new search_movie_model_1.SearchMovieModel("", "", "", 1);
     }
     GetAllMoviesResolve.prototype.resolve = function (route) {
         var _this = this;

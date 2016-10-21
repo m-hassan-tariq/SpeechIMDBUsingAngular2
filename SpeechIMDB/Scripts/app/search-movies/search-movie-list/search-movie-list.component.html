@@ -20,7 +20,7 @@
                     <p class="category">{{movieListModel.response == "True" ? "Total Records: " + movieListModel.totalResults : "No record."}}</p>
                 </div>
                 <div class="content table-responsive">
-                    <table ngl-datatable [data]="movieListModel.search" trackByKey="imdbID" [loading]="loading" [(sort)]="sort" (sortChange)="onSort($event)"
+                    <table ngl-datatable [data]="movieListModel.search" trackByKey="imdbID" [loading]="tableLoadingStatus" [(sort)]="sort" (sortChange)="onSort($event)"
                            (onRowClick)="onRowClick($event)" class="slds-max-medium-table--stacked-horizontal">
 
                         <ngl-datatable-column heading="Title" key="title" cellClass="slds-truncate" sortable>
@@ -79,6 +79,12 @@
                             No movie(s) available for searched query !!! 
                         </template>
                     </table>
+                    <br />
+                    <br />
+                    <div class="col-md-offset-4">
+                        <div class="slds-text-title--caps-normal slds-m-bottom--x-small">Showing {{pagination.start}} - {{pagination.end}} of {{total}}</div>
+                        <ngl-pagination [(page)]="page" (pageChange)="refreshDataOnPageChange($event)" [total]="total" limit="5" boundaryNumbers="2" perPage="10" #pagination boundaryLinks></ngl-pagination>
+                    </div>
                 </div>
             </div>
         </div>

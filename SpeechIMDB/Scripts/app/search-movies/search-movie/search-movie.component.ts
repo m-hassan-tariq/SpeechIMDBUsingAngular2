@@ -28,8 +28,8 @@ export class SearchMovieComponent implements OnInit, DoCheck {
         private route: ActivatedRoute,
         private toasterService: ToasterService,
         private breadcrumbService: BreadcrumbService) {
-        this.model = new SearchMovieModel("", "", "");
-        this.oldModel = new SearchMovieModel("", "", "");
+        this.model = new SearchMovieModel("", "", "", 1);
+        this.oldModel = new SearchMovieModel("", "", "", 1);
         this.changeDetected = false;
     }
 

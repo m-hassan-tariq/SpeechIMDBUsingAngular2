@@ -12,7 +12,7 @@ var core_1 = require('@angular/core');
 var search_movie_model_1 = require('../model/search-movie.model');
 var SearchMovieParameterDataService = (function () {
     function SearchMovieParameterDataService() {
-        this.searchParamObj = new search_movie_model_1.SearchMovieModel("", "", "");
+        this.searchParamObj = new search_movie_model_1.SearchMovieModel("", "", "", 1);
     }
     SearchMovieParameterDataService.prototype.setSearchParamObj = function (val) {
         this.searchParamObj = val;

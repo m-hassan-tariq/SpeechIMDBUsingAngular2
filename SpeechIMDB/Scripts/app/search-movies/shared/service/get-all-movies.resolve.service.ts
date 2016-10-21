@@ -19,7 +19,7 @@ export class GetAllMoviesResolve implements Resolve<MovieListModel> {
         private movieService: WebApiObservableService,
         private moviePromiseService: WebApiPromiseService,
         private loaderService: LoaderService) {
-        this.searchMovieModel = new SearchMovieModel("", "", "");
+        this.searchMovieModel = new SearchMovieModel("", "", "", 1);
     }
 
     resolve(route: ActivatedRouteSnapshot): Promise<MovieListModel> | boolean {
