@@ -41,7 +41,7 @@ export class SearchMovieComponent implements OnInit, DoCheck {
 
         //service to set title of page
         this.pageTitleService.setTitle("Search Movies");
-        this.toasterService.showToaster("info", "Search Movie", "Search your movie");
+        this.toasterService.showToaster("info", "Search Movie", "ready to explore movie search engine");
         this.breadcrumbService.setBreadcrumbs("searchMovie");
     }
 

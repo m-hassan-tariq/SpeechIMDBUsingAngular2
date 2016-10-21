@@ -36,7 +36,8 @@ export class SearchMovieListComponent implements OnInit {
         //get data from resolve feature of routing
         this.route.data.forEach((data: { resolvedAllMovieList: MovieListModel }) => {
             this.movieListModel = data.resolvedAllMovieList;
-            this.toasterService.showToaster("info", "Search Result", this.movieListModel.totalResults + ' record(s) found');
+            this.toasterService.showToaster("info", "Search Movie List", "Page has been loaded");
+            this.toasterService.showToaster("success", "Search Result", this.movieListModel.totalResults + ' record(s) found');
             this.loaderService.displayLoader(false);
         });
 

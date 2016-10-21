@@ -1,13 +1,18 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
-
 import 'rxjs/add/operator/toPromise';
+
+import { ToasterService } from './alert.service';
+import { LoaderService } from './loader.service';
 
 @Injectable()
 export class WebApiPromiseService {
 
 
-    constructor(private http: Http) { }
+    constructor(private http: Http,
+        private toasterService: ToasterService,
+        private loaderService: LoaderService) {
+    }
 
     getService(url: string): Promise<any> {
         return this.http
@@ -129,6 +134,8 @@ export class WebApiPromiseService {
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error);
+        this.toasterService.showToaster('error', 'Oops!! An error occurred', error);
+        this.loaderService.displayLoader(false);
         return Promise.reject(error.message || error);
     }
 }

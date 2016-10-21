@@ -33,7 +33,8 @@ var SearchMovieListComponent = (function () {
         //get data from resolve feature of routing
         this.route.data.forEach(function (data) {
             _this.movieListModel = data.resolvedAllMovieList;
-            _this.toasterService.showToaster("info", "Search Result", _this.movieListModel.totalResults + ' record(s) found');
+            _this.toasterService.showToaster("info", "Search Movie List", "Page has been loaded");
+            _this.toasterService.showToaster("success", "Search Result", _this.movieListModel.totalResults + ' record(s) found');
             _this.loaderService.displayLoader(false);
         });
         //service to set title of page

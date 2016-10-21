@@ -15,10 +15,16 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
+import { ToasterService } from './alert.service';
+import { LoaderService } from './loader.service';
+
 @Injectable()
 export class WebApiObservableService {
 
-    constructor(private http: Http) { }
+    constructor(private http: Http,
+        private toasterService: ToasterService,
+        private loaderService: LoaderService) {
+    }
 
     getService(url : string): Observable<any> {
         return this.http
@@ -133,6 +139,8 @@ export class WebApiObservableService {
         let errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.error(errMsg); 
+        this.toasterService.showToaster('error', 'Oops!! An error occurred', errMsg);
+        this.loaderService.displayLoader(false);
         return Observable.throw(errMsg);
     }
 }

@@ -35,6 +35,7 @@ var ToasterService = (function () {
     function ToasterService() {
         this.toasterStatus = new BehaviorSubject_1.BehaviorSubject(null);
     }
+    //type: success, info, warn, error
     ToasterService.prototype.showToaster = function (type, header, content) {
         var toasterObj = { severity: type, summary: header, detail: content };
         this.toasterStatus.next(toasterObj);
