@@ -29,6 +29,10 @@ export class BreadcrumbService {
                 this.itemBreadcrums.push({ label: 'Dashboard', routerLink: ['dashboard/home'] });
                 this.itemBreadcrums.push({ label: 'Search Movie' });
                 break;
+            case 'speechSearchMovie':
+                this.itemBreadcrums.push({ label: 'Dashboard', routerLink: ['dashboard/home'] });
+                this.itemBreadcrums.push({ label: 'Speech Search Movie' });
+                break;
             case 'movieList':
                 this.itemBreadcrums.push({ label: 'Dashboard', routerLink: ['dashboard/home'] });
                 this.itemBreadcrums.push({ label: 'Search Movie', routerLink: ['movie/searchMovie'] });

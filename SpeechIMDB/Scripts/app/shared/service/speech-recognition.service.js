@@ -9,22 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var search_movie_model_1 = require('../model/search-movie.model');
-var SearchMovieParameterDataService = (function () {
-    function SearchMovieParameterDataService() {
-        this.searchParamObj = new search_movie_model_1.SearchMovieModel("", "", "", 1);
+var SpeechRecognition = (function () {
+    function SpeechRecognition() {
     }
-    SearchMovieParameterDataService.prototype.setSearchParamObj = function (val) {
-        this.searchParamObj = val;
-    };
-    SearchMovieParameterDataService.prototype.getSearchParamObj = function () {
-        return this.searchParamObj;
-    };
-    SearchMovieParameterDataService = __decorate([
+    SpeechRecognition = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], SearchMovieParameterDataService);
-    return SearchMovieParameterDataService;
+    ], SpeechRecognition);
+    return SpeechRecognition;
 }());
-exports.SearchMovieParameterDataService = SearchMovieParameterDataService;
-//# sourceMappingURL=search-movie-parameter-store.service.js.map
+exports.SpeechRecognition = SpeechRecognition;
+//# sourceMappingURL=speech-recognition.service.js.map

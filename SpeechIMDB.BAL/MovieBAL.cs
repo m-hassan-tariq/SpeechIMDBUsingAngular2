@@ -21,7 +21,7 @@ namespace SpeechIMDB.BAL
 
         public async Task<MovieList> GetAllMovies(SearchMovie obj)
         {
-            return await _movieListService.GetMovieAsync("/?s=" + obj.Name + "&y=" + obj.Year + "&plot=full&r=json&type=" + obj.Type);
+            return await _movieListService.GetMovieAsync("/?s=" + obj.Name + "&y=" + obj.Year + "&plot=full&r=json&type=" + obj.Type + "&page=" + obj.Page);
         }
 
         public async Task<MovieDetail> GetMovieDetail(string id)

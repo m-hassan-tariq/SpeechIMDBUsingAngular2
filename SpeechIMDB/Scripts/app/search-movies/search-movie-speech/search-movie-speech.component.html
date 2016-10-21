@@ -1,0 +1,28 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">begin speech search from here...</h4>
+                </div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Movie Name</label>
+                                <input type="text" class="form-control border-input" name="txtSearchMovieName" id="txtSearchMovieName" value=""
+                                       placeholder="Enter Movie Name" [(ngModel)]="model.name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-info btn-fill btn-wd" name="btnSearchMovie" id="btnSearchMovie" (click)="searchMovie()">
+                            Search <b>{{model.name}}</b>
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

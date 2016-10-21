@@ -8,7 +8,7 @@ export class SearchMovieParameterDataService {
     private searchParamObj: SearchMovieModel;
 
     constructor() {
-        this.searchParamObj = new SearchMovieModel("", "", "");
+        this.searchParamObj = new SearchMovieModel("", "", "", 1);
     }
 
     public setSearchParamObj(val: SearchMovieModel): void {

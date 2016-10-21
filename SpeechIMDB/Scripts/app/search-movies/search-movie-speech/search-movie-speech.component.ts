@@ -12,10 +12,10 @@ import * as _ from "lodash";
 
 @Component({
     selector: 'search-movie',
-    templateUrl: '../../Scripts/app/search-movies/search-movie/search-movie.component.html'
+    templateUrl: '../../Scripts/app/search-movies/search-movie-speech/search-movie-speech.component.html'
 })
 
-export class SearchMovieComponent implements OnInit, DoCheck {
+export class SpeechSearchMovieComponent implements OnInit, DoCheck {
     model: SearchMovieModel;
     oldModel: SearchMovieModel;
     changeDetected: boolean;
@@ -41,8 +41,8 @@ export class SearchMovieComponent implements OnInit, DoCheck {
 
         //service to set title of page
         this.pageTitleService.setTitle("Search Movies");
-        this.toasterService.showToaster("info", "Search Movie", "ready to explore movie search engine");
-        this.breadcrumbService.setBreadcrumbs("searchMovie");
+        this.toasterService.showToaster("info", "Speech Search Movie", "ready to explore movie search engine using SpeechAPI");
+        this.breadcrumbService.setBreadcrumbs("speechSearchMovie");
     }
 
     ngDoCheck() {

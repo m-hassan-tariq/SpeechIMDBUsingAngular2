@@ -2,5 +2,6 @@
     constructor(
         public name: string,
         public year: string,
-        public type: string) { }
+        public type: string,
+        public page: number) { }
 }

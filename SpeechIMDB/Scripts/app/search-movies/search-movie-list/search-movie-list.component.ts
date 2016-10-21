@@ -2,7 +2,10 @@
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Message } from 'primeng/primeng';
+import { INglDatatableSort, INglDatatableRowClick } from 'ng-lightning/ng-lightning';
 
+import { SearchMovieModel } from '../shared/model/search-movie.model';
+import { SearchMovieParameterDataService } from '../shared/service/search-movie-parameter-store.service';
 import { MovieListModel } from '../shared/model/movie.model';
 import { PageTitleService } from '../../shared/service/page-title.service';
 import { ToasterService } from '../../shared/service/alert.service';
@@ -17,19 +20,28 @@ import { WebApiPromiseService } from '../../shared/service/web-api-promise.servi
 })
 
 export class SearchMovieListComponent implements OnInit {
+    searchMovieModel: SearchMovieModel;
     movieListModel: MovieListModel;
     errorMessage: string;
-    msgs: Message[] = [];
+    msgs: Message[];
+    sort: INglDatatableSort;
+    tableLoadingStatus: boolean;
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
+        private searchMovieParameterService: SearchMovieParameterDataService,
         private pageTitleService: PageTitleService,
         private toasterService: ToasterService,
         private breadcrumbService: BreadcrumbService,
         private loaderService: LoaderService,
-        private movieService: WebApiObservableService,
+        private movieObservableService: WebApiObservableService,
         private moviePromiseService: WebApiPromiseService) {
+
+        this.tableLoadingStatus = false;
+        this.searchMovieModel = this.searchMovieParameterService.getSearchParamObj();
+        this.msgs = [];
+        this.sort = { key: 'title', order: 'asc' };
     }
 
     ngOnInit() {
@@ -46,11 +58,35 @@ export class SearchMovieListComponent implements OnInit {
         this.breadcrumbService.setBreadcrumbs("movieList");
     }
 
-    gotoMovieDetail(id: string): void {
-        this.router.navigate(['movie/searchMovieDetail', id]);
+    onSort($event: INglDatatableSort) {
+        const { key, order } = $event;
+        this.movieListModel.search.sort((a: any, b: any) => {
+            return (key === 'rank' ? b[key] - a[key] : b[key].localeCompare(a[key])) * (order === 'desc' ? 1 : -1);
+        });
     }
 
-    get diagnostic() : string {
+    onRowClick($event: INglDatatableRowClick) {
+        this.router.navigate(['movie/searchMovieDetail', $event.data.imdbID]);
+    }
+
+    refreshDataOnPageChange(pageNumber: number) {
+        this.tableLoadingStatus = true;
+        this.searchMovieModel.page = pageNumber;
+        this.movieObservableService
+            .getServiceWithComplexObjectAsQueryString('api/Movie/GetAllMovies', this.searchMovieModel)
+            .subscribe(
+            result => {
+                this.tableLoadingStatus = false;
+                this.movieListModel = result;
+            },
+            error => {
+                this.toasterService.showToaster("error", "Opps!! Error Occured", <any>error);
+                this.tableLoadingStatus = false;
+            }
+            );
+    }
+
+    get diagnostic(): string {
         return JSON.stringify(this.movieListModel);
     }
 

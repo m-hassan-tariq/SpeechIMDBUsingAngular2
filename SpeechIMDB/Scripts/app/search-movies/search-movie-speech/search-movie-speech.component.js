@@ -18,8 +18,8 @@ var breadcrumb_service_1 = require('../../shared/service/breadcrumb.service');
 var search_movie_parameter_store_service_1 = require('../shared/service/search-movie-parameter-store.service');
 var search_movie_list_store_service_1 = require('../shared/service/search-movie-list-store.service');
 var _ = require("lodash");
-var SearchMovieComponent = (function () {
-    function SearchMovieComponent(searchMovieParameterService, searchMovieListDataService, pageTitleService, router, route, toasterService, breadcrumbService) {
+var SpeechSearchMovieComponent = (function () {
+    function SpeechSearchMovieComponent(searchMovieParameterService, searchMovieListDataService, pageTitleService, router, route, toasterService, breadcrumbService) {
         this.searchMovieParameterService = searchMovieParameterService;
         this.searchMovieListDataService = searchMovieListDataService;
         this.pageTitleService = pageTitleService;
@@ -31,21 +31,21 @@ var SearchMovieComponent = (function () {
         this.oldModel = new search_movie_model_1.SearchMovieModel("", "", "", 1);
         this.changeDetected = false;
     }
-    SearchMovieComponent.prototype.ngOnInit = function () {
+    SpeechSearchMovieComponent.prototype.ngOnInit = function () {
         //populate fields in case of back button click from search movie list
         //use Object.assign() for deep copy, its similar to angular.copy()
         this.model = Object.assign({}, this.searchMovieParameterService.getSearchParamObj());
         this.oldModel = Object.assign({}, this.searchMovieParameterService.getSearchParamObj());
         //service to set title of page
         this.pageTitleService.setTitle("Search Movies");
-        this.toasterService.showToaster("info", "Search Movie", "ready to explore movie search engine");
-        this.breadcrumbService.setBreadcrumbs("searchMovie");
+        this.toasterService.showToaster("info", "Speech Search Movie", "ready to explore movie search engine using SpeechAPI");
+        this.breadcrumbService.setBreadcrumbs("speechSearchMovie");
     };
-    SearchMovieComponent.prototype.ngDoCheck = function () {
+    SpeechSearchMovieComponent.prototype.ngDoCheck = function () {
         if (_.isEqual(this.model, this.oldModel) == false)
             this.changeDetected = true;
     };
-    SearchMovieComponent.prototype.searchMovie = function () {
+    SpeechSearchMovieComponent.prototype.searchMovie = function () {
         if (this.changeDetected) {
             //set movies search parameter store
             this.searchMovieParameterService.setSearchParamObj(this.model);
@@ -54,21 +54,21 @@ var SearchMovieComponent = (function () {
         }
         this.router.navigate(['movie/searchMovieList']);
     };
-    Object.defineProperty(SearchMovieComponent.prototype, "diagnostic", {
+    Object.defineProperty(SpeechSearchMovieComponent.prototype, "diagnostic", {
         get: function () {
             return JSON.stringify(this.model);
         },
         enumerable: true,
         configurable: true
     });
-    SearchMovieComponent = __decorate([
+    SpeechSearchMovieComponent = __decorate([
         core_1.Component({
             selector: 'search-movie',
-            templateUrl: '../../Scripts/app/search-movies/search-movie/search-movie.component.html'
+            templateUrl: '../../Scripts/app/search-movies/search-movie-speech/search-movie-speech.component.html'
         }), 
         __metadata('design:paramtypes', [search_movie_parameter_store_service_1.SearchMovieParameterDataService, search_movie_list_store_service_1.SearchMovieListDataService, page_title_service_1.PageTitleService, router_1.Router, router_1.ActivatedRoute, alert_service_1.ToasterService, breadcrumb_service_1.BreadcrumbService])
-    ], SearchMovieComponent);
-    return SearchMovieComponent;
+    ], SpeechSearchMovieComponent);
+    return SpeechSearchMovieComponent;
 }());
-exports.SearchMovieComponent = SearchMovieComponent;
-//# sourceMappingURL=search-movie.component.js.map
+exports.SpeechSearchMovieComponent = SpeechSearchMovieComponent;
+//# sourceMappingURL=search-movie-speech.component.js.map
