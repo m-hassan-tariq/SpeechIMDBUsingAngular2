@@ -2,6 +2,7 @@
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Message } from 'primeng/primeng';
+import { INglDatatableSort, INglDatatableRowClick } from 'ng-lightning/ng-lightning';
 
 import { MovieListModel } from '../shared/model/movie.model';
 import { PageTitleService } from '../../shared/service/page-title.service';
@@ -20,6 +21,7 @@ export class SearchMovieListComponent implements OnInit {
     movieListModel: MovieListModel;
     errorMessage: string;
     msgs: Message[] = [];
+    sort: INglDatatableSort = { key: 'title', order: 'asc' };
 
     constructor(
         private router: Router,
@@ -37,7 +39,10 @@ export class SearchMovieListComponent implements OnInit {
         this.route.data.forEach((data: { resolvedAllMovieList: MovieListModel }) => {
             this.movieListModel = data.resolvedAllMovieList;
             this.toasterService.showToaster("info", "Search Movie List", "Page has been loaded");
-            this.toasterService.showToaster("success", "Search Result", this.movieListModel.totalResults + ' record(s) found');
+            this.toasterService.showToaster(
+                /*type*/ this.movieListModel.totalResults ? "success" : "warn", "Search Result",
+                /*message*/ this.movieListModel.totalResults ? this.movieListModel.totalResults : '0' + ' record(s) found'
+            );
             this.loaderService.displayLoader(false);
         });
 
@@ -46,8 +51,15 @@ export class SearchMovieListComponent implements OnInit {
         this.breadcrumbService.setBreadcrumbs("movieList");
     }
 
-    gotoMovieDetail(id: string): void {
-        this.router.navigate(['movie/searchMovieDetail', id]);
+    onRowClick($event: INglDatatableRowClick) {
+        this.router.navigate(['movie/searchMovieDetail', $event.data.imdbID]);
+    }
+
+    onSort($event: INglDatatableSort) {
+        const { key, order } = $event;
+        this.movieListModel.search.sort((a: any, b: any) => {
+            return (key === 'rank' ? b[key] - a[key] : b[key].localeCompare(a[key])) * (order === 'desc' ? 1 : -1);
+        });
     }
 
     get diagnostic() : string {

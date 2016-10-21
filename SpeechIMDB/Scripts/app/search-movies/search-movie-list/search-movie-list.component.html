@@ -19,39 +19,53 @@
                     <h4 class="title">{{movieListModel.response == "True" ? "Feeling lucky?" : "Nope !! We couldnt found anything, Try again !!!"}}</h4>
                     <p class="category">{{movieListModel.response == "True" ? "Total Records: " + movieListModel.totalResults : "No record."}}</p>
                 </div>
-                <div class="content table-responsive" *ngIf="movieListModel.totalResults > 0">
-                    <table class="table table-striped">
-                        <thead>
-                        <th>Title</th>
-                        <th>Year</th>
-                        <th>imdbID</th>
-                        <th>Type</th>
-                        <th>Poster</th>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let movie of movieListModel.search">
-                                <td>
-                                    <a (click)="gotoMovieDetail(movie.imdbID)">
-                                        {{movie.title}}
-                                    </a>
-                                </td>
-                                <td>
-                                    {{movie.year}}
-                                </td>
-                                <td>
-                                    {{movie.imdbID}}
-                                </td>
-                                <td>
-                                    {{movie.type}}
-                                </td>
-                                <td>
-                                    <a [routerLink]="['/movie/searchMovieDetail', movie.imdbID]">
-                                        <img src="{{movie.poster != 'N/A' ? movie.poster: '../../../../Image/notavailable.svg.png'}}"
-                                             style="height: 150px; width: 150px" />
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
+                <div class="content table-responsive" >
+                    <table ngl-datatable [data]="movieListModel.search" trackByKey="imdbID" [loading]="loading" [(sort)]="sort" (sortChange)="onSort($event)"
+                           (onRowClick)="onRowClick($event)" class="slds-max-medium-table--stacked-horizontal">
+
+                        <ngl-datatable-column heading="Title" key="title" sortable>
+                            <template nglDatatableHeading>
+                                <strong>Title</strong>
+                            </template>
+                            <template nglDatatableCell let-row="row">
+                                <b>
+                                    {{row.title}}
+                                </b>
+                            </template>
+                        </ngl-datatable-column>
+
+                        <ngl-datatable-column heading="Year" key="year" cellClass="slds-truncate" sortable></ngl-datatable-column>
+
+                        <ngl-datatable-column heading="IMDB-ID" key="imdbID" cellClass="slds-truncate" sortable></ngl-datatable-column>
+
+                        <ngl-datatable-column heading="Type" key="type" sortable>
+                            <template nglDatatableHeading>
+                                <strong>Type</strong>
+                            </template>
+                            <template nglDatatableCell let-row="row">
+                                <b>{{row.type}}</b>
+                            </template>
+                        </ngl-datatable-column>
+
+                        <ngl-datatable-column heading="Poster" key="poster">
+                            <template nglDatatableHeading>
+                                <strong>Poster</strong>
+                            </template>
+                            <template nglDatatableCell let-row="row">
+                                    <img src="{{row.poster != 'N/A' ? row.poster: '../../../../Image/notavailable.svg.png'}}"
+                                         style="height: 150px; width: 150px" />
+                            </template>
+                        </ngl-datatable-column>
+
+                        <!-- Loading overlay -->
+                        <template nglLoadingOverlay>
+                            <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">Loading...</div>
+                        </template>
+
+                        <!-- No rows overlay -->
+                        <template nglNoRowsOverlay>
+                            No movie(s) found matching your search
+                        </template>
                     </table>
                 </div>
             </div>
