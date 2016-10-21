@@ -27,7 +27,6 @@ var SearchMovieListComponent = (function () {
         this.movieService = movieService;
         this.moviePromiseService = moviePromiseService;
         this.msgs = [];
-        this.sort = { key: 'title', order: 'asc' };
     }
     SearchMovieListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -35,23 +34,15 @@ var SearchMovieListComponent = (function () {
         this.route.data.forEach(function (data) {
             _this.movieListModel = data.resolvedAllMovieList;
             _this.toasterService.showToaster("info", "Search Movie List", "Page has been loaded");
-            _this.toasterService.showToaster(
-            /*type*/ _this.movieListModel.totalResults ? "success" : "warn", "Search Result", 
-            /*message*/ _this.movieListModel.totalResults ? _this.movieListModel.totalResults : '0' + ' record(s) found');
+            _this.toasterService.showToaster("success", "Search Result", _this.movieListModel.totalResults + ' record(s) found');
             _this.loaderService.displayLoader(false);
         });
         //service to set title of page
         this.pageTitleService.setTitle("Movie List");
         this.breadcrumbService.setBreadcrumbs("movieList");
     };
-    SearchMovieListComponent.prototype.onRowClick = function ($event) {
-        this.router.navigate(['movie/searchMovieDetail', $event.data.imdbID]);
-    };
-    SearchMovieListComponent.prototype.onSort = function ($event) {
-        var key = $event.key, order = $event.order;
-        this.movieListModel.search.sort(function (a, b) {
-            return (key === 'rank' ? b[key] - a[key] : b[key].localeCompare(a[key])) * (order === 'desc' ? 1 : -1);
-        });
+    SearchMovieListComponent.prototype.gotoMovieDetail = function (id) {
+        this.router.navigate(['movie/searchMovieDetail', id]);
     };
     Object.defineProperty(SearchMovieListComponent.prototype, "diagnostic", {
         get: function () {
