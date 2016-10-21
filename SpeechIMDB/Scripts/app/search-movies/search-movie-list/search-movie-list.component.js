@@ -28,7 +28,6 @@ var SearchMovieListComponent = (function () {
         this.loaderService = loaderService;
         this.movieObservableService = movieObservableService;
         this.moviePromiseService = moviePromiseService;
-        this.total = 252;
         this.tableLoadingStatus = false;
         this.searchMovieModel = this.searchMovieParameterService.getSearchParamObj();
         this.msgs = [];
@@ -58,19 +57,17 @@ var SearchMovieListComponent = (function () {
     };
     SearchMovieListComponent.prototype.refreshDataOnPageChange = function (pageNumber) {
         var _this = this;
-        if (pageNumber > 1) {
-            this.tableLoadingStatus = true;
-            this.searchMovieModel.page = pageNumber;
-            this.movieObservableService
-                .getServiceWithComplexObjectAsQueryString('api/Movie/GetAllMovies', this.searchMovieModel)
-                .subscribe(function (result) {
-                _this.tableLoadingStatus = false;
-                _this.movieListModel = result;
-            }, function (error) {
-                _this.toasterService.showToaster("error", "Opps!! Error Occured", error);
-                _this.tableLoadingStatus = false;
-            });
-        }
+        this.tableLoadingStatus = true;
+        this.searchMovieModel.page = pageNumber;
+        this.movieObservableService
+            .getServiceWithComplexObjectAsQueryString('api/Movie/GetAllMovies', this.searchMovieModel)
+            .subscribe(function (result) {
+            _this.tableLoadingStatus = false;
+            _this.movieListModel = result;
+        }, function (error) {
+            _this.toasterService.showToaster("error", "Opps!! Error Occured", error);
+            _this.tableLoadingStatus = false;
+        });
     };
     Object.defineProperty(SearchMovieListComponent.prototype, "diagnostic", {
         get: function () {

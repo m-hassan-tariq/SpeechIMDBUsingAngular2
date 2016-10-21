@@ -26,7 +26,6 @@ export class SearchMovieListComponent implements OnInit {
     msgs: Message[];
     sort: INglDatatableSort;
     tableLoadingStatus: boolean;
-    total = 252;
 
     constructor(
         private router: Router,
@@ -71,22 +70,20 @@ export class SearchMovieListComponent implements OnInit {
     }
 
     refreshDataOnPageChange(pageNumber: number) {
-        if (pageNumber > 1) {
-            this.tableLoadingStatus = true;
-            this.searchMovieModel.page = pageNumber;
-            this.movieObservableService
-                .getServiceWithComplexObjectAsQueryString('api/Movie/GetAllMovies', this.searchMovieModel)
-                .subscribe(
-                result => {
-                    this.tableLoadingStatus = false;
-                    this.movieListModel = result;
-                },
-                error => {
-                    this.toasterService.showToaster("error", "Opps!! Error Occured", <any>error);
-                    this.tableLoadingStatus = false;
-                }
-                );
-        }
+        this.tableLoadingStatus = true;
+        this.searchMovieModel.page = pageNumber;
+        this.movieObservableService
+            .getServiceWithComplexObjectAsQueryString('api/Movie/GetAllMovies', this.searchMovieModel)
+            .subscribe(
+            result => {
+                this.tableLoadingStatus = false;
+                this.movieListModel = result;
+            },
+            error => {
+                this.toasterService.showToaster("error", "Opps!! Error Occured", <any>error);
+                this.tableLoadingStatus = false;
+            }
+            );
     }
 
     get diagnostic(): string {

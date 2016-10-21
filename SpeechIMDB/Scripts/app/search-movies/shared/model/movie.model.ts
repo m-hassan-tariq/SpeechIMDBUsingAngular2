@@ -8,6 +8,6 @@
 
 export class MovieListModel {
     public search: MovieModel[];
-    public totalResults: string;
+    public totalResults: number;
     public response: string;
 }
