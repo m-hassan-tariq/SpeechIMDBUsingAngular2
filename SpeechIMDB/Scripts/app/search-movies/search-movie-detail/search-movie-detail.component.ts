@@ -1,6 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
+
+
 import { MovieDetailModel } from '../shared/model/movie-detail.model'
 import { PageTitleService } from '../../shared/service/page-title.service';
 import { AlertService, AlertMessage, ToasterService } from '../../shared/service/alert.service';

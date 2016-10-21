@@ -62,12 +62,12 @@
                                              class="img-circle img-no-padding img-responsive">
                                     </div>
                                 </div>
-                                <div class="col-xs-6">
-                                    {{movieDetailModel.imdbRating}}
+                                <div class="col-xs-8">
+                                    <p-rating [ngModel]="movieDetailModel.imdbRating" readonly="true" stars="10" [cancel]="false"></p-rating>
                                     <br />
-                                    <span class="text-success"><small>Rating</small></span>
+                                    <span class="text-success"><small>{{movieDetailModel.imdbRating}} - Rating</small></span>
                                 </div>
-                                <div class="col-xs-3 text-right">
+                                <div class="col-xs-1 text-right">
                                 </div>
                             </div>
                         </li>

@@ -2,6 +2,8 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { RatingModule } from 'primeng/primeng';
+
 import { SearchMoviesRoutingModule } from './search-movies-main-routing.module';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
 import { SearchMovieListComponent } from './search-movie-list/search-movie-list.component';
@@ -16,6 +18,8 @@ import { SearchMovieListDataService } from './shared/service/search-movie-list-s
     imports: [
         CommonModule,
         FormsModule,
+
+        RatingModule,
 
         SearchMoviesRoutingModule,
     ],
