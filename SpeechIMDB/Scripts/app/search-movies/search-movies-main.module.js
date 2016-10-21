@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var forms_1 = require('@angular/forms');
 var primeng_1 = require('primeng/primeng');
+var ng_lightning_1 = require('ng-lightning/ng-lightning');
 var search_movies_main_routing_module_1 = require('./search-movies-main-routing.module');
 var search_movie_component_1 = require('./search-movie/search-movie.component');
 var search_movie_list_component_1 = require('./search-movie-list/search-movie-list.component');
@@ -30,6 +31,7 @@ var SearchMoviesMainModule = (function () {
             imports: [
                 common_1.CommonModule,
                 forms_1.FormsModule,
+                ng_lightning_1.NglModule.forRoot(),
                 primeng_1.RatingModule,
                 search_movies_main_routing_module_1.SearchMoviesRoutingModule,
             ],

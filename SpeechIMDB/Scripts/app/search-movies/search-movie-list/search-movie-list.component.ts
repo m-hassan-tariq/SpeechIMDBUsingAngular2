@@ -2,6 +2,7 @@
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Message } from 'primeng/primeng';
+import { INglDatatableSort, INglDatatableRowClick } from 'ng-lightning/ng-lightning';
 
 import { MovieListModel } from '../shared/model/movie.model';
 import { PageTitleService } from '../../shared/service/page-title.service';
@@ -19,7 +20,8 @@ import { WebApiPromiseService } from '../../shared/service/web-api-promise.servi
 export class SearchMovieListComponent implements OnInit {
     movieListModel: MovieListModel;
     errorMessage: string;
-    msgs: Message[] = [];
+    msgs: Message[];
+    sort: INglDatatableSort;
 
     constructor(
         private router: Router,
@@ -30,6 +32,8 @@ export class SearchMovieListComponent implements OnInit {
         private loaderService: LoaderService,
         private movieService: WebApiObservableService,
         private moviePromiseService: WebApiPromiseService) {
+        this.msgs = [];
+        this.sort = { key: 'title', order: 'asc' };
     }
 
     ngOnInit() {
@@ -46,8 +50,16 @@ export class SearchMovieListComponent implements OnInit {
         this.breadcrumbService.setBreadcrumbs("movieList");
     }
 
-    gotoMovieDetail(id: string): void {
-        this.router.navigate(['movie/searchMovieDetail', id]);
+    // Custom sort function
+    onSort($event: INglDatatableSort) {
+        const { key, order } = $event;
+        this.movieListModel.search.sort((a: any, b: any) => {
+            return (key === 'rank' ? b[key] - a[key] : b[key].localeCompare(a[key])) * (order === 'desc' ? 1 : -1);
+        });
+    }
+
+    onRowClick($event: INglDatatableRowClick) {
+        this.router.navigate(['movie/searchMovieDetail', $event.data.imdbID]);
     }
 
     get diagnostic() : string {

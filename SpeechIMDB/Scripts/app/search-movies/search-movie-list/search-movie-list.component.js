@@ -27,6 +27,7 @@ var SearchMovieListComponent = (function () {
         this.movieService = movieService;
         this.moviePromiseService = moviePromiseService;
         this.msgs = [];
+        this.sort = { key: 'title', order: 'asc' };
     }
     SearchMovieListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -41,8 +42,15 @@ var SearchMovieListComponent = (function () {
         this.pageTitleService.setTitle("Movie List");
         this.breadcrumbService.setBreadcrumbs("movieList");
     };
-    SearchMovieListComponent.prototype.gotoMovieDetail = function (id) {
-        this.router.navigate(['movie/searchMovieDetail', id]);
+    // Custom sort function
+    SearchMovieListComponent.prototype.onSort = function ($event) {
+        var key = $event.key, order = $event.order;
+        this.movieListModel.search.sort(function (a, b) {
+            return (key === 'rank' ? b[key] - a[key] : b[key].localeCompare(a[key])) * (order === 'desc' ? 1 : -1);
+        });
+    };
+    SearchMovieListComponent.prototype.onRowClick = function ($event) {
+        this.router.navigate(['movie/searchMovieDetail', $event.data.imdbID]);
     };
     Object.defineProperty(SearchMovieListComponent.prototype, "diagnostic", {
         get: function () {

@@ -7,7 +7,7 @@
 }
 
 export class MovieListModel {
-    public movie: MovieModel[];
+    public search: MovieModel[];
     public totalResults: string;
     public response: string;
 }
