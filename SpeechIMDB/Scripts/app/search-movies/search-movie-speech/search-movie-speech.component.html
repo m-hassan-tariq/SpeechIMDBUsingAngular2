@@ -15,28 +15,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Year</label>
-                                <input type="text" class="form-control border-input" name="txtSearchMovieYear" id="txtSearchMovieYear" value=""
-                                       placeholder="Enter Movie Year" [(ngModel)]="model.year">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Movie Name</label>
-                                <select type="text" class="form-control border-input dropdown" name="txtSearchType" id="txtSearchType" [(ngModel)]="model.type">
-                                    <option value="" selected>Select All</option>
-                                    <option value="movie">Movie</option>
-                                    <option value="series">Series</option>
-                                    <option value="episode">Episode</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                     <div class="text-center">
                         <button class="btn btn-info btn-fill btn-wd" name="btnSearchMovie" id="btnSearchMovie" (click)="searchMovie()">
                             Search <b>{{model.name}}</b>

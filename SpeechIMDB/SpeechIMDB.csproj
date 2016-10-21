@@ -2294,6 +2294,7 @@
     <TypeScriptCompile Include="Scripts\app\shared\service\breadcrumb.service.ts" />
     <TypeScriptCompile Include="Scripts\app\shared\service\loader.service.ts" />
     <TypeScriptCompile Include="Scripts\app\shared\service\page-title.service.ts" />
+    <TypeScriptCompile Include="Scripts\app\shared\service\speech-recognition.service.ts" />
     <TypeScriptCompile Include="Scripts\app\shared\service\web-api-promise.service.ts" />
     <TypeScriptCompile Include="Scripts\app\shared\service\web-api-observable.service.ts" />
     <TypeScriptCompile Include="Scripts\main.ts" />
