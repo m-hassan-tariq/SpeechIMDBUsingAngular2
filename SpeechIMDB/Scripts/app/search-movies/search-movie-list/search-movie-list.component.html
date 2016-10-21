@@ -19,6 +19,14 @@
                     <h4 class="title">{{movieListModel.response == "True" ? "Feeling lucky?" : "Nope !! We couldnt found anything, Try again !!!"}}</h4>
                     <p class="category">{{movieListModel.response == "True" ? "Total Records: " + movieListModel.totalResults : "No record."}}</p>
                 </div>
+                <br />
+                <div class="col-md-offset-4">
+                    <div class="slds-text-title--caps-normal slds-m-bottom--x-small">Showing {{pagination.start}} - {{pagination.end}} of {{movieListModel.totalResults}}</div>
+                    <ngl-pagination [(page)]="page" (pageChange)="refreshDataOnPageChange($event)" [total]="movieListModel.totalResults" limit="5" 
+                                    boundaryNumbers="2" perPage="10" #pagination boundaryLinks></ngl-pagination>
+                </div>
+                <br />
+                <br />
                 <div class="content table-responsive">
                     <table ngl-datatable [data]="movieListModel.search" trackByKey="imdbID" [loading]="tableLoadingStatus" [(sort)]="sort" (sortChange)="onSort($event)"
                            (onRowClick)="onRowClick($event)" class="slds-max-medium-table--stacked-horizontal">
