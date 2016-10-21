@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var search_movies_main_component_1 = require('./search-movies-main.component');
 var search_movie_component_1 = require('./search-movie/search-movie.component');
+var search_movie_speech_component_1 = require('./search-movie-speech/search-movie-speech.component');
 var search_movie_list_component_1 = require('./search-movie-list/search-movie-list.component');
 var search_movie_detail_component_1 = require('./search-movie-detail/search-movie-detail.component');
 var get_all_movies_resolve_service_1 = require('./shared/service/get-all-movies.resolve.service');
@@ -30,6 +31,10 @@ var SearchMoviesRoutingModule = (function () {
                             {
                                 path: 'searchMovie',
                                 component: search_movie_component_1.SearchMovieComponent
+                            },
+                            {
+                                path: 'speechSearchMovie',
+                                component: search_movie_speech_component_1.SpeechSearchMovieComponent
                             },
                             {
                                 path: 'searchMovieList',

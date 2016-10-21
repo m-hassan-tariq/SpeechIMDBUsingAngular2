@@ -2233,6 +2233,7 @@
     <Content Include="Scripts\app\dashboard\dashboard.component.html" />
     <Content Include="Scripts\app\search-movies\search-movie-detail\search-movie-detail.component.html" />
     <Content Include="Scripts\app\search-movies\search-movie-list\search-movie-list.component.html" />
+    <Content Include="Scripts\app\search-movies\search-movie-speech\search-movie-speech.component.html" />
     <Content Include="Scripts\app\search-movies\search-movie\search-movie.component.html" />
     <Content Include="Scripts\app\app.component.html" />
     <Content Include="Scripts\lib\tether.js" />
@@ -2277,6 +2278,7 @@
     <TypeScriptCompile Include="Scripts\app\dashboard\dashboard.module.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movie-detail\search-movie-detail.component.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movie-list\search-movie-list.component.ts" />
+    <TypeScriptCompile Include="Scripts\app\search-movies\search-movie-speech\search-movie-speech.component.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movie\search-movie.component.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movies-main-routing.module.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movies-main.component.ts" />

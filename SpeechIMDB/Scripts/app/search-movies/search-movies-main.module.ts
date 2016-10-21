@@ -7,6 +7,7 @@ import { NglModule } from 'ng-lightning/ng-lightning';
 
 import { SearchMoviesRoutingModule } from './search-movies-main-routing.module';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
+import { SpeechSearchMovieComponent } from './search-movie-speech/search-movie-speech.component';
 import { SearchMovieListComponent } from './search-movie-list/search-movie-list.component';
 import { SearchMovieDetailComponent } from './search-movie-detail/search-movie-detail.component';;
 import { SearchMovieMainComponent } from './search-movies-main.component';
@@ -28,6 +29,7 @@ import { SearchMovieListDataService } from './shared/service/search-movie-list-s
     declarations: [
         SearchMovieMainComponent,
         SearchMovieComponent,
+        SpeechSearchMovieComponent,
         SearchMovieListComponent,
         SearchMovieDetailComponent
     ],
