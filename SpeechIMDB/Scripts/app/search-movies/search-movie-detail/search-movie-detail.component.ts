@@ -1,11 +1,10 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-
-
 import { MovieDetailModel } from '../shared/model/movie-detail.model'
 import { PageTitleService } from '../../shared/service/page-title.service';
 import { AlertService, AlertMessage, ToasterService } from '../../shared/service/alert.service';
+import { BreadcrumbService } from '../../shared/service/breadcrumb.service';
 import { WebApiObservableService } from '../../shared/service/web-api-observable.service';
 import { WebApiPromiseService } from '../../shared/service/web-api-promise.service';
 
@@ -21,7 +20,8 @@ export class SearchMovieDetailComponent implements OnInit {
         private pageTitleService: PageTitleService,
         private movieService: WebApiObservableService,
         private moviePromiseService: WebApiPromiseService,
-        private alertService: AlertService) {
+        private alertService: AlertService,
+        private breadcrumbService: BreadcrumbService) {
         
     }
 
@@ -39,6 +39,7 @@ export class SearchMovieDetailComponent implements OnInit {
         });
 
         this.pageTitleService.setTitle("Movie Detail");
+        this.breadcrumbService.setBreadcrumbs("movieDetail");
     }
 
     get diagnostic() : string {

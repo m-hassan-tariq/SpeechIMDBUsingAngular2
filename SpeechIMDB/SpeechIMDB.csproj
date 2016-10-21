@@ -2289,6 +2289,7 @@
     <TypeScriptCompile Include="Scripts\app\search-movies\shared\service\search-movie-list-store.service.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\shared\service\search-movie-parameter-store.service.ts" />
     <TypeScriptCompile Include="Scripts\app\shared\service\alert.service.ts" />
+    <TypeScriptCompile Include="Scripts\app\shared\service\breadcrumb.service.ts" />
     <TypeScriptCompile Include="Scripts\app\shared\service\page-title.service.ts" />
     <TypeScriptCompile Include="Scripts\app\shared\service\web-api-promise.service.ts" />
     <TypeScriptCompile Include="Scripts\app\shared\service\web-api-observable.service.ts" />

@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var page_title_service_1 = require('./shared/service/page-title.service');
 var alert_service_1 = require('./shared/service/alert.service');
+var breadcrumb_service_1 = require('./shared/service/breadcrumb.service');
 var AppComponent = (function () {
-    function AppComponent(pageTitleService, alertService, toasterService) {
+    function AppComponent(pageTitleService, alertService, toasterService, breadcrumbService) {
         this.pageTitleService = pageTitleService;
         this.alertService = alertService;
         this.toasterService = toasterService;
+        this.breadcrumbService = breadcrumbService;
         this.objToaster = [];
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -25,6 +27,10 @@ var AppComponent = (function () {
         });
         this.alertService.alertStatus.subscribe(function (val) {
             _this.objAlert = { show: val.show, message: val.message };
+        });
+        this.breadcrumbService.breadcrumbItem.subscribe(function (val) {
+            if (val)
+                _this.objBreadcrumbs = val;
         });
     };
     AppComponent.prototype.onCloseAlert = function (reason) {
@@ -47,7 +53,7 @@ var AppComponent = (function () {
             selector: 'my-app',
             templateUrl: '../../Scripts/app/app.component.html'
         }), 
-        __metadata('design:paramtypes', [page_title_service_1.PageTitleService, alert_service_1.AlertService, alert_service_1.ToasterService])
+        __metadata('design:paramtypes', [page_title_service_1.PageTitleService, alert_service_1.AlertService, alert_service_1.ToasterService, breadcrumb_service_1.BreadcrumbService])
     ], AppComponent);
     return AppComponent;
 }());

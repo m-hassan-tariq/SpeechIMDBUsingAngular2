@@ -14,17 +14,19 @@ var search_movie_model_1 = require('../shared/model/search-movie.model');
 var movie_model_1 = require('../shared/model/movie.model');
 var page_title_service_1 = require('../../shared/service/page-title.service');
 var alert_service_1 = require('../../shared/service/alert.service');
+var breadcrumb_service_1 = require('../../shared/service/breadcrumb.service');
 var search_movie_parameter_store_service_1 = require('../shared/service/search-movie-parameter-store.service');
 var search_movie_list_store_service_1 = require('../shared/service/search-movie-list-store.service');
 var _ = require("lodash");
 var SearchMovieComponent = (function () {
-    function SearchMovieComponent(searchMovieParameterService, searchMovieListDataService, pageTitleService, router, route, toasterService) {
+    function SearchMovieComponent(searchMovieParameterService, searchMovieListDataService, pageTitleService, router, route, toasterService, breadcrumbService) {
         this.searchMovieParameterService = searchMovieParameterService;
         this.searchMovieListDataService = searchMovieListDataService;
         this.pageTitleService = pageTitleService;
         this.router = router;
         this.route = route;
         this.toasterService = toasterService;
+        this.breadcrumbService = breadcrumbService;
         this.model = new search_movie_model_1.SearchMovieModel("", "", "");
         this.oldModel = new search_movie_model_1.SearchMovieModel("", "", "");
         this.changeDetected = false;
@@ -37,6 +39,7 @@ var SearchMovieComponent = (function () {
         //service to set title of page
         this.pageTitleService.setTitle("Search Movies");
         this.toasterService.showToaster("info", "Search Movie", "Search your movie");
+        this.breadcrumbService.setBreadcrumbs("searchMovie");
     };
     SearchMovieComponent.prototype.ngDoCheck = function () {
         if (_.isEqual(this.model, this.oldModel) == false)
@@ -63,7 +66,7 @@ var SearchMovieComponent = (function () {
             selector: 'search-movie',
             templateUrl: '../../Scripts/app/search-movies/search-movie/search-movie.component.html'
         }), 
-        __metadata('design:paramtypes', [search_movie_parameter_store_service_1.SearchMovieParameterDataService, search_movie_list_store_service_1.SearchMovieListDataService, page_title_service_1.PageTitleService, router_1.Router, router_1.ActivatedRoute, alert_service_1.ToasterService])
+        __metadata('design:paramtypes', [search_movie_parameter_store_service_1.SearchMovieParameterDataService, search_movie_list_store_service_1.SearchMovieListDataService, page_title_service_1.PageTitleService, router_1.Router, router_1.ActivatedRoute, alert_service_1.ToasterService, breadcrumb_service_1.BreadcrumbService])
     ], SearchMovieComponent);
     return SearchMovieComponent;
 }());

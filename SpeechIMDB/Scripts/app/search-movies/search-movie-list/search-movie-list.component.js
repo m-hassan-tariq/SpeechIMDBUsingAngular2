@@ -12,14 +12,16 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var page_title_service_1 = require('../../shared/service/page-title.service');
 var alert_service_1 = require('../../shared/service/alert.service');
+var breadcrumb_service_1 = require('../../shared/service/breadcrumb.service');
 var web_api_observable_service_1 = require('../../shared/service/web-api-observable.service');
 var web_api_promise_service_1 = require('../../shared/service/web-api-promise.service');
 var SearchMovieListComponent = (function () {
-    function SearchMovieListComponent(router, route, pageTitleService, toasterService, movieService, moviePromiseService) {
+    function SearchMovieListComponent(router, route, pageTitleService, toasterService, breadcrumbService, movieService, moviePromiseService) {
         this.router = router;
         this.route = route;
         this.pageTitleService = pageTitleService;
         this.toasterService = toasterService;
+        this.breadcrumbService = breadcrumbService;
         this.movieService = movieService;
         this.moviePromiseService = moviePromiseService;
         this.msgs = [];
@@ -33,6 +35,7 @@ var SearchMovieListComponent = (function () {
         });
         //service to set title of page
         this.pageTitleService.setTitle("Movie List");
+        this.breadcrumbService.setBreadcrumbs("movieList");
     };
     SearchMovieListComponent.prototype.gotoMovieDetail = function (id) {
         this.router.navigate(['movie/searchMovieDetail', id]);
@@ -49,7 +52,7 @@ var SearchMovieListComponent = (function () {
             selector: 'search-movie-list',
             templateUrl: '../../Scripts/app/search-movies/search-movie-list/search-movie-list.component.html'
         }), 
-        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, page_title_service_1.PageTitleService, alert_service_1.ToasterService, web_api_observable_service_1.WebApiObservableService, web_api_promise_service_1.WebApiPromiseService])
+        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, page_title_service_1.PageTitleService, alert_service_1.ToasterService, breadcrumb_service_1.BreadcrumbService, web_api_observable_service_1.WebApiObservableService, web_api_promise_service_1.WebApiPromiseService])
     ], SearchMovieListComponent);
     return SearchMovieListComponent;
 }());

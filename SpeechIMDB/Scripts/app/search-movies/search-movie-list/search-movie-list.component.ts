@@ -6,6 +6,7 @@ import { Message } from 'primeng/primeng';
 import { MovieListModel } from '../shared/model/movie.model';
 import { PageTitleService } from '../../shared/service/page-title.service';
 import { ToasterService } from '../../shared/service/alert.service';
+import { BreadcrumbService } from '../../shared/service/breadcrumb.service';
 import { WebApiObservableService } from '../../shared/service/web-api-observable.service';
 import { WebApiPromiseService } from '../../shared/service/web-api-promise.service';
 
@@ -24,6 +25,7 @@ export class SearchMovieListComponent implements OnInit {
         private route: ActivatedRoute,
         private pageTitleService: PageTitleService,
         private toasterService: ToasterService,
+        private breadcrumbService: BreadcrumbService,
         private movieService: WebApiObservableService,
         private moviePromiseService: WebApiPromiseService) {
     }
@@ -37,6 +39,7 @@ export class SearchMovieListComponent implements OnInit {
 
         //service to set title of page
         this.pageTitleService.setTitle("Movie List");
+        this.breadcrumbService.setBreadcrumbs("movieList");
     }
 
     gotoMovieDetail(id: string): void {
