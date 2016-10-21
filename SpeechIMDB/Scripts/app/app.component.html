@@ -94,7 +94,14 @@
 
             <p-growl [value]="objToaster"></p-growl>
 
-            <router-outlet></router-outlet>
+            <div *ngIf="objLoaderStatus">
+                <ngl-spinner size="large" type="brand" container="true"></ngl-spinner>
+            </div>
+
+            <router-outlet>
+                
+            </router-outlet>
+
         </div>
         <footer class="footer">
             <div class="container-fluid">

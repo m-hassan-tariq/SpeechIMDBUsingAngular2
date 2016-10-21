@@ -5,6 +5,7 @@ import { SearchMovieModel } from '../model/search-movie.model'
 import { MovieListModel } from '../model/movie.model'
 import { WebApiObservableService } from '../../../shared/service/web-api-observable.service';
 import { WebApiPromiseService } from '../../../shared/service/web-api-promise.service';
+import { LoaderService } from '../../../shared/service/loader.service';
 import { SearchMovieParameterDataService } from './search-movie-parameter-store.service'
 import { SearchMovieListDataService } from './search-movie-list-store.service'
 
@@ -16,11 +17,13 @@ export class GetAllMoviesResolve implements Resolve<MovieListModel> {
         private searchMovieParameterService: SearchMovieParameterDataService,
         private searchMovieListDataService: SearchMovieListDataService,
         private movieService: WebApiObservableService,
-        private moviePromiseService: WebApiPromiseService) {
+        private moviePromiseService: WebApiPromiseService,
+        private loaderService: LoaderService) {
         this.searchMovieModel = new SearchMovieModel("", "", "");
     }
 
     resolve(route: ActivatedRouteSnapshot): Promise<MovieListModel> | boolean {
+        this.loaderService.displayLoader(true);
         this.searchMovieModel = this.searchMovieParameterService.getSearchParamObj();
         let lstMovie: MovieListModel = this.searchMovieListDataService.getMovieListObj();
 

@@ -7,6 +7,7 @@ import { MovieListModel } from '../shared/model/movie.model';
 import { PageTitleService } from '../../shared/service/page-title.service';
 import { ToasterService } from '../../shared/service/alert.service';
 import { BreadcrumbService } from '../../shared/service/breadcrumb.service';
+import { LoaderService } from '../../shared/service/loader.service';
 import { WebApiObservableService } from '../../shared/service/web-api-observable.service';
 import { WebApiPromiseService } from '../../shared/service/web-api-promise.service';
 
@@ -26,6 +27,7 @@ export class SearchMovieListComponent implements OnInit {
         private pageTitleService: PageTitleService,
         private toasterService: ToasterService,
         private breadcrumbService: BreadcrumbService,
+        private loaderService: LoaderService,
         private movieService: WebApiObservableService,
         private moviePromiseService: WebApiPromiseService) {
     }
@@ -35,6 +37,7 @@ export class SearchMovieListComponent implements OnInit {
         this.route.data.forEach((data: { resolvedAllMovieList: MovieListModel }) => {
             this.movieListModel = data.resolvedAllMovieList;
             this.toasterService.showToaster("info", "Search Result", this.movieListModel.totalResults + ' record(s) found');
+            this.loaderService.displayLoader(false);
         });
 
         //service to set title of page

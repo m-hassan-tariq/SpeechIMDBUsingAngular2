@@ -12,18 +12,21 @@ var core_1 = require('@angular/core');
 var search_movie_model_1 = require('../model/search-movie.model');
 var web_api_observable_service_1 = require('../../../shared/service/web-api-observable.service');
 var web_api_promise_service_1 = require('../../../shared/service/web-api-promise.service');
+var loader_service_1 = require('../../../shared/service/loader.service');
 var search_movie_parameter_store_service_1 = require('./search-movie-parameter-store.service');
 var search_movie_list_store_service_1 = require('./search-movie-list-store.service');
 var GetAllMoviesResolve = (function () {
-    function GetAllMoviesResolve(searchMovieParameterService, searchMovieListDataService, movieService, moviePromiseService) {
+    function GetAllMoviesResolve(searchMovieParameterService, searchMovieListDataService, movieService, moviePromiseService, loaderService) {
         this.searchMovieParameterService = searchMovieParameterService;
         this.searchMovieListDataService = searchMovieListDataService;
         this.movieService = movieService;
         this.moviePromiseService = moviePromiseService;
+        this.loaderService = loaderService;
         this.searchMovieModel = new search_movie_model_1.SearchMovieModel("", "", "");
     }
     GetAllMoviesResolve.prototype.resolve = function (route) {
         var _this = this;
+        this.loaderService.displayLoader(true);
         this.searchMovieModel = this.searchMovieParameterService.getSearchParamObj();
         var lstMovie = this.searchMovieListDataService.getMovieListObj();
         //making sure that movie-list-data-service has data to avoid server round trip for same search query otherwise make a server trip
@@ -44,7 +47,7 @@ var GetAllMoviesResolve = (function () {
     };
     GetAllMoviesResolve = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [search_movie_parameter_store_service_1.SearchMovieParameterDataService, search_movie_list_store_service_1.SearchMovieListDataService, web_api_observable_service_1.WebApiObservableService, web_api_promise_service_1.WebApiPromiseService])
+        __metadata('design:paramtypes', [search_movie_parameter_store_service_1.SearchMovieParameterDataService, search_movie_list_store_service_1.SearchMovieListDataService, web_api_observable_service_1.WebApiObservableService, web_api_promise_service_1.WebApiPromiseService, loader_service_1.LoaderService])
     ], GetAllMoviesResolve);
     return GetAllMoviesResolve;
 }());

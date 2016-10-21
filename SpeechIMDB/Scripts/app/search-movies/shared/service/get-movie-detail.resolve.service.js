@@ -12,13 +12,16 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var web_api_observable_service_1 = require('../../../shared/service/web-api-observable.service');
 var web_api_promise_service_1 = require('../../../shared/service/web-api-promise.service');
+var loader_service_1 = require('../../../shared/service/loader.service');
 var GetMovieDetailResolve = (function () {
-    function GetMovieDetailResolve(router, movieService, moviePromiseService) {
+    function GetMovieDetailResolve(router, movieService, moviePromiseService, loaderService) {
         this.router = router;
         this.movieService = movieService;
         this.moviePromiseService = moviePromiseService;
+        this.loaderService = loaderService;
     }
     GetMovieDetailResolve.prototype.resolve = function (route) {
+        this.loaderService.displayLoader(true);
         var id = route.params['imdbId'];
         return this.moviePromiseService
             .getServiceWithDynamicQueryTerm('api/Movie/GetMovieDetail', "imdbId", id)
@@ -29,7 +32,7 @@ var GetMovieDetailResolve = (function () {
     };
     GetMovieDetailResolve = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [router_1.Router, web_api_observable_service_1.WebApiObservableService, web_api_promise_service_1.WebApiPromiseService])
+        __metadata('design:paramtypes', [router_1.Router, web_api_observable_service_1.WebApiObservableService, web_api_promise_service_1.WebApiPromiseService, loader_service_1.LoaderService])
     ], GetMovieDetailResolve);
     return GetMovieDetailResolve;
 }());

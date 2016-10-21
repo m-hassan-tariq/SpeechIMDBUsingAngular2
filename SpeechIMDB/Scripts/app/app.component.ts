@@ -6,6 +6,7 @@ import { MenuItem } from 'primeng/primeng';
 import { PageTitleService } from './shared/service/page-title.service';
 import { AlertService, AlertMessage, ToasterService } from './shared/service/alert.service';
 import { BreadcrumbService } from './shared/service/breadcrumb.service';
+import { LoaderService } from './shared/service/loader.service';
 
 @Component({
     selector: 'my-app',
@@ -14,22 +15,30 @@ import { BreadcrumbService } from './shared/service/breadcrumb.service';
 
 export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit, AfterContentInit {
     header: string;
-    objToaster: Message[] = [];
+    objToaster: Message[];
     objAlert: AlertMessage;
     objBreadcrumbs: MenuItem[];
+    objLoaderStatus: boolean;
 
     constructor(
         private pageTitleService: PageTitleService,
         private alertService: AlertService,
         private toasterService: ToasterService,
-        private breadcrumbService: BreadcrumbService) {
-
+        private breadcrumbService: BreadcrumbService,
+        private loaderService: LoaderService) {
+        this.objLoaderStatus = false;
+        this.objToaster = [];
+        this.objBreadcrumbs = [];
     }
 
     ngOnInit() {
 
-        this.pageTitleService.title.subscribe((pageTitle: string) => {
-            this.header = pageTitle;
+        this.pageTitleService.title.subscribe((val: string) => {
+            this.header = val;
+        });
+
+        this.loaderService.loaderStatus.subscribe((val: boolean) => {
+            this.objLoaderStatus = val;
         });
 
         this.alertService.alertStatus.subscribe((val: AlertMessage) => {
