@@ -56,6 +56,21 @@ var SpeechSearchMovieComponent = (function () {
         //        console.log(e);
         //    });
     };
+    SpeechSearchMovieComponent.prototype.setCommand = function () {
+        this.speechRecognitionService.clearCommands();
+        this.speechRecognitionService.addCommand("search", this.search);
+        this.speechRecognitionService.addCommand("testing", this.testing);
+        //speechRecognitionService.setNoMatchCallback(function (transcript) {
+        //    addAlert('danger', "No command found for '" + transcript + "'");
+        //});
+        //speechRecognitionService.setUnrecognizedCallback(function (transcript) {
+        //    addAlert('info', "I'm not sure, but I think you said, '" + transcript + "'");
+        //});
+    };
+    SpeechSearchMovieComponent.prototype.search = function () {
+    };
+    SpeechSearchMovieComponent.prototype.testing = function () {
+    };
     SpeechSearchMovieComponent.prototype.ngDoCheck = function () {
         if (_.isEqual(this.model, this.oldModel) == false)
             this.changeDetected = true;

@@ -10,6 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var alert_service_1 = require('./alert.service');
+var _ = require("lodash");
+var CommandSubject = (function () {
+    function CommandSubject() {
+    }
+    return CommandSubject;
+}());
+exports.CommandSubject = CommandSubject;
 var SpeechRecognitionService = (function () {
     function SpeechRecognitionService(zone, toasterService) {
         this.zone = zone;
@@ -23,9 +30,9 @@ var SpeechRecognitionService = (function () {
     SpeechRecognitionService.prototype.activate = function () {
         console.log("activate");
         this.SpeechRecognition.continuous = true;
-        this.SpeechRecognition.interimResults = true;
+        //this.SpeechRecognition.interimResults = true;
         this.SpeechRecognition.lang = 'en-US';
-        this.SpeechRecognition.maxAlternatives = 20;
+        this.SpeechRecognition.maxAlternatives = 3;
         this.SpeechRecognition.onstart = this.startHandler;
         this.SpeechRecognition.onend = this.endHandler;
         this.SpeechRecognition.onresult = this.resultHandler;
@@ -39,12 +46,45 @@ var SpeechRecognitionService = (function () {
         console.log(speechRecognition);
         speechRecognition.target.start();
     };
+    SpeechRecognitionService.prototype.addCommand = function (text, cb) {
+        this.commands.push({ commandText: _.toLower(text), commandcallback: cb });
+    };
+    SpeechRecognitionService.prototype.clearCommands = function () {
+        this.commands.length = 0;
+    };
+    SpeechRecognitionService.prototype.setNoMatchCallback = function (callback) {
+        this.noMatchCallback = callback;
+    };
+    SpeechRecognitionService.prototype.setUnrecognizedCallback = function (callback) {
+        this.unrecognizedCallback = callback;
+    };
     SpeechRecognitionService.prototype.resultHandler = function (event) {
         if (event.results) {
             var result = event.results[event.resultIndex];
             console.log(result);
-            for (var index = 0; index < result.length; index++) {
-                console.log("Transcript " + index + " : " + result[index].transcript + " (" + result[index].confidence + ") ");
+            var transcript = result[0].transcript;
+            if (result.isFinal) {
+                if (result[0].confidence < 0.5) {
+                    if (this.unrecognizedCallback) {
+                        this.unrecognizedCallback(transcript);
+                    }
+                    else {
+                        console.log('Unrecognized result: ' + transcript);
+                    }
+                }
+                else {
+                    var match = _.find(this.commands, { commandText: _.toLower(_.trim(transcript)) });
+                    if (match) {
+                        match.commandcallback();
+                    }
+                    else if (this.noMatchCallback) {
+                        this.noMatchCallback(transcript);
+                    }
+                    else {
+                        console.log("No matching command was found for '" + transcript + "'");
+                    }
+                    console.log("Final result: " + transcript);
+                }
             }
         }
     };

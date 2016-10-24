@@ -65,6 +65,28 @@ export class SpeechSearchMovieComponent implements OnInit, DoCheck {
         //    });
     }
 
+    setCommand() {
+        this.speechRecognitionService.clearCommands();
+
+        this.speechRecognitionService.addCommand("search", this.search);
+        this.speechRecognitionService.addCommand("testing", this.testing);
+
+        //speechRecognitionService.setNoMatchCallback(function (transcript) {
+        //    addAlert('danger', "No command found for '" + transcript + "'");
+        //});
+        //speechRecognitionService.setUnrecognizedCallback(function (transcript) {
+        //    addAlert('info', "I'm not sure, but I think you said, '" + transcript + "'");
+        //});
+    }
+
+    search() {
+
+    }
+
+    testing() {
+
+    }
+
     ngDoCheck() {
         if (_.isEqual(this.model, this.oldModel) == false)
             this.changeDetected = true;
