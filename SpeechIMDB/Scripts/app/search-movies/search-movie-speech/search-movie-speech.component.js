@@ -60,16 +60,18 @@ var SpeechSearchMovieComponent = (function () {
         this.speechRecognitionService.clearCommands();
         this.speechRecognitionService.addCommand("search", this.search);
         this.speechRecognitionService.addCommand("testing", this.testing);
-        //speechRecognitionService.setNoMatchCallback(function (transcript) {
-        //    addAlert('danger', "No command found for '" + transcript + "'");
-        //});
-        //speechRecognitionService.setUnrecognizedCallback(function (transcript) {
-        //    addAlert('info', "I'm not sure, but I think you said, '" + transcript + "'");
-        //});
+        this.speechRecognitionService.setNoMatchCallback(function (transcript) {
+            this.toasterService.showToaster("error", "No command found for '" + transcript + "'");
+        });
+        this.speechRecognitionService.setUnrecognizedCallback(function (transcript) {
+            this.toasterService.showToaster("error", "I'm not sure, but I think you said, '" + transcript + "'");
+        });
     };
     SpeechSearchMovieComponent.prototype.search = function () {
+        this.toasterService.showToaster("success", "function invoked", "search function is called");
     };
     SpeechSearchMovieComponent.prototype.testing = function () {
+        this.toasterService.showToaster("success", "function invoked", "testing function is called");
     };
     SpeechSearchMovieComponent.prototype.ngDoCheck = function () {
         if (_.isEqual(this.model, this.oldModel) == false)

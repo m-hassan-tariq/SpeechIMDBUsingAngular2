@@ -59,11 +59,13 @@ var SpeechRecognitionService = (function () {
         this.unrecognizedCallback = callback;
     };
     SpeechRecognitionService.prototype.resultHandler = function (event) {
+        console.log("resultHandler");
         if (event.results) {
             var result = event.results[event.resultIndex];
-            console.log(result);
             var transcript = result[0].transcript;
+            console.log(transcript);
             if (result.isFinal) {
+                console.log(result[0].confidence);
                 if (result[0].confidence < 0.5) {
                     if (this.unrecognizedCallback) {
                         this.unrecognizedCallback(transcript);
