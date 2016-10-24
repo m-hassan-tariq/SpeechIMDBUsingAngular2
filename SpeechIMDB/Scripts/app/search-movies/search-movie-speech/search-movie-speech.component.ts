@@ -6,6 +6,7 @@ import { MovieListModel } from '../shared/model/movie.model';
 import { PageTitleService } from '../../shared/service/page-title.service';
 import { ToasterService } from '../../shared/service/alert.service';
 import { BreadcrumbService } from '../../shared/service/breadcrumb.service';
+import { SpeechRecognitionService } from '../../shared/service/speech-recognition.service';
 import { SearchMovieParameterDataService } from '../shared/service/search-movie-parameter-store.service';
 import { SearchMovieListDataService } from '../shared/service/search-movie-list-store.service';
 import * as _ from "lodash";
@@ -20,6 +21,8 @@ export class SpeechSearchMovieComponent implements OnInit, DoCheck {
     oldModel: SearchMovieModel;
     changeDetected: boolean;
 
+    val: string;
+
     constructor(
         private searchMovieParameterService: SearchMovieParameterDataService,
         private searchMovieListDataService: SearchMovieListDataService,
@@ -27,7 +30,8 @@ export class SpeechSearchMovieComponent implements OnInit, DoCheck {
         private router: Router,
         private route: ActivatedRoute,
         private toasterService: ToasterService,
-        private breadcrumbService: BreadcrumbService) {
+        private breadcrumbService: BreadcrumbService,
+        private speechRecognitionService: SpeechRecognitionService) {
         this.model = new SearchMovieModel("", "", "", 1);
         this.oldModel = new SearchMovieModel("", "", "", 1);
         this.changeDetected = false;
@@ -43,6 +47,22 @@ export class SpeechSearchMovieComponent implements OnInit, DoCheck {
         this.pageTitleService.setTitle("Search Movies");
         this.toasterService.showToaster("info", "Speech Search Movie", "ready to explore movie search engine using SpeechAPI");
         this.breadcrumbService.setBreadcrumbs("speechSearchMovie");
+    }
+
+    test() {
+        try {
+            this.speechRecognitionService.startRecognition();
+        }
+        catch (e) {
+            this.toasterService.showToaster("error", "Error: Speech Search", (<Error>e).message);
+        }
+
+
+        //this.speechRecognitionService.record('en-US')
+        //    .subscribe(e => {
+        //        this.val = e;
+        //        console.log(e);
+        //    });
     }
 
     ngDoCheck() {

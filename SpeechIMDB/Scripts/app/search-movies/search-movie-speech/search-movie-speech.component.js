@@ -15,11 +15,12 @@ var movie_model_1 = require('../shared/model/movie.model');
 var page_title_service_1 = require('../../shared/service/page-title.service');
 var alert_service_1 = require('../../shared/service/alert.service');
 var breadcrumb_service_1 = require('../../shared/service/breadcrumb.service');
+var speech_recognition_service_1 = require('../../shared/service/speech-recognition.service');
 var search_movie_parameter_store_service_1 = require('../shared/service/search-movie-parameter-store.service');
 var search_movie_list_store_service_1 = require('../shared/service/search-movie-list-store.service');
 var _ = require("lodash");
 var SpeechSearchMovieComponent = (function () {
-    function SpeechSearchMovieComponent(searchMovieParameterService, searchMovieListDataService, pageTitleService, router, route, toasterService, breadcrumbService) {
+    function SpeechSearchMovieComponent(searchMovieParameterService, searchMovieListDataService, pageTitleService, router, route, toasterService, breadcrumbService, speechRecognitionService) {
         this.searchMovieParameterService = searchMovieParameterService;
         this.searchMovieListDataService = searchMovieListDataService;
         this.pageTitleService = pageTitleService;
@@ -27,6 +28,7 @@ var SpeechSearchMovieComponent = (function () {
         this.route = route;
         this.toasterService = toasterService;
         this.breadcrumbService = breadcrumbService;
+        this.speechRecognitionService = speechRecognitionService;
         this.model = new search_movie_model_1.SearchMovieModel("", "", "", 1);
         this.oldModel = new search_movie_model_1.SearchMovieModel("", "", "", 1);
         this.changeDetected = false;
@@ -40,6 +42,19 @@ var SpeechSearchMovieComponent = (function () {
         this.pageTitleService.setTitle("Search Movies");
         this.toasterService.showToaster("info", "Speech Search Movie", "ready to explore movie search engine using SpeechAPI");
         this.breadcrumbService.setBreadcrumbs("speechSearchMovie");
+    };
+    SpeechSearchMovieComponent.prototype.test = function () {
+        try {
+            this.speechRecognitionService.startRecognition();
+        }
+        catch (e) {
+            this.toasterService.showToaster("error", "Error: Speech Search", e.message);
+        }
+        //this.speechRecognitionService.record('en-US')
+        //    .subscribe(e => {
+        //        this.val = e;
+        //        console.log(e);
+        //    });
     };
     SpeechSearchMovieComponent.prototype.ngDoCheck = function () {
         if (_.isEqual(this.model, this.oldModel) == false)
@@ -66,7 +81,7 @@ var SpeechSearchMovieComponent = (function () {
             selector: 'search-movie',
             templateUrl: '../../Scripts/app/search-movies/search-movie-speech/search-movie-speech.component.html'
         }), 
-        __metadata('design:paramtypes', [search_movie_parameter_store_service_1.SearchMovieParameterDataService, search_movie_list_store_service_1.SearchMovieListDataService, page_title_service_1.PageTitleService, router_1.Router, router_1.ActivatedRoute, alert_service_1.ToasterService, breadcrumb_service_1.BreadcrumbService])
+        __metadata('design:paramtypes', [search_movie_parameter_store_service_1.SearchMovieParameterDataService, search_movie_list_store_service_1.SearchMovieListDataService, page_title_service_1.PageTitleService, router_1.Router, router_1.ActivatedRoute, alert_service_1.ToasterService, breadcrumb_service_1.BreadcrumbService, speech_recognition_service_1.SpeechRecognitionService])
     ], SpeechSearchMovieComponent);
     return SpeechSearchMovieComponent;
 }());
