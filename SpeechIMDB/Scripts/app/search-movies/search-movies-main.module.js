@@ -20,10 +20,7 @@ var search_movie_list_component_1 = require('./search-movie-list/search-movie-li
 var search_movie_detail_component_1 = require('./search-movie-detail/search-movie-detail.component');
 ;
 var search_movies_main_component_1 = require('./search-movies-main.component');
-var get_all_movies_resolve_service_1 = require('./shared/service/get-all-movies.resolve.service');
-var get_movie_detail_resolve_service_1 = require('./shared/service/get-movie-detail.resolve.service');
-var search_movie_parameter_store_service_1 = require('./shared/service/search-movie-parameter-store.service');
-var search_movie_list_store_service_1 = require('./shared/service/search-movie-list-store.service');
+var search_movies_main_providers_1 = require('./search-movies-main.providers');
 var SearchMoviesMainModule = (function () {
     function SearchMoviesMainModule() {
     }
@@ -44,10 +41,7 @@ var SearchMoviesMainModule = (function () {
                 search_movie_detail_component_1.SearchMovieDetailComponent
             ],
             providers: [
-                get_all_movies_resolve_service_1.GetAllMoviesResolve,
-                get_movie_detail_resolve_service_1.GetMovieDetailResolve,
-                search_movie_parameter_store_service_1.SearchMovieParameterDataService,
-                search_movie_list_store_service_1.SearchMovieListDataService
+                search_movies_main_providers_1.MOVIE_PROVIDERS
             ],
             schemas: [
                 core_1.CUSTOM_ELEMENTS_SCHEMA

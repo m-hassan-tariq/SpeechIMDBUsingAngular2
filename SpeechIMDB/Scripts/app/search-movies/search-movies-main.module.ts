@@ -11,10 +11,8 @@ import { SpeechSearchMovieComponent } from './search-movie-speech/search-movie-s
 import { SearchMovieListComponent } from './search-movie-list/search-movie-list.component';
 import { SearchMovieDetailComponent } from './search-movie-detail/search-movie-detail.component';;
 import { SearchMovieMainComponent } from './search-movies-main.component';
-import { GetAllMoviesResolve } from './shared/service/get-all-movies.resolve.service';
-import { GetMovieDetailResolve } from './shared/service/get-movie-detail.resolve.service';
-import { SearchMovieParameterDataService } from './shared/service/search-movie-parameter-store.service';
-import { SearchMovieListDataService } from './shared/service/search-movie-list-store.service';
+
+import { MOVIE_PROVIDERS } from './search-movies-main.providers';
 
 @NgModule({
     imports: [
@@ -34,10 +32,7 @@ import { SearchMovieListDataService } from './shared/service/search-movie-list-s
         SearchMovieDetailComponent
     ],
     providers: [
-        GetAllMoviesResolve,
-        GetMovieDetailResolve,
-        SearchMovieParameterDataService,
-        SearchMovieListDataService
+        MOVIE_PROVIDERS
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA

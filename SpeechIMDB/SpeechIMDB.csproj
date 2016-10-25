@@ -2253,7 +2253,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\app\core\" />
     <Folder Include="Scripts\app\search-movies\shared\directive\" />
     <Folder Include="Scripts\app\shared\directive\" />
   </ItemGroup>
@@ -2267,9 +2266,10 @@
     <Content Include="typings.json" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="Scripts\app\app.routing.ts" />
     <TypeScriptCompile Include="Scripts\app\app.component.ts" />
     <TypeScriptCompile Include="Scripts\app\app.module.ts" />
+    <TypeScriptCompile Include="Scripts\app\app.provider.ts" />
     <TypeScriptCompile Include="Scripts\app\dashboard2\dashboard2-routing.module.ts" />
     <TypeScriptCompile Include="Scripts\app\dashboard2\dashboard2.component.ts" />
     <TypeScriptCompile Include="Scripts\app\dashboard2\dashboard2.module.ts" />
@@ -2279,6 +2279,7 @@
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movie-detail\search-movie-detail.component.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movie-list\search-movie-list.component.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movie-speech\search-movie-speech.component.ts" />
+    <TypeScriptCompile Include="Scripts\app\search-movies\search-movies-main.providers.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movie\search-movie.component.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movies-main-routing.module.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movies-main.component.ts" />
