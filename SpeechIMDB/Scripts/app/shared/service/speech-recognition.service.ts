@@ -22,17 +22,17 @@ export class SpeechRecognitionService {
 
         return Observable.create(observer => {
             const { webkitSpeechRecognition }: IWindow = <IWindow>window;
-            const recognition = new webkitSpeechRecognition();
-            recognition.continuous = true;
-            //recognition.interimResults = true;
-            recognition.lang = 'en-US';
-            recognition.maxAlternatives = 1;
+            const SpeechRecognition = new webkitSpeechRecognition();
+            SpeechRecognition.continuous = true;
+            //SpeechRecognition.interimResults = true;
+            SpeechRecognition.lang = 'en-US';
+            SpeechRecognition.maxAlternatives = 1;
 
             //recognition.onstart = () => {
             //    this.toasterService.showToaster("success", "Speech Search Status", "Speech Search is ACTIVATED");
             //};
 
-            recognition.onresult = speech => {
+            SpeechRecognition.onresult = speech => {
                 let term: string = "";
                 if (speech.results) {
                     var result = speech.results[speech.resultIndex];
@@ -53,15 +53,15 @@ export class SpeechRecognitionService {
                 });
             };
 
-            recognition.onerror = error => {
+            SpeechRecognition.onerror = error => {
                 observer.error(error);
             };
 
-            recognition.onend = () => {
+            SpeechRecognition.onend = () => {
                 observer.complete();
             };  
 
-            recognition.start();
+            SpeechRecognition.start();
         });
     }
 

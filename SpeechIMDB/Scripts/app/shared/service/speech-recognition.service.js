@@ -21,15 +21,15 @@ var SpeechRecognitionService = (function () {
         var _this = this;
         return Rx_1.Observable.create(function (observer) {
             var webkitSpeechRecognition = window.webkitSpeechRecognition;
-            var recognition = new webkitSpeechRecognition();
-            recognition.continuous = true;
-            //recognition.interimResults = true;
-            recognition.lang = 'en-US';
-            recognition.maxAlternatives = 1;
+            var SpeechRecognition = new webkitSpeechRecognition();
+            SpeechRecognition.continuous = true;
+            //SpeechRecognition.interimResults = true;
+            SpeechRecognition.lang = 'en-US';
+            SpeechRecognition.maxAlternatives = 1;
             //recognition.onstart = () => {
             //    this.toasterService.showToaster("success", "Speech Search Status", "Speech Search is ACTIVATED");
             //};
-            recognition.onresult = function (speech) {
+            SpeechRecognition.onresult = function (speech) {
                 var term = "";
                 if (speech.results) {
                     var result = speech.results[speech.resultIndex];
@@ -49,13 +49,13 @@ var SpeechRecognitionService = (function () {
                     observer.next(term);
                 });
             };
-            recognition.onerror = function (error) {
+            SpeechRecognition.onerror = function (error) {
                 observer.error(error);
             };
-            recognition.onend = function () {
+            SpeechRecognition.onend = function () {
                 observer.complete();
             };
-            recognition.start();
+            SpeechRecognition.start();
         });
     };
     SpeechRecognitionService = __decorate([
