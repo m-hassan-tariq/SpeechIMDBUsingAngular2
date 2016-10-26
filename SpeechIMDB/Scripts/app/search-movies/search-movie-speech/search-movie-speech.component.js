@@ -50,8 +50,8 @@ var SpeechSearchMovieComponent = (function () {
             _this.val = e;
             console.log(e);
         }, function (error) {
-            console.error(error);
             _this.toasterService.showToaster("error", "Error: Speech Search", error.message);
+            console.error(error);
         }, function () {
             console.log("Completed");
         });

@@ -26,10 +26,6 @@ var AppRoutingModule = (function () {
                     {
                         path: '',
                         loadChildren: 'Scripts/app/search-movies/search-movies-main.module#SearchMoviesMainModule'
-                    },
-                    {
-                        path: '',
-                        loadChildren: 'Scripts/app/dashboard2/dashboard2.module#DashboardMainModule'
                     }
                 ])
             ],

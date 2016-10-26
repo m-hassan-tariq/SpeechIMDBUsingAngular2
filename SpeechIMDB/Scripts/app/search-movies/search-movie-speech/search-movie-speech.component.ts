@@ -56,8 +56,8 @@ export class SpeechSearchMovieComponent implements OnInit, DoCheck {
                 console.log(e);
             },
             error => {
-                console.error(error)
                 this.toasterService.showToaster("error", "Error: Speech Search", (<Error>error).message);
+                console.error(error);
             },
             () => {
                 console.log("Completed");
