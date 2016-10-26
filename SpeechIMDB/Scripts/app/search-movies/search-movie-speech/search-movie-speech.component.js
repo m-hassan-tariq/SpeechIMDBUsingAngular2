@@ -31,6 +31,7 @@ var SpeechSearchMovieComponent = (function () {
         this.speechRecognitionService = speechRecognitionService;
         this.model = new search_movie_model_1.SearchMovieModel("", "", "", 1);
         this.oldModel = new search_movie_model_1.SearchMovieModel("", "", "", 1);
+        this.popover = { message: "", theme: "", display: false, position: "" };
         this.changeDetected = false;
     }
     SpeechSearchMovieComponent.prototype.ngOnInit = function () {
@@ -39,12 +40,14 @@ var SpeechSearchMovieComponent = (function () {
         this.model = Object.assign({}, this.searchMovieParameterService.getSearchParamObj());
         this.oldModel = Object.assign({}, this.searchMovieParameterService.getSearchParamObj());
         //service to set title of page
-        this.pageTitleService.setTitle("Search Movies");
-        this.toasterService.showToaster("info", "Speech Search Movie", "ready to explore movie search engine using SpeechAPI");
+        this.pageTitleService.setTitle("Speech Search Movies");
+        this.toasterService.showToaster("info", "Speech Search Movie", "Are you ready to explore movie search using SpeechAPI?");
         this.breadcrumbService.setBreadcrumbs("speechSearchMovie");
+        this.populatePopoverMessages("Click Here to enable Speech Search !!!", "info", true, "top");
     };
-    SpeechSearchMovieComponent.prototype.test = function () {
+    SpeechSearchMovieComponent.prototype.activateSpeechSearchMovie = function () {
         var _this = this;
+        this.populatePopoverMessages("Say something to search !!!", "success", true, "left");
         this.speechRecognitionService.record()
             .subscribe(function (e) {
             _this.val = e;
@@ -56,6 +59,11 @@ var SpeechSearchMovieComponent = (function () {
             console.log("Completed");
         });
     };
+    SpeechSearchMovieComponent.prototype.populatePopoverMessages = function (msg, style, show, placement) {
+        this.popover = null;
+        this.popover = { message: msg, theme: style, display: show, position: placement };
+    };
+    ////////////////////////////////////////
     SpeechSearchMovieComponent.prototype.ngDoCheck = function () {
         if (_.isEqual(this.model, this.oldModel) == false)
             this.changeDetected = true;

@@ -20,6 +20,7 @@ export class SpeechSearchMovieComponent implements OnInit, DoCheck {
     model: SearchMovieModel;
     oldModel: SearchMovieModel;
     changeDetected: boolean;
+    popover: Object;
 
     val: string;
 
@@ -34,6 +35,7 @@ export class SpeechSearchMovieComponent implements OnInit, DoCheck {
         private speechRecognitionService: SpeechRecognitionService) {
         this.model = new SearchMovieModel("", "", "", 1);
         this.oldModel = new SearchMovieModel("", "", "", 1);
+        this.popover = { message: "", theme: "", display: false, position: "" };
         this.changeDetected = false;
     }
 
@@ -44,12 +46,14 @@ export class SpeechSearchMovieComponent implements OnInit, DoCheck {
         this.oldModel = Object.assign({}, this.searchMovieParameterService.getSearchParamObj());
 
         //service to set title of page
-        this.pageTitleService.setTitle("Search Movies");
-        this.toasterService.showToaster("info", "Speech Search Movie", "ready to explore movie search engine using SpeechAPI");
+        this.pageTitleService.setTitle("Speech Search Movies");
+        this.toasterService.showToaster("info", "Speech Search Movie", "Are you ready to explore movie search using SpeechAPI?");
         this.breadcrumbService.setBreadcrumbs("speechSearchMovie");
+        this.populatePopoverMessages("Click Here to enable Speech Search !!!", "info", true, "top");
     }
 
-    test() {
+    activateSpeechSearchMovie(): void {
+        this.populatePopoverMessages("Say something to search !!!", "success", true, "left");
         this.speechRecognitionService.record()
             .subscribe(e => {
                 this.val = e;
@@ -63,6 +67,14 @@ export class SpeechSearchMovieComponent implements OnInit, DoCheck {
                 console.log("Completed");
             });
     }
+
+    populatePopoverMessages(msg: string, style: string, show: boolean, placement: string): void {
+        this.popover = null;
+        this.popover = { message: msg, theme: style, display: show, position: placement };
+    }
+
+
+    ////////////////////////////////////////
 
     ngDoCheck() {
         if (_.isEqual(this.model, this.oldModel) == false)

@@ -10,23 +10,27 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Movie Name</label>
-                                <input type="text" class="form-control border-input" name="txtSearchMovieName" id="txtSearchMovieName" value=""
-                                       placeholder="Enter Movie Name" [(ngModel)]="model.name">
+                                <input type="text" class="form-control border-input" name="txtSpeechSearchMovieName" id="txtSpeechSearchMovieName" value=""
+                                       placeholder="Say Movie Name" [(ngModel)]="model.name">
                             </div>
                         </div>
                     </div>
-
+                    <template #tip2>
+                        Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi.
+                    </template>
                     value is : {{val}}
-                    <div class="text-center">
-                        <button class="btn btn-info btn-fill btn-wd" name="btnSearchMovie" id="btnSearchMovie" (click)="searchMovie()">
-                            Search <b>{{model.name}}</b>
-                        </button>
 
-                        <button class="btn btn-info btn-fill btn-wd" name="test" id="test" (click)="test()">
-                            Test 
+                    <br />
+                    <br />
+                    <div class="text-center">
+                        <button class="btn btn-info btn-fill btn-wd" name="btnActivateSpeechSearchMovie" id="btnActivateSpeechSearchMovie" (click)="activateSpeechSearchMovie()"
+                                [nglPopover]="popover.message" [nglPopoverTheme]="popover.theme" [nglOpen]="popover.display" [nglPopoverPlacement]="popover.position">
+                            Enable Speech Search
                         </button>
                     </div>
-                    <div class="clearfix"></div>
+                    {{popover.message}}
+                    <br />
+                    <br />
                 </div>
             </div>
         </div>
