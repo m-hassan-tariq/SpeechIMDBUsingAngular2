@@ -11,134 +11,58 @@ interface IWindow extends Window {
     SpeechRecognition: any;
 }
 
-export class CommandSubject {
-    commandText: string;
-    commandcallback: () => void;
-} 
-
 @Injectable()
 export class SpeechRecognitionService {
 
-    SpeechRecognition: any;
-    commands: CommandSubject[] = [];
-    noMatchCallback: any;
-    unrecognizedCallback: any;
-
     constructor(private zone: NgZone,
         private toasterService: ToasterService) {
-        const { webkitSpeechRecognition }: IWindow = <IWindow>window;
-        const { SpeechRecognition }: IWindow = <IWindow>window;
-        this.SpeechRecognition = new webkitSpeechRecognition();
-        this.activate();
     }
 
-    activate() {
-        console.log("activate");
-        this.SpeechRecognition.continuous = true;
-        //this.SpeechRecognition.interimResults = true;
-        this.SpeechRecognition.lang = 'en-US';
-        this.SpeechRecognition.maxAlternatives = 3;
+    record(): Observable<string> {
 
-        this.SpeechRecognition.onstart = this.startHandler;
-        this.SpeechRecognition.onend = this.endHandler;
-        this.SpeechRecognition.onresult = this.resultHandler;
-        //this.SpeechRecognition.onerror = this.errorHandler;
-    }
+        return Observable.create(observer => {
+            const { webkitSpeechRecognition }: IWindow = <IWindow>window;
+            const recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            //recognition.interimResults = true;
+            recognition.lang = 'en-US';
+            recognition.maxAlternatives = 1;
 
-    startHandler() {
-        console.log("startHandler");
-    }
+            //recognition.onstart = () => {
+            //    this.toasterService.showToaster("success", "Speech Search Status", "Speech Search is ACTIVATED");
+            //};
 
-    endHandler(speechRecognition: any) {
-        console.log("endHandler");
-        console.log(speechRecognition)
-        speechRecognition.target.start();
-    }
-
-    addCommand(text, cb) {
-        this.commands.push({ commandText: _.toLower(text), commandcallback: cb });
-    }
-
-    clearCommands() {
-        this.commands.length = 0;
-    }
-
-    setNoMatchCallback(callback) {
-        this.noMatchCallback = callback;
-    }
-
-    setUnrecognizedCallback(callback) {
-        this.unrecognizedCallback = callback;
-    }
-
-    resultHandler(event) {
-        console.log("resultHandler")
-        if (event.results) {
-            var result = event.results[event.resultIndex];
-            var transcript = result[0].transcript;
-            console.log(transcript)
-            if (result.isFinal) {
-                console.log(result[0].confidence);
-                if (result[0].confidence < 0.5) {
-                    if (this.unrecognizedCallback) {
-                        this.unrecognizedCallback(transcript);
-                    } else {
-                        console.log('Unrecognized result: ' + transcript);
+            recognition.onresult = speech => {
+                let term: string = "";
+                if (speech.results) {
+                    var result = speech.results[speech.resultIndex];
+                    var transcript = result[0].transcript;
+                    if (result.isFinal) {
+                        console.log(result[0].confidence);
+                        if (result[0].confidence < 0.3) {
+                            this.toasterService.showToaster("warn", "Speech Search Status", "Unrecognized result - Please try again");
+                        }
+                        else {
+                            term = _.trim(transcript);
+                            this.toasterService.showToaster("success", "I'm not sure, but I think you said", term);
+                        }
                     }
                 }
-                else {
-                    var match = _.find(this.commands, { commandText: _.toLower(_.trim(transcript)) });
-                    if (match) {
-                        match.commandcallback();
-                    }
-                    else if (this.noMatchCallback) {
-                        this.noMatchCallback(transcript);
-                    }
-                    else {
-                        console.log("No matching command was found for '" + transcript + "'");
-                    }
-                    console.log("Final result: " + transcript);
-                }
-            }
-            //console.log(result)
-            //for (var index = 0; index < result.length; index++) {
-            //    console.log("Transcript " + index + " : " + result[index].transcript + " (" + result[index].confidence + ") ")
-            //}
-        }
+                this.zone.run(() => {
+                    observer.next(term);
+                });
+            };
+
+            recognition.onerror = error => {
+                observer.error(error);
+            };
+
+            recognition.onend = () => {
+                observer.complete();
+            };  
+
+            recognition.start();
+        });
     }
-
-    startRecognition() {
-        if (this.SpeechRecognition) {
-            this.toasterService.showToaster("success", "Speech Search Status", "Speech Search is ACTIVATED");
-            this.SpeechRecognition.start();
-        }
-        else {
-            this.toasterService.showToaster("warn", "Speech Search Status", "Speech recognition is not supported");
-            throw new Error('Speech recognition is not supported');
-        }
-    }
-
-    stopRecognition() {
-        if (this.SpeechRecognition) {
-            this.toasterService.showToaster("warn", "Speech Search Status", "Speech Search is STOPPED");
-            this.SpeechRecognition.stop();
-        }
-    }
-
-    //record(language: string): Observable<string> {
-    //    return Observable.create(observer => {
-    //        const { webkitSpeechRecognition }: IWindow = <IWindow>window;
-    //        const recognition = new webkitSpeechRecognition();
-    //        recognition.continuous = true;
-    //        recognition.interimResults = true;
-
-    //        recognition.onresult = e => this.zone.run(() => observer.next(e.results.item(e.results.length - 1).item(0).transcript));
-    //        recognition.onerror = e => observer.error(e);
-    //        recognition.onend = () => observer.complete();
-    //        //recognition.lang = language;
-    //        recognition.start();
-    //        console.log("its started")
-    //    });
-    //}
 
 }

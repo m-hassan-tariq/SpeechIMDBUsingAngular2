@@ -50,41 +50,18 @@ export class SpeechSearchMovieComponent implements OnInit, DoCheck {
     }
 
     test() {
-        try {
-            this.speechRecognitionService.startRecognition();
-        }
-        catch (e) {
-            this.toasterService.showToaster("error", "Error: Speech Search", (<Error>e).message);
-        }
-
-
-        //this.speechRecognitionService.record('en-US')
-        //    .subscribe(e => {
-        //        this.val = e;
-        //        console.log(e);
-        //    });
-    }
-
-    setCommand() {
-        this.speechRecognitionService.clearCommands();
-
-        this.speechRecognitionService.addCommand("search", this.search);
-        this.speechRecognitionService.addCommand("testing", this.testing);
-
-        this.speechRecognitionService.setNoMatchCallback(function (transcript) {
-            this.toasterService.showToaster("error", "No command found for '" + transcript + "'");
-        });
-        this.speechRecognitionService.setUnrecognizedCallback(function (transcript) {
-            this.toasterService.showToaster("error", "I'm not sure, but I think you said, '" + transcript + "'");
-        });
-    }
-
-    search() {
-        this.toasterService.showToaster("success", "function invoked", "search function is called");
-    }
-
-    testing() {
-        this.toasterService.showToaster("success", "function invoked", "testing function is called");
+        this.speechRecognitionService.record()
+            .subscribe(e => {
+                this.val = e;
+                console.log(e);
+            },
+            error => {
+                console.error(error)
+                this.toasterService.showToaster("error", "Error: Speech Search", (<Error>error).message);
+            },
+            () => {
+                console.log("Completed");
+            });
     }
 
     ngDoCheck() {

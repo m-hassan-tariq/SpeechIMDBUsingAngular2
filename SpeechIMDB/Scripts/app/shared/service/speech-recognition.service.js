@@ -9,102 +9,54 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var Rx_1 = require('rxjs/Rx');
 var alert_service_1 = require('./alert.service');
 var _ = require("lodash");
-var CommandSubject = (function () {
-    function CommandSubject() {
-    }
-    return CommandSubject;
-}());
-exports.CommandSubject = CommandSubject;
 var SpeechRecognitionService = (function () {
     function SpeechRecognitionService(zone, toasterService) {
         this.zone = zone;
         this.toasterService = toasterService;
-        this.commands = [];
-        var webkitSpeechRecognition = window.webkitSpeechRecognition;
-        var SpeechRecognition = window.SpeechRecognition;
-        this.SpeechRecognition = new webkitSpeechRecognition();
-        this.activate();
     }
-    SpeechRecognitionService.prototype.activate = function () {
-        console.log("activate");
-        this.SpeechRecognition.continuous = true;
-        //this.SpeechRecognition.interimResults = true;
-        this.SpeechRecognition.lang = 'en-US';
-        this.SpeechRecognition.maxAlternatives = 3;
-        this.SpeechRecognition.onstart = this.startHandler;
-        this.SpeechRecognition.onend = this.endHandler;
-        this.SpeechRecognition.onresult = this.resultHandler;
-        //this.SpeechRecognition.onerror = this.errorHandler;
-    };
-    SpeechRecognitionService.prototype.startHandler = function () {
-        console.log("startHandler");
-    };
-    SpeechRecognitionService.prototype.endHandler = function (speechRecognition) {
-        console.log("endHandler");
-        console.log(speechRecognition);
-        speechRecognition.target.start();
-    };
-    SpeechRecognitionService.prototype.addCommand = function (text, cb) {
-        this.commands.push({ commandText: _.toLower(text), commandcallback: cb });
-    };
-    SpeechRecognitionService.prototype.clearCommands = function () {
-        this.commands.length = 0;
-    };
-    SpeechRecognitionService.prototype.setNoMatchCallback = function (callback) {
-        this.noMatchCallback = callback;
-    };
-    SpeechRecognitionService.prototype.setUnrecognizedCallback = function (callback) {
-        this.unrecognizedCallback = callback;
-    };
-    SpeechRecognitionService.prototype.resultHandler = function (event) {
-        console.log("resultHandler");
-        if (event.results) {
-            var result = event.results[event.resultIndex];
-            var transcript = result[0].transcript;
-            console.log(transcript);
-            if (result.isFinal) {
-                console.log(result[0].confidence);
-                if (result[0].confidence < 0.5) {
-                    if (this.unrecognizedCallback) {
-                        this.unrecognizedCallback(transcript);
-                    }
-                    else {
-                        console.log('Unrecognized result: ' + transcript);
+    SpeechRecognitionService.prototype.record = function () {
+        var _this = this;
+        return Rx_1.Observable.create(function (observer) {
+            var webkitSpeechRecognition = window.webkitSpeechRecognition;
+            var recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            //recognition.interimResults = true;
+            recognition.lang = 'en-US';
+            recognition.maxAlternatives = 1;
+            //recognition.onstart = () => {
+            //    this.toasterService.showToaster("success", "Speech Search Status", "Speech Search is ACTIVATED");
+            //};
+            recognition.onresult = function (speech) {
+                var term = "";
+                if (speech.results) {
+                    var result = speech.results[speech.resultIndex];
+                    var transcript = result[0].transcript;
+                    if (result.isFinal) {
+                        console.log(result[0].confidence);
+                        if (result[0].confidence < 0.3) {
+                            _this.toasterService.showToaster("warn", "Speech Search Status", "Unrecognized result - Please try again");
+                        }
+                        else {
+                            term = _.trim(transcript);
+                            _this.toasterService.showToaster("success", "I'm not sure, but I think you said", term);
+                        }
                     }
                 }
-                else {
-                    var match = _.find(this.commands, { commandText: _.toLower(_.trim(transcript)) });
-                    if (match) {
-                        match.commandcallback();
-                    }
-                    else if (this.noMatchCallback) {
-                        this.noMatchCallback(transcript);
-                    }
-                    else {
-                        console.log("No matching command was found for '" + transcript + "'");
-                    }
-                    console.log("Final result: " + transcript);
-                }
-            }
-        }
-    };
-    SpeechRecognitionService.prototype.startRecognition = function () {
-        if (this.SpeechRecognition) {
-            this.toasterService.showToaster("success", "Speech Search Status", "Speech Search is ACTIVATED");
-            this.SpeechRecognition.start();
-        }
-        else {
-            this.toasterService.showToaster("warn", "Speech Search Status", "Speech recognition is not supported");
-            throw new Error('Speech recognition is not supported');
-        }
-    };
-    SpeechRecognitionService.prototype.stopRecognition = function () {
-        if (this.SpeechRecognition) {
-            this.toasterService.showToaster("warn", "Speech Search Status", "Speech Search is STOPPED");
-            this.SpeechRecognition.stop();
-        }
+                _this.zone.run(function () {
+                    observer.next(term);
+                });
+            };
+            recognition.onerror = function (error) {
+                observer.error(error);
+            };
+            recognition.onend = function () {
+                observer.complete();
+            };
+            recognition.start();
+        });
     };
     SpeechRecognitionService = __decorate([
         core_1.Injectable(), 
