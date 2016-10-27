@@ -11,6 +11,7 @@ import { PageTitleService } from '../../shared/service/page-title.service';
 import { ToasterService } from '../../shared/service/alert.service';
 import { BreadcrumbService } from '../../shared/service/breadcrumb.service';
 import { LoaderService } from '../../shared/service/loader.service';
+import { UrlHistoryService } from '../shared/service/url-history-store.service';
 import { WebApiObservableService } from '../../shared/service/web-api-observable.service';
 import { WebApiPromiseService } from '../../shared/service/web-api-promise.service';
 
@@ -26,6 +27,7 @@ export class SearchMovieListComponent implements OnInit {
     msgs: Message[];
     sort: INglDatatableSort;
     tableLoadingStatus: boolean;
+    backUrl: string;
 
     constructor(
         private router: Router,
@@ -35,6 +37,7 @@ export class SearchMovieListComponent implements OnInit {
         private toasterService: ToasterService,
         private breadcrumbService: BreadcrumbService,
         private loaderService: LoaderService,
+        private urlHistoryService: UrlHistoryService,
         private movieObservableService: WebApiObservableService,
         private moviePromiseService: WebApiPromiseService) {
 
@@ -42,6 +45,7 @@ export class SearchMovieListComponent implements OnInit {
         this.searchMovieModel = this.searchMovieParameterService.getSearchParamObj();
         this.msgs = [];
         this.sort = { key: 'title', order: 'asc' };
+        this.backUrl = this.urlHistoryService.getUrlHistoryObj();
     }
 
     ngOnInit() {

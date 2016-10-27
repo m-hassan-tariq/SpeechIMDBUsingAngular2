@@ -35,7 +35,6 @@ var SpeechRecognitionService = (function () {
                     var result = speech.results[speech.resultIndex];
                     var transcript = result[0].transcript;
                     if (result.isFinal) {
-                        console.log(result[0].confidence);
                         if (result[0].confidence < 0.3) {
                             _this.toasterService.showToaster("warn", "Speech Search Status", "Unrecognized result - Please try again");
                         }

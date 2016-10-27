@@ -15,10 +15,11 @@ var page_title_service_1 = require('../../shared/service/page-title.service');
 var alert_service_1 = require('../../shared/service/alert.service');
 var breadcrumb_service_1 = require('../../shared/service/breadcrumb.service');
 var loader_service_1 = require('../../shared/service/loader.service');
+var url_history_store_service_1 = require('../shared/service/url-history-store.service');
 var web_api_observable_service_1 = require('../../shared/service/web-api-observable.service');
 var web_api_promise_service_1 = require('../../shared/service/web-api-promise.service');
 var SearchMovieListComponent = (function () {
-    function SearchMovieListComponent(router, route, searchMovieParameterService, pageTitleService, toasterService, breadcrumbService, loaderService, movieObservableService, moviePromiseService) {
+    function SearchMovieListComponent(router, route, searchMovieParameterService, pageTitleService, toasterService, breadcrumbService, loaderService, urlHistoryService, movieObservableService, moviePromiseService) {
         this.router = router;
         this.route = route;
         this.searchMovieParameterService = searchMovieParameterService;
@@ -26,12 +27,14 @@ var SearchMovieListComponent = (function () {
         this.toasterService = toasterService;
         this.breadcrumbService = breadcrumbService;
         this.loaderService = loaderService;
+        this.urlHistoryService = urlHistoryService;
         this.movieObservableService = movieObservableService;
         this.moviePromiseService = moviePromiseService;
         this.tableLoadingStatus = false;
         this.searchMovieModel = this.searchMovieParameterService.getSearchParamObj();
         this.msgs = [];
         this.sort = { key: 'title', order: 'asc' };
+        this.backUrl = this.urlHistoryService.getUrlHistoryObj();
     }
     SearchMovieListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -81,7 +84,7 @@ var SearchMovieListComponent = (function () {
             selector: 'search-movie-list',
             templateUrl: '../../Scripts/app/search-movies/search-movie-list/search-movie-list.component.html'
         }), 
-        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, search_movie_parameter_store_service_1.SearchMovieParameterDataService, page_title_service_1.PageTitleService, alert_service_1.ToasterService, breadcrumb_service_1.BreadcrumbService, loader_service_1.LoaderService, web_api_observable_service_1.WebApiObservableService, web_api_promise_service_1.WebApiPromiseService])
+        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, search_movie_parameter_store_service_1.SearchMovieParameterDataService, page_title_service_1.PageTitleService, alert_service_1.ToasterService, breadcrumb_service_1.BreadcrumbService, loader_service_1.LoaderService, url_history_store_service_1.UrlHistoryService, web_api_observable_service_1.WebApiObservableService, web_api_promise_service_1.WebApiPromiseService])
     ], SearchMovieListComponent);
     return SearchMovieListComponent;
 }());

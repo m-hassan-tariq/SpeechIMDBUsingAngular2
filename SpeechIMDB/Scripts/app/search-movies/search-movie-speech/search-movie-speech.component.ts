@@ -9,6 +9,7 @@ import { BreadcrumbService } from '../../shared/service/breadcrumb.service';
 import { SpeechRecognitionService } from '../../shared/service/speech-recognition.service';
 import { SearchMovieParameterDataService } from '../shared/service/search-movie-parameter-store.service';
 import { SearchMovieListDataService } from '../shared/service/search-movie-list-store.service';
+import { UrlHistoryService } from '../shared/service/url-history-store.service';
 import * as _ from "lodash";
 
 @Component({
@@ -28,7 +29,8 @@ export class SpeechSearchMovieComponent implements OnInit {
         private route: ActivatedRoute,
         private toasterService: ToasterService,
         private breadcrumbService: BreadcrumbService,
-        private speechRecognitionService: SpeechRecognitionService) {
+        private speechRecognitionService: SpeechRecognitionService,
+        private urlHistoryService: UrlHistoryService) {
         this.model = new SearchMovieModel("", "", "", 1);
         this.showSearchButton = true;
     }
@@ -38,6 +40,7 @@ export class SpeechSearchMovieComponent implements OnInit {
         this.pageTitleService.setTitle("Speech Search Movies");
         this.toasterService.showToaster("info", "Speech Search Movie", "Are you ready to explore movie search using SpeechAPI?");
         this.breadcrumbService.setBreadcrumbs("speechSearchMovie");
+        this.urlHistoryService.setUrlHistoryObj("/movie/speechSearchMovie");
     }
 
     activateSpeechSearchMovie(): void {
@@ -48,16 +51,13 @@ export class SpeechSearchMovieComponent implements OnInit {
             //listener
             (value) => {
                 this.filterTerm(value);
-                console.log(value);
             },
             //errror
             (error) => {
                 this.toasterService.showToaster("error", "Error: Speech Search", (<Error>error).message);
-                console.log(error);
             },
              //completion
             () => {
-                console.log("Completed");
                 this.showSearchButton = true;
             });
     }
@@ -77,10 +77,11 @@ export class SpeechSearchMovieComponent implements OnInit {
     }
 
     searchMovie(): void {
+        this.model.name = "silicon";
         if (this.model.name) {
             this.searchMovieParameterService.setSearchParamObj(this.model);
             this.searchMovieListDataService.setMovieListObj(new MovieListModel());
-            this.router.navigate(['movie/searchMovieList']);
+            this.router.navigate(['/movie/searchMovieList']);
         }
         else
             this.toasterService.showToaster("error", "Required", "Please speak movie name");

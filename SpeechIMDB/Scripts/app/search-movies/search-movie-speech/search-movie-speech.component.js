@@ -18,9 +18,10 @@ var breadcrumb_service_1 = require('../../shared/service/breadcrumb.service');
 var speech_recognition_service_1 = require('../../shared/service/speech-recognition.service');
 var search_movie_parameter_store_service_1 = require('../shared/service/search-movie-parameter-store.service');
 var search_movie_list_store_service_1 = require('../shared/service/search-movie-list-store.service');
+var url_history_store_service_1 = require('../shared/service/url-history-store.service');
 var _ = require("lodash");
 var SpeechSearchMovieComponent = (function () {
-    function SpeechSearchMovieComponent(searchMovieParameterService, searchMovieListDataService, pageTitleService, router, route, toasterService, breadcrumbService, speechRecognitionService) {
+    function SpeechSearchMovieComponent(searchMovieParameterService, searchMovieListDataService, pageTitleService, router, route, toasterService, breadcrumbService, speechRecognitionService, urlHistoryService) {
         this.searchMovieParameterService = searchMovieParameterService;
         this.searchMovieListDataService = searchMovieListDataService;
         this.pageTitleService = pageTitleService;
@@ -29,6 +30,7 @@ var SpeechSearchMovieComponent = (function () {
         this.toasterService = toasterService;
         this.breadcrumbService = breadcrumbService;
         this.speechRecognitionService = speechRecognitionService;
+        this.urlHistoryService = urlHistoryService;
         this.model = new search_movie_model_1.SearchMovieModel("", "", "", 1);
         this.showSearchButton = true;
     }
@@ -37,6 +39,7 @@ var SpeechSearchMovieComponent = (function () {
         this.pageTitleService.setTitle("Speech Search Movies");
         this.toasterService.showToaster("info", "Speech Search Movie", "Are you ready to explore movie search using SpeechAPI?");
         this.breadcrumbService.setBreadcrumbs("speechSearchMovie");
+        this.urlHistoryService.setUrlHistoryObj("/movie/speechSearchMovie");
     };
     SpeechSearchMovieComponent.prototype.activateSpeechSearchMovie = function () {
         var _this = this;
@@ -46,16 +49,13 @@ var SpeechSearchMovieComponent = (function () {
         //listener
         function (value) {
             _this.filterTerm(value);
-            console.log(value);
         }, 
         //errror
         function (error) {
             _this.toasterService.showToaster("error", "Error: Speech Search", error.message);
-            console.log(error);
         }, 
         //completion
         function () {
-            console.log("Completed");
             _this.showSearchButton = true;
         });
     };
@@ -72,10 +72,11 @@ var SpeechSearchMovieComponent = (function () {
         this.model = new search_movie_model_1.SearchMovieModel("", "", "", 1);
     };
     SpeechSearchMovieComponent.prototype.searchMovie = function () {
+        this.model.name = "silicon";
         if (this.model.name) {
             this.searchMovieParameterService.setSearchParamObj(this.model);
             this.searchMovieListDataService.setMovieListObj(new movie_model_1.MovieListModel());
-            this.router.navigate(['movie/searchMovieList']);
+            this.router.navigate(['/movie/searchMovieList']);
         }
         else
             this.toasterService.showToaster("error", "Required", "Please speak movie name");
@@ -92,7 +93,7 @@ var SpeechSearchMovieComponent = (function () {
             selector: 'search-movie',
             templateUrl: '../../Scripts/app/search-movies/search-movie-speech/search-movie-speech.component.html'
         }), 
-        __metadata('design:paramtypes', [search_movie_parameter_store_service_1.SearchMovieParameterDataService, search_movie_list_store_service_1.SearchMovieListDataService, page_title_service_1.PageTitleService, router_1.Router, router_1.ActivatedRoute, alert_service_1.ToasterService, breadcrumb_service_1.BreadcrumbService, speech_recognition_service_1.SpeechRecognitionService])
+        __metadata('design:paramtypes', [search_movie_parameter_store_service_1.SearchMovieParameterDataService, search_movie_list_store_service_1.SearchMovieListDataService, page_title_service_1.PageTitleService, router_1.Router, router_1.ActivatedRoute, alert_service_1.ToasterService, breadcrumb_service_1.BreadcrumbService, speech_recognition_service_1.SpeechRecognitionService, url_history_store_service_1.UrlHistoryService])
     ], SpeechSearchMovieComponent);
     return SpeechSearchMovieComponent;
 }());

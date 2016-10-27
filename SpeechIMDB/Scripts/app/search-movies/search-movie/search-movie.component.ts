@@ -8,6 +8,7 @@ import { ToasterService } from '../../shared/service/alert.service';
 import { BreadcrumbService } from '../../shared/service/breadcrumb.service';
 import { SearchMovieParameterDataService } from '../shared/service/search-movie-parameter-store.service';
 import { SearchMovieListDataService } from '../shared/service/search-movie-list-store.service';
+import { UrlHistoryService } from '../shared/service/url-history-store.service';
 import * as _ from "lodash";
 
 @Component({
@@ -27,7 +28,8 @@ export class SearchMovieComponent implements OnInit, DoCheck {
         private router: Router,
         private route: ActivatedRoute,
         private toasterService: ToasterService,
-        private breadcrumbService: BreadcrumbService) {
+        private breadcrumbService: BreadcrumbService,
+        private urlHistoryService: UrlHistoryService) {
         this.model = new SearchMovieModel("", "", "", 1);
         this.oldModel = new SearchMovieModel("", "", "", 1);
         this.changeDetected = false;
@@ -43,6 +45,7 @@ export class SearchMovieComponent implements OnInit, DoCheck {
         this.pageTitleService.setTitle("Search Movies");
         this.toasterService.showToaster("info", "Search Movie", "ready to explore movie search engine");
         this.breadcrumbService.setBreadcrumbs("searchMovie");
+        this.urlHistoryService.setUrlHistoryObj("/movie/searchMovie");
     }
 
     ngDoCheck() {
@@ -57,7 +60,7 @@ export class SearchMovieComponent implements OnInit, DoCheck {
             //reset movies list store
             this.searchMovieListDataService.setMovieListObj(new MovieListModel());
         }
-        this.router.navigate(['movie/searchMovieList']);
+        this.router.navigate(['/movie/searchMovieList']);
     }
 
     get diagnostic(): string {

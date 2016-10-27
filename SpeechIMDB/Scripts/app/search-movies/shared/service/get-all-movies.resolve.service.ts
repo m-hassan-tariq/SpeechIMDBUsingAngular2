@@ -29,14 +29,12 @@ export class GetAllMoviesResolve implements Resolve<MovieListModel> {
 
         //making sure that movie-list-data-service has data to avoid server round trip for same search query otherwise make a server trip
         if (lstMovie.response) {
-            console.log("exist")
             return Promise.resolve(lstMovie);
         }
         else {
             return this.moviePromiseService
                 .getServiceWithComplexObjectAsQueryString('api/Movie/GetAllMovies', this.searchMovieModel)
                 .then((result: MovieListModel) => {
-                    console.log("new")
                     this.searchMovieListDataService.setMovieListObj(result);
                     return result;
                 })
