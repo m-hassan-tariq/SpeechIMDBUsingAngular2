@@ -77,7 +77,6 @@ export class SpeechSearchMovieComponent implements OnInit {
     }
 
     searchMovie(): void {
-        this.model.name = "silicon";
         if (this.model.name) {
             this.searchMovieParameterService.setSearchParamObj(this.model);
             this.searchMovieListDataService.setMovieListObj(new MovieListModel());

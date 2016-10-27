@@ -2,12 +2,10 @@
 import { GetMovieDetailResolve } from './shared/service/get-movie-detail.resolve.service';
 import { SearchMovieParameterDataService } from './shared/service/search-movie-parameter-store.service';
 import { SearchMovieListDataService } from './shared/service/search-movie-list-store.service';
-import { UrlHistoryService } from './shared/service/url-history-store.service';
 
 export const MOVIE_PROVIDERS = [
     GetAllMoviesResolve,
     GetMovieDetailResolve,
     SearchMovieParameterDataService,
-    SearchMovieListDataService,
-    UrlHistoryService
+    SearchMovieListDataService
 ]

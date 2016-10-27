@@ -6,6 +6,7 @@ var loader_service_1 = require('./shared/service/loader.service');
 var speech_recognition_service_1 = require('./shared/service/speech-recognition.service');
 var web_api_observable_service_1 = require('./shared/service/web-api-observable.service');
 var web_api_promise_service_1 = require('./shared/service/web-api-promise.service');
+var url_history_store_service_1 = require('./search-movies/shared/service/url-history-store.service');
 exports.APP_PROVIDERS = [
     page_title_service_1.PageTitleService,
     alert_service_1.AlertService,
@@ -14,6 +15,7 @@ exports.APP_PROVIDERS = [
     loader_service_1.LoaderService,
     speech_recognition_service_1.SpeechRecognitionService,
     web_api_observable_service_1.WebApiObservableService,
-    web_api_promise_service_1.WebApiPromiseService
+    web_api_promise_service_1.WebApiPromiseService,
+    url_history_store_service_1.UrlHistoryService
 ];
 //# sourceMappingURL=app.provider.js.map

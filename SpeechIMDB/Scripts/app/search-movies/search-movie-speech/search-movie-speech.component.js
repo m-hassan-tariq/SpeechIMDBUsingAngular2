@@ -72,7 +72,6 @@ var SpeechSearchMovieComponent = (function () {
         this.model = new search_movie_model_1.SearchMovieModel("", "", "", 1);
     };
     SpeechSearchMovieComponent.prototype.searchMovie = function () {
-        this.model.name = "silicon";
         if (this.model.name) {
             this.searchMovieParameterService.setSearchParamObj(this.model);
             this.searchMovieListDataService.setMovieListObj(new movie_model_1.MovieListModel());

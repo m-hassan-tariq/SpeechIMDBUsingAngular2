@@ -10,8 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var BehaviorSubject_1 = require('rxjs/BehaviorSubject');
+var url_history_store_service_1 = require('../../search-movies/shared/service/url-history-store.service');
+var _ = require("lodash");
+var BreadcrumItem = (function () {
+    function BreadcrumItem() {
+    }
+    return BreadcrumItem;
+}());
 var BreadcrumbService = (function () {
-    function BreadcrumbService() {
+    function BreadcrumbService(urlHistoryService) {
+        this.urlHistoryService = urlHistoryService;
         this.breadcrumbItem = new BehaviorSubject_1.BehaviorSubject([]);
     }
     BreadcrumbService.prototype.setBreadcrumbs = function (page) {
@@ -21,13 +29,10 @@ var BreadcrumbService = (function () {
     };
     BreadcrumbService.prototype.getBreadcrumsLink = function (page) {
         this.itemBreadcrums = [];
+        var item = this.getsearchMoviePage();
         switch (page) {
             case 'dashboard':
                 this.itemBreadcrums.push({ label: 'Dashboard' });
-                break;
-            case 'dashboard2':
-                this.itemBreadcrums.push({ label: 'Dashboard', routerLink: ['dashboard/home'] });
-                this.itemBreadcrums.push({ label: 'Dashboard2' });
                 break;
             case 'searchMovie':
                 this.itemBreadcrums.push({ label: 'Dashboard', routerLink: ['dashboard/home'] });
@@ -39,12 +44,12 @@ var BreadcrumbService = (function () {
                 break;
             case 'movieList':
                 this.itemBreadcrums.push({ label: 'Dashboard', routerLink: ['dashboard/home'] });
-                this.itemBreadcrums.push({ label: 'Search Movie', routerLink: ['movie/searchMovie'] });
+                this.itemBreadcrums.push({ label: item.label, routerLink: [item.link] });
                 this.itemBreadcrums.push({ label: 'Search Movie List' });
                 break;
             case 'movieDetail':
                 this.itemBreadcrums.push({ label: 'Dashboard', routerLink: ['dashboard/home'] });
-                this.itemBreadcrums.push({ label: 'Search Movie', routerLink: ['movie/searchMovie'] });
+                this.itemBreadcrums.push({ label: item.label, routerLink: [item.link] });
                 this.itemBreadcrums.push({ label: 'Search Movie List', routerLink: ['movie/searchMovieList'] });
                 this.itemBreadcrums.push({ label: 'Search Movie Detail' });
                 break;
@@ -53,9 +58,22 @@ var BreadcrumbService = (function () {
         }
         return this.itemBreadcrums;
     };
+    BreadcrumbService.prototype.getsearchMoviePage = function () {
+        var url = _.toLower(_.trim(this.urlHistoryService.getUrlHistoryObj()));
+        var item = new BreadcrumItem();
+        if (_.includes(url, 'speech')) {
+            item.label = "Speech Search Movie";
+            item.link = "movie/speechSearchMovie";
+        }
+        else {
+            item.label = "Search Movie";
+            item.link = "movie/searchMovie";
+        }
+        return item;
+    };
     BreadcrumbService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [url_history_store_service_1.UrlHistoryService])
     ], BreadcrumbService);
     return BreadcrumbService;
 }());
