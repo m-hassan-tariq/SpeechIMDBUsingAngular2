@@ -10,26 +10,27 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Movie Name</label>
+                                <template #searchMessage>
+                                    Say <b>'Search'</b> to find movie 
+                                    <br />
+                                    <span class="text-center">OR</span>
+                                    <br />
+                                    Say <b>'Clear'</b> to reset the search fields
+                                </template>
                                 <input type="text" class="form-control border-input" name="txtSpeechSearchMovieName" id="txtSpeechSearchMovieName" value=""
-                                       placeholder="Say Movie Name" [(ngModel)]="model.name">
+                                       placeholder="Say Movie Name" [(ngModel)]="model.name" [nglPopover]="searchMessage" nglPopoverTheme="warning"
+                                       [nglOpen]="!showSearchButton" nglPopoverPlacement="top">
                             </div>
                         </div>
                     </div>
-                    <template #tip2>
-                        Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi.
-                    </template>
-                    value is : {{val}}
-
-                    <br />
                     <br />
                     <div class="text-center">
                         <button class="btn btn-info btn-fill btn-wd" name="btnActivateSpeechSearchMovie" id="btnActivateSpeechSearchMovie" (click)="activateSpeechSearchMovie()"
-                                [nglPopover]="popover.message" [nglPopoverTheme]="popover.theme" [nglOpen]="popover.display" [nglPopoverPlacement]="popover.position">
+                                nglPopover="Click Here to Activate Speech Search !!!" nglPopoverTheme="info" [nglOpen]="showSearchButton" nglPopoverPlacement="right"
+                                [disabled]="!showSearchButton">
                             Enable Speech Search
                         </button>
                     </div>
-                    {{popover.message}}
-                    <br />
                     <br />
                 </div>
             </div>

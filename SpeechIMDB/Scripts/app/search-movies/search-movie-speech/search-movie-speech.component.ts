@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, DoCheck } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { SearchMovieModel } from '../shared/model/search-movie.model';
@@ -16,13 +16,9 @@ import * as _ from "lodash";
     templateUrl: '../../Scripts/app/search-movies/search-movie-speech/search-movie-speech.component.html'
 })
 
-export class SpeechSearchMovieComponent implements OnInit, DoCheck {
+export class SpeechSearchMovieComponent implements OnInit {
     model: SearchMovieModel;
-    oldModel: SearchMovieModel;
-    changeDetected: boolean;
-    popover: Object;
-
-    val: string;
+    showSearchButton: boolean;
 
     constructor(
         private searchMovieParameterService: SearchMovieParameterDataService,
@@ -34,61 +30,60 @@ export class SpeechSearchMovieComponent implements OnInit, DoCheck {
         private breadcrumbService: BreadcrumbService,
         private speechRecognitionService: SpeechRecognitionService) {
         this.model = new SearchMovieModel("", "", "", 1);
-        this.oldModel = new SearchMovieModel("", "", "", 1);
-        this.popover = { message: "", theme: "", display: false, position: "" };
-        this.changeDetected = false;
+        this.showSearchButton = true;
     }
 
     ngOnInit() {
-        //populate fields in case of back button click from search movie list
-        //use Object.assign() for deep copy, its similar to angular.copy()
-        this.model = Object.assign({}, this.searchMovieParameterService.getSearchParamObj());
-        this.oldModel = Object.assign({}, this.searchMovieParameterService.getSearchParamObj());
-
         //service to set title of page
         this.pageTitleService.setTitle("Speech Search Movies");
         this.toasterService.showToaster("info", "Speech Search Movie", "Are you ready to explore movie search using SpeechAPI?");
         this.breadcrumbService.setBreadcrumbs("speechSearchMovie");
-        this.populatePopoverMessages("Click Here to enable Speech Search !!!", "info", true, "top");
     }
 
     activateSpeechSearchMovie(): void {
-        this.populatePopoverMessages("Say something to search !!!", "success", true, "left");
+        this.showSearchButton = false;
+
         this.speechRecognitionService.record()
-            .subscribe(e => {
-                this.val = e;
-                console.log(e);
+            .subscribe(
+            //listener
+            (value) => {
+                this.filterTerm(value);
+                console.log(value);
             },
-            error => {
+            //errror
+            (error) => {
                 this.toasterService.showToaster("error", "Error: Speech Search", (<Error>error).message);
-                console.error(error);
+                console.log(error);
             },
+             //completion
             () => {
                 console.log("Completed");
+                this.showSearchButton = true;
             });
     }
 
-    populatePopoverMessages(msg: string, style: string, show: boolean, placement: string): void {
-        this.popover = null;
-        this.popover = { message: msg, theme: style, display: show, position: placement };
+    filterTerm(term: string): void {
+        if (_.toLower(term) == "clear")
+            this.resetSearch();
+        else if (_.toLower(term) == "search")
+            this.searchMovie();
+        else
+            this.model.name = term;
     }
 
-
-    ////////////////////////////////////////
-
-    ngDoCheck() {
-        if (_.isEqual(this.model, this.oldModel) == false)
-            this.changeDetected = true;
+    resetSearch(): void {
+        this.toasterService.showToaster("info", "Success", "Search field is ready to use again.");
+        this.model = new SearchMovieModel("", "", "", 1);
     }
 
     searchMovie(): void {
-        if (this.changeDetected) {
-            //set movies search parameter store
+        if (this.model.name) {
             this.searchMovieParameterService.setSearchParamObj(this.model);
-            //reset movies list store
             this.searchMovieListDataService.setMovieListObj(new MovieListModel());
+            this.router.navigate(['movie/searchMovieList']);
         }
-        this.router.navigate(['movie/searchMovieList']);
+        else
+            this.toasterService.showToaster("error", "Required", "Please speak movie name");
     }
 
     get diagnostic(): string {

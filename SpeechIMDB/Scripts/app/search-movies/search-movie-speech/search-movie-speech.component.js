@@ -30,52 +30,55 @@ var SpeechSearchMovieComponent = (function () {
         this.breadcrumbService = breadcrumbService;
         this.speechRecognitionService = speechRecognitionService;
         this.model = new search_movie_model_1.SearchMovieModel("", "", "", 1);
-        this.oldModel = new search_movie_model_1.SearchMovieModel("", "", "", 1);
-        this.popover = { message: "", theme: "", display: false, position: "" };
-        this.changeDetected = false;
+        this.showSearchButton = true;
     }
     SpeechSearchMovieComponent.prototype.ngOnInit = function () {
-        //populate fields in case of back button click from search movie list
-        //use Object.assign() for deep copy, its similar to angular.copy()
-        this.model = Object.assign({}, this.searchMovieParameterService.getSearchParamObj());
-        this.oldModel = Object.assign({}, this.searchMovieParameterService.getSearchParamObj());
         //service to set title of page
         this.pageTitleService.setTitle("Speech Search Movies");
         this.toasterService.showToaster("info", "Speech Search Movie", "Are you ready to explore movie search using SpeechAPI?");
         this.breadcrumbService.setBreadcrumbs("speechSearchMovie");
-        this.populatePopoverMessages("Click Here to enable Speech Search !!!", "info", true, "top");
     };
     SpeechSearchMovieComponent.prototype.activateSpeechSearchMovie = function () {
         var _this = this;
-        this.populatePopoverMessages("Say something to search !!!", "success", true, "left");
+        this.showSearchButton = false;
         this.speechRecognitionService.record()
-            .subscribe(function (e) {
-            _this.val = e;
-            console.log(e);
-        }, function (error) {
+            .subscribe(
+        //listener
+        function (value) {
+            _this.filterTerm(value);
+            console.log(value);
+        }, 
+        //errror
+        function (error) {
             _this.toasterService.showToaster("error", "Error: Speech Search", error.message);
-            console.error(error);
-        }, function () {
+            console.log(error);
+        }, 
+        //completion
+        function () {
             console.log("Completed");
+            _this.showSearchButton = true;
         });
     };
-    SpeechSearchMovieComponent.prototype.populatePopoverMessages = function (msg, style, show, placement) {
-        this.popover = null;
-        this.popover = { message: msg, theme: style, display: show, position: placement };
+    SpeechSearchMovieComponent.prototype.filterTerm = function (term) {
+        if (_.toLower(term) == "clear")
+            this.resetSearch();
+        else if (_.toLower(term) == "search")
+            this.searchMovie();
+        else
+            this.model.name = term;
     };
-    ////////////////////////////////////////
-    SpeechSearchMovieComponent.prototype.ngDoCheck = function () {
-        if (_.isEqual(this.model, this.oldModel) == false)
-            this.changeDetected = true;
+    SpeechSearchMovieComponent.prototype.resetSearch = function () {
+        this.toasterService.showToaster("info", "Success", "Search field is ready to use again.");
+        this.model = new search_movie_model_1.SearchMovieModel("", "", "", 1);
     };
     SpeechSearchMovieComponent.prototype.searchMovie = function () {
-        if (this.changeDetected) {
-            //set movies search parameter store
+        if (this.model.name) {
             this.searchMovieParameterService.setSearchParamObj(this.model);
-            //reset movies list store
             this.searchMovieListDataService.setMovieListObj(new movie_model_1.MovieListModel());
+            this.router.navigate(['movie/searchMovieList']);
         }
-        this.router.navigate(['movie/searchMovieList']);
+        else
+            this.toasterService.showToaster("error", "Required", "Please speak movie name");
     };
     Object.defineProperty(SpeechSearchMovieComponent.prototype, "diagnostic", {
         get: function () {

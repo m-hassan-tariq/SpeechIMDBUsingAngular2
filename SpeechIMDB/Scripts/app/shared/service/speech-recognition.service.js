@@ -56,7 +56,7 @@ var SpeechRecognitionService = (function () {
                 observer.complete();
             };
             SpeechRecognition.start();
-            _this.toasterService.showToaster("success", "Speech Search Status", "Speech Search is ACTIVATED");
+            _this.toasterService.showToaster("success", "Speech Search Status", "Say something - We are listening !!!");
         });
     };
     SpeechRecognitionService = __decorate([

@@ -61,7 +61,7 @@ export class SpeechRecognitionService {
             };  
 
             SpeechRecognition.start();
-            this.toasterService.showToaster("success", "Speech Search Status", "Speech Search is ACTIVATED");
+            this.toasterService.showToaster("success", "Speech Search Status", "Say something - We are listening !!!");
         });
     }
 
