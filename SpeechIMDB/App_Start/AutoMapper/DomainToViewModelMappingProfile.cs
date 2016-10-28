@@ -61,6 +61,7 @@ namespace SpeechIMDB.App_Start
         {
             CreateMap<Thumbnail, NewsVM>()
               .ForMember(vm => vm.thumbnailUrl, map => map.MapFrom(m => m.contentUrl));
+
             CreateMap<Provider, NewsVM>()
               .ForMember(vm => vm.sourceName, map => map.MapFrom(m => m.name));
 

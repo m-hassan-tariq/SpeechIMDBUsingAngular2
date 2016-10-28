@@ -43,6 +43,11 @@ namespace SpeechIMDB.Controllers.Movie
         public async Task<IHttpActionResult> GetMovieNews()
         {
             var result = await _movieListService.GetMovieNewsAsync();
+            //http://stackoverflow.com/questions/12429210/automapper-multi-objects-to-one-object/12433558#12433558
+            //http://stackoverflow.com/questions/19544133/automapper-multi-object-source-and-one-destination
+            //http://stackoverflow.com/questions/21413273/automapper-convert-from-multiple-sources
+            //var newsListItem1 = Mapper.Map<Thumbnail, NewsVM>(result.value[0].image.thumbnail);
+            //var newsListItem2 = Mapper.Map<Provider, NewsVM>(Provider, newsListItem1.);
             NewsListVM newsListVM = Mapper.Map<NewsList, NewsListVM>(result);
             return Ok(newsListVM);
         }
