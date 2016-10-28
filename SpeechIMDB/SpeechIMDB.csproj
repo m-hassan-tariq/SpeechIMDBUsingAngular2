@@ -2273,6 +2273,7 @@
     <TypeScriptCompile Include="Scripts\app\dashboard\dashboard-routing.module.ts" />
     <TypeScriptCompile Include="Scripts\app\dashboard\dashboard.component.ts" />
     <TypeScriptCompile Include="Scripts\app\dashboard\dashboard.module.ts" />
+    <TypeScriptCompile Include="Scripts\app\dashboard\shared\model\news.model.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movie-detail\search-movie-detail.component.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movie-list\search-movie-list.component.ts" />
     <TypeScriptCompile Include="Scripts\app\search-movies\search-movie-speech\search-movie-speech.component.ts" />
