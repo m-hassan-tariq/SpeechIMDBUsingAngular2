@@ -24,7 +24,7 @@ export class SpeechRecognitionService {
             const SpeechRecognition = new webkitSpeechRecognition();
             SpeechRecognition.continuous = true;
             //SpeechRecognition.interimResults = true;
-            SpeechRecognition.lang = 'en-US';
+            SpeechRecognition.lang = 'en-us';
             SpeechRecognition.maxAlternatives = 1;
 
             //recognition.onstart = () => {

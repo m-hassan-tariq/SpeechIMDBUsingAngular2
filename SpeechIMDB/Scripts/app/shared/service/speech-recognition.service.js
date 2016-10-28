@@ -24,7 +24,7 @@ var SpeechRecognitionService = (function () {
             var SpeechRecognition = new webkitSpeechRecognition();
             SpeechRecognition.continuous = true;
             //SpeechRecognition.interimResults = true;
-            SpeechRecognition.lang = 'en-US';
+            SpeechRecognition.lang = 'en-us';
             SpeechRecognition.maxAlternatives = 1;
             //recognition.onstart = () => {
             //    this.toasterService.showToaster("success", "Speech Search Status", "Speech Search is ACTIVATED");
