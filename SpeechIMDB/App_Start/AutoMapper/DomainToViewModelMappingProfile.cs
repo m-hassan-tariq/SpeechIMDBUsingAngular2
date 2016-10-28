@@ -59,17 +59,13 @@ namespace SpeechIMDB.App_Start
 
         private void MapNewsList()
         {
-            CreateMap<Thumbnail, NewsVM>()
-              .ForMember(vm => vm.thumbnailUrl, map => map.MapFrom(m => m.contentUrl));
-
-            CreateMap<Provider, NewsVM>()
-              .ForMember(vm => vm.sourceName, map => map.MapFrom(m => m.name));
-
             CreateMap<Value, NewsVM>()
               .ForMember(vm => vm.name, map => map.MapFrom(m => m.name))
               .ForMember(vm => vm.url, map => map.MapFrom(m => m.url))
               .ForMember(vm => vm.description, map => map.MapFrom(m => m.description))
               .ForMember(vm => vm.datePublished, map => map.MapFrom(m => m.datePublished))
+              .ForMember(vm => vm.sourceName, map => map.MapFrom(m => m.provider[0].name))
+              .ForMember(vm => vm.thumbnailUrl, map => map.MapFrom(m => m.image.thumbnail.contentUrl))
               .ForMember(vm => vm.category, map => map.MapFrom(m => m.category));
 
             CreateMap<NewsList, NewsListVM>()
