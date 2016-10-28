@@ -34,7 +34,6 @@ var DashboardComponent = (function () {
             .getService("api/movie/GetMovieNews")
             .subscribe(function (result) {
             _this.newsList = result;
-            console.log(result);
             console.log(_this.newsList);
         }, function (error) {
             _this.toasterService.showToaster('error', 'Oops!! An error occurred', error);
@@ -42,7 +41,7 @@ var DashboardComponent = (function () {
     };
     Object.defineProperty(DashboardComponent.prototype, "diagnostic", {
         get: function () {
-            return JSON.stringify("dashboard ---diagnostic");
+            return JSON.stringify(this.newsList);
         },
         enumerable: true,
         configurable: true

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
+var common_1 = require('@angular/common');
 var dashboard_routing_module_1 = require('./dashboard-routing.module');
 var dashboard_component_1 = require('./dashboard.component');
 var DashboardMainModule = (function () {
@@ -19,6 +20,7 @@ var DashboardMainModule = (function () {
         core_1.NgModule({
             imports: [
                 forms_1.FormsModule,
+                common_1.CommonModule,
                 dashboard_routing_module_1.DashbaordRoutingModule
             ],
             declarations: [

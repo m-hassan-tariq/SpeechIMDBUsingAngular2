@@ -109,7 +109,11 @@
                     <p class="category">24 Hours performance</p>
                 </div>
                 <div class="content">
-                    <div id="chartHours" class="ct-chart"></div>
+                    <ul>
+                        <li *ngFor="let item of newsList.news">
+                            {{item.name}}
+                        </li>
+                    </ul>
                     <div class="footer">
                         <div class="chart-legend">
                             <i class="fa fa-circle text-info"></i> Open

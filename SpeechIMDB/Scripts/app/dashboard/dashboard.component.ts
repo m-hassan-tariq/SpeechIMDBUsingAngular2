@@ -38,7 +38,6 @@ export class DashboardComponent implements OnInit {
             .subscribe(
             (result: NewsModel[]) => {
                 this.newsList = result;
-                console.log(result);
                 console.log(this.newsList);
             },
             (error) => {
@@ -47,6 +46,6 @@ export class DashboardComponent implements OnInit {
     }
 
     get diagnostic() : string {
-        return JSON.stringify("dashboard ---diagnostic");
+        return JSON.stringify(this.newsList);
     }
 }
