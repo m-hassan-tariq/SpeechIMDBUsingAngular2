@@ -31,10 +31,10 @@ namespace SpeechIMDB.BAL
         public async Task<NewsList> GetMovieNewsAsync()
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
-            queryString["q"] = "bollywood";
-            queryString["count"] = "20";
+            queryString["q"] = ServiceConfig.NewsSearchQuery;
+            queryString["count"] = ServiceConfig.NewsSearchRecordCount;
             queryString["offset"] = "0";
-            queryString["mkt"] = "en-us";
+            queryString["mkt"] = ServiceConfig.NewsSearchLang;
             queryString["safeSearch"] = "Off";
 
             return await _newsListlService.GetMovieNewsAsync(queryString);
