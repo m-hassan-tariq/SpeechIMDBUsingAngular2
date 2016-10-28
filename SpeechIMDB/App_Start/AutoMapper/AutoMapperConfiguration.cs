@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 
-
 namespace SpeechIMDB.App_Start
 {
     public static class AutoMapperConfiguration

@@ -34,6 +34,7 @@ namespace SpeechIMDB.DependencyResolution {
             For<IMovieBAL>().Use<MovieBAL>();
             For<IMovieServices<MovieList>>().Use<MovieServices<MovieList>>();
             For<IMovieServices<MovieDetail>>().Use<MovieServices<MovieDetail>>();
+            For<IMovieServices<NewsList>>().Use<MovieServices<NewsList>>();
         }
 
         #endregion

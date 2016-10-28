@@ -175,6 +175,7 @@
     </Compile>
     <Compile Include="Models\MovieDetailVM.cs" />
     <Compile Include="Models\MovieListVM.cs" />
+    <Compile Include="Models\NewsListVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

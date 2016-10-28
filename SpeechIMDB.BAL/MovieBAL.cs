@@ -1,10 +1,7 @@
 ﻿using SpeechIMDB.DomainClasses;
 using SpeechIMDB.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace SpeechIMDB.BAL
 {
@@ -12,22 +9,35 @@ namespace SpeechIMDB.BAL
     {
         private readonly IMovieServices<MovieList> _movieListService;
         private readonly IMovieServices<MovieDetail> _movieDetailService;
+        private readonly IMovieServices<NewsList> _newsListlService;
 
-        public MovieBAL(IMovieServices<MovieList> movieListService, IMovieServices<MovieDetail> movieDetailService)
+        public MovieBAL(IMovieServices<MovieList> movieListService, IMovieServices<MovieDetail> movieDetailService, IMovieServices<NewsList> newsListlService)
         {
             _movieListService = movieListService;
             _movieDetailService = movieDetailService;
+            _newsListlService = newsListlService;
         }
 
-        public async Task<MovieList> GetAllMovies(SearchMovie obj)
+        public async Task<MovieList> GetAllMoviesAsync(SearchMovie obj)
         {
             return await _movieListService.GetMovieAsync("/?s=" + obj.Name + "&y=" + obj.Year + "&plot=full&r=json&type=" + obj.Type + "&page=" + obj.Page);
         }
 
-        public async Task<MovieDetail> GetMovieDetail(string id)
+        public async Task<MovieDetail> GetMovieDetailAsync(string id)
         {
             return await _movieDetailService.GetMovieAsync("/?i=" + id + "&plot=full&r=json");
         }
 
+        public async Task<NewsList> GetMovieNewsAsync()
+        {
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            queryString["q"] = "bollywood";
+            queryString["count"] = "20";
+            queryString["offset"] = "0";
+            queryString["mkt"] = "en-us";
+            queryString["safeSearch"] = "Off";
+
+            return await _newsListlService.GetMovieNewsAsync(queryString);
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace SpeechIMDB.Controllers.Movie
         [HttpGet]
         public async Task<IHttpActionResult> GetAllMovies([FromUri] SearchMovie modelSearchMovie)
         {
-            var result = await _movieListService.GetAllMovies(modelSearchMovie);
+            var result = await _movieListService.GetAllMoviesAsync(modelSearchMovie);
             MovieListVM movieListVM = Mapper.Map<MovieList, MovieListVM>(result);
             return Ok(movieListVM);
         }
@@ -34,9 +34,17 @@ namespace SpeechIMDB.Controllers.Movie
         [HttpGet]
         public async Task<IHttpActionResult> GetMovieDetail([FromUri] string imdbId)
         {
-            var result = await _movieListService.GetMovieDetail(imdbId);
+            var result = await _movieListService.GetMovieDetailAsync(imdbId);
             MovieDetailVM movieDetailVM = Mapper.Map<MovieDetail, MovieDetailVM>(result);
             return Ok(movieDetailVM);
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetMovieNews()
+        {
+            var result = await _movieListService.GetMovieNewsAsync();
+            NewsListVM newsListVM = Mapper.Map<NewsList, NewsListVM>(result);
+            return Ok(newsListVM);
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////

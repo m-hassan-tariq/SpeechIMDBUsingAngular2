@@ -1,10 +1,6 @@
-﻿using SpeechIMDB;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Specialized;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SpeechIMDB.Service
@@ -31,6 +27,26 @@ namespace SpeechIMDB.Service
                     movie = await response.Content.ReadAsAsync<T>();
                 }
                 return movie;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public async Task<T> GetMovieNewsAsync(NameValueCollection queryString)
+        {
+            try
+            {
+                T news = null;
+                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", ServiceConfig.NewsSearchKey);
+                HttpResponseMessage response = await client.GetAsync(ServiceConfig.NewsSearchUrl + queryString);
+                if (response.IsSuccessStatusCode)
+                {
+                    news = await response.Content.ReadAsAsync<T>();
+                }
+                return news;
             }
             catch (Exception e)
             {
