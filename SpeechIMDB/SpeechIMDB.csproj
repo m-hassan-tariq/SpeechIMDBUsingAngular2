@@ -2234,6 +2234,7 @@
     <Content Include="Image\imdb_votes.png" />
     <Content Include="Image\notavailable.svg.png" />
     <Content Include="Image\photonotavailable.jpg" />
+    <Content Include="Scripts\app\dashboard\dashboard.component.css" />
     <Content Include="Scripts\app\dashboard\dashboard.component.html" />
     <Content Include="Scripts\app\search-movies\search-movie-detail\search-movie-detail.component.html" />
     <Content Include="Scripts\app\search-movies\search-movie-list\search-movie-list.component.html" />

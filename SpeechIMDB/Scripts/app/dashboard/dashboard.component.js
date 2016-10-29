@@ -34,10 +34,12 @@ var DashboardComponent = (function () {
             .getService("api/movie/GetMovieNews")
             .subscribe(function (result) {
             _this.newsList = result;
-            console.log(_this.newsList);
         }, function (error) {
             _this.toasterService.showToaster('error', 'Oops!! An error occurred', error);
         });
+    };
+    DashboardComponent.prototype.displaySource = function (source) {
+        this.toasterService.showToaster('success', 'Source of the news is ...', source);
     };
     Object.defineProperty(DashboardComponent.prototype, "diagnostic", {
         get: function () {
@@ -49,7 +51,8 @@ var DashboardComponent = (function () {
     DashboardComponent = __decorate([
         core_1.Component({
             selector: 'search-movie-list',
-            templateUrl: '../../Scripts/app/dashboard/dashboard.component.html'
+            templateUrl: '../../Scripts/app/dashboard/dashboard.component.html',
+            styleUrls: ['../../Scripts/app/dashboard/dashboard.component.css']
         }), 
         __metadata('design:paramtypes', [page_title_service_1.PageTitleService, alert_service_1.AlertService, alert_service_1.ToasterService, breadcrumb_service_1.BreadcrumbService, web_api_observable_service_1.WebApiObservableService])
     ], DashboardComponent);

@@ -10,7 +10,8 @@ import { WebApiPromiseService } from '../shared/service/web-api-promise.service'
 
 @Component({
     selector: 'search-movie-list',
-    templateUrl: '../../Scripts/app/dashboard/dashboard.component.html'
+    templateUrl: '../../Scripts/app/dashboard/dashboard.component.html',
+    styleUrls: ['../../Scripts/app/dashboard/dashboard.component.css']
 })
 
 export class DashboardComponent implements OnInit {
@@ -38,11 +39,14 @@ export class DashboardComponent implements OnInit {
             .subscribe(
             (result: NewsModel[]) => {
                 this.newsList = result;
-                console.log(this.newsList);
             },
             (error) => {
                 this.toasterService.showToaster('error', 'Oops!! An error occurred', <any>error);
             });
+    }
+
+    displaySource(source: string) {
+        this.toasterService.showToaster('success', 'Source of the news is ...', source);
     }
 
     get diagnostic() : string {

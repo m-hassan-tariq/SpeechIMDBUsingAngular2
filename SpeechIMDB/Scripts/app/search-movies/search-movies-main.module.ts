@@ -18,10 +18,8 @@ import { MOVIE_PROVIDERS } from './search-movies-main.providers';
     imports: [
         CommonModule,
         FormsModule,
-
         NglModule.forRoot(),
         RatingModule,
-
         SearchMoviesRoutingModule,
     ],
     declarations: [

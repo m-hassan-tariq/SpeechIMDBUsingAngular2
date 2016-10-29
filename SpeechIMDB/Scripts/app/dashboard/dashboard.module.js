@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var common_1 = require('@angular/common');
+var ng_lightning_1 = require('ng-lightning/ng-lightning');
 var dashboard_routing_module_1 = require('./dashboard-routing.module');
 var dashboard_component_1 = require('./dashboard.component');
 var DashboardMainModule = (function () {
@@ -21,6 +22,7 @@ var DashboardMainModule = (function () {
             imports: [
                 forms_1.FormsModule,
                 common_1.CommonModule,
+                ng_lightning_1.NglModule.forRoot(),
                 dashboard_routing_module_1.DashbaordRoutingModule
             ],
             declarations: [

@@ -1,14 +1,6 @@
-﻿<link href="http://fonts.googleapis.com/css?family=Ubuntu:400,300" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=Questrial" rel="stylesheet" type="text/css">
-<link href="../../../Content/assets/css/main.css" rel="stylesheet" type="text/css" />
+﻿<link href="../../../Content/assets/css/main.css" rel="stylesheet" type="text/css" />
 <link href="../../../Content/assets/css/owl.carousel.css" rel="stylesheet" type="text/css" />
 <link href="../../../Content/assets/css/pixeden-icons.css" rel="stylesheet" type="text/css" />
-
-<!--<ul>
-    <li *ngFor="let item of newsList.news">
-        {{item.name}}
-    </li>
-</ul>-->
 
 <body class="sidebar-disabled archive">
     <div class="xv-overFlow">
@@ -22,35 +14,29 @@
                     </header>
 
                     <div class="timeline-wrap">
-
-                        <article>
-                            <time datetime="2015-01-31 08:30:45.687">26 jan,2015</time>
+                        <article *ngFor="let newsItem of newsList.news">
+                            <time datetime="2015-01-31 08:30:45.687">{{newsItem.datePublished | date}}</time>
                             <div class="specialContent">
                                 <div class="shareWrapper">
-                                    <ul class="social-list">
-                                        <li><a href="https://twitter.com/intent/tweet?url=YOUR-URL" class="icon-twitter twitter-bg" target="_blank"></a></li>
-                                        <li><a href="http://www.facebook.com/sharer/sharer.php?u=YOUR-URL" class="icon-facebook facebook-bg" target="_blank"></a></li>
-                                        <li><a href="https://plus.google.com/share?url=YOUR-URL" class="icon-google-plus gplus-bg" target="_blank"></a></li>
-                                    </ul>
-                                    <button><i class="icon-next-1-f"></i></button>
+                                    <button (click)="displaySource(newsItem.sourceName)"><i class="icon-next-1-f"></i></button>
                                 </div>
-                                <a href="http://xvelopers.com/wp/themes/voltov3/category/social/" style="background:#ffb310" class="cat-tag">Social</a>
                             </div>
                             <div class="article_inner clearfix">
-                                <figure class="articleVisual">
-                                    <img src="assets/demo-data/img1.jpg" width="1200" height="570" alt="" />
+                                <figure>
+                                    <img [src]="newsItem.thumbnailUrl" />
                                 </figure>
-                                <h1><a href="#">“The Lego Movie” snubbed at the Oscars</a></h1>
-                                <p>Pellentesque quis sapien eleifend aliquet, morbi ideru  dictum finibus blandit. Phasellus a iaculis hiri habitase platea dictumst neque, tincinq mangas.</p>
-                                <a class="readMore" href="#">Read More..</a>
+                                <h1><a target="_blank" href="{{newsItem.url}}">{{newsItem.name}}</a></h1>
+                                <p>{{newsItem.description | slice:0:150}}...</p>
+                                <a class="readMore" target="_blank" href="{{newsItem.url}}">Read More..</a>
                             </div>
+                            <ngl-badge type="info">{{newsItem.sourceName}}</ngl-badge>
+                            <ngl-badge type="warning">{{newsItem.category}}</ngl-badge>
                         </article>
-
                         <a href="#" class="loadTimeline">That's All Folks</a>
-                    </div><!--timeline-wrap-->
+                    </div>
 
-                </main><!--main content of current page-->
-            </div><!--pageContentArea-->
-        </div><!--container-->
+                </main>
+            </div>
+        </div>
     </div>
 </body>
