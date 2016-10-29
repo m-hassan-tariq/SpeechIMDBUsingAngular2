@@ -59,7 +59,7 @@ export class SpeechRecognitionService {
 
             this.speechRecognition.onend = () => {
                 observer.complete();
-            };  
+            };
 
             this.speechRecognition.start();
             this.toasterService.showToaster("success", "Speech Search Status", "Say something - We are listening !!!");
@@ -67,7 +67,8 @@ export class SpeechRecognitionService {
     }
 
     DestroySpeechObject() {
-        this.speechRecognition.stop();
+        if (this.speechRecognition)
+            this.speechRecognition.stop();
     }
 
 }

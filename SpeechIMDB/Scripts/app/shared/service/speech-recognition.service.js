@@ -60,7 +60,8 @@ var SpeechRecognitionService = (function () {
         });
     };
     SpeechRecognitionService.prototype.DestroySpeechObject = function () {
-        this.speechRecognition.stop();
+        if (this.speechRecognition)
+            this.speechRecognition.stop();
     };
     SpeechRecognitionService = __decorate([
         core_1.Injectable(), 
