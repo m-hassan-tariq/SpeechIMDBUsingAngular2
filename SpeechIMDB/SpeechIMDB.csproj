@@ -2161,12 +2161,16 @@
     <Content Include="Content\assets\css\demo.css" />
     <Content Include="Content\assets\css\google-font.css" />
     <Content Include="Content\assets\css\lightning.css" />
+    <Content Include="Content\assets\css\main.css" />
+    <Content Include="Content\assets\css\owl.carousel.css" />
     <Content Include="Content\assets\css\paper-dashboard.css" />
+    <Content Include="Content\assets\css\pixeden-icons.css" />
     <Content Include="Content\assets\css\themify-icons.css" />
     <Content Include="Content\assets\css\font-awesome.min.css" />
     <Content Include="Content\assets\fonts\themify.svg" />
     <Content Include="Content\assets\img\apple-icon.png" />
     <Content Include="Content\assets\img\background.jpg" />
+    <Content Include="Content\assets\img\triangle.png" />
     <Content Include="Content\assets\img\faces\face-0.jpg" />
     <Content Include="Content\assets\img\faces\face-1.jpg" />
     <Content Include="Content\assets\img\faces\face-2.jpg" />
@@ -2353,6 +2357,9 @@
     <Content Include="assets\fonts\webfonts\SalesforceSans-ThinItalic.woff" />
     <Content Include="assets\fonts\webfonts\SalesforceSans-ThinItalic.woff2" />
     <Content Include="assets\icons\README-dist.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\assets\fonts\icomoon.woff" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
