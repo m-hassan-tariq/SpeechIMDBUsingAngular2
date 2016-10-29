@@ -21,15 +21,16 @@ var SpeechRecognitionService = (function () {
         var _this = this;
         return Rx_1.Observable.create(function (observer) {
             var webkitSpeechRecognition = window.webkitSpeechRecognition;
-            var SpeechRecognition = new webkitSpeechRecognition();
-            SpeechRecognition.continuous = true;
-            //SpeechRecognition.interimResults = true;
-            SpeechRecognition.lang = 'en-us';
-            SpeechRecognition.maxAlternatives = 1;
+            _this.speechRecognition = new webkitSpeechRecognition();
+            //this.speechRecognition = SpeechRecognition;
+            _this.speechRecognition.continuous = true;
+            //this.speechRecognition.interimResults = true;
+            _this.speechRecognition.lang = 'en-us';
+            _this.speechRecognition.maxAlternatives = 1;
             //recognition.onstart = () => {
             //    this.toasterService.showToaster("success", "Speech Search Status", "Speech Search is ACTIVATED");
             //};
-            SpeechRecognition.onresult = function (speech) {
+            _this.speechRecognition.onresult = function (speech) {
                 var term = "";
                 if (speech.results) {
                     var result = speech.results[speech.resultIndex];
@@ -40,7 +41,7 @@ var SpeechRecognitionService = (function () {
                         }
                         else {
                             term = _.trim(transcript);
-                            _this.toasterService.showToaster("success", "I'm not sure, but I think you said", term);
+                            _this.toasterService.showToaster("success", "Info", "Did you said? -> " + term + " , If not then say something else...");
                         }
                     }
                 }
@@ -48,15 +49,18 @@ var SpeechRecognitionService = (function () {
                     observer.next(term);
                 });
             };
-            SpeechRecognition.onerror = function (error) {
+            _this.speechRecognition.onerror = function (error) {
                 observer.error(error);
             };
-            SpeechRecognition.onend = function () {
+            _this.speechRecognition.onend = function () {
                 observer.complete();
             };
-            SpeechRecognition.start();
+            _this.speechRecognition.start();
             _this.toasterService.showToaster("success", "Speech Search Status", "Say something - We are listening !!!");
         });
+    };
+    SpeechRecognitionService.prototype.DestroySpeechObject = function () {
+        this.speechRecognition.stop();
     };
     SpeechRecognitionService = __decorate([
         core_1.Injectable(), 

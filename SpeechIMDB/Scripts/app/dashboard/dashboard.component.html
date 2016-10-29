@@ -23,7 +23,7 @@
                             </div>
                             <div class="article_inner clearfix">
                                 <figure>
-                                    <img [src]="newsItem.thumbnailUrl" width="600" height="290" alt=""/>
+                                    <img [src]="newsItem.thumbnailUrl ? newsItem.thumbnailUrl :  '../../../Image/imagenotavail.png'" width="600" height="290" alt=""/>
                                 </figure>
                                 <h1><a target="_blank" href="{{newsItem.url}}">{{newsItem.name}}</a></h1>
                                 <p>{{newsItem.description | slice:0:150}}...</p>

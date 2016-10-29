@@ -41,6 +41,9 @@ var SpeechSearchMovieComponent = (function () {
         this.breadcrumbService.setBreadcrumbs("speechSearchMovie");
         this.urlHistoryService.setUrlHistoryObj("/movie/speechSearchMovie");
     };
+    SpeechSearchMovieComponent.prototype.ngOnDestroy = function () {
+        this.speechRecognitionService.DestroySpeechObject();
+    };
     SpeechSearchMovieComponent.prototype.activateSpeechSearchMovie = function () {
         var _this = this;
         this.showSearchButton = false;

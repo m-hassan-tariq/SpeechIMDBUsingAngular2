@@ -12,6 +12,7 @@ interface IWindow extends Window {
 
 @Injectable()
 export class SpeechRecognitionService {
+    speechRecognition: any;
 
     constructor(private zone: NgZone,
         private toasterService: ToasterService) {
@@ -21,17 +22,18 @@ export class SpeechRecognitionService {
 
         return Observable.create(observer => {
             const { webkitSpeechRecognition }: IWindow = <IWindow>window;
-            const SpeechRecognition = new webkitSpeechRecognition();
-            SpeechRecognition.continuous = true;
-            //SpeechRecognition.interimResults = true;
-            SpeechRecognition.lang = 'en-us';
-            SpeechRecognition.maxAlternatives = 1;
+            this.speechRecognition = new webkitSpeechRecognition();
+            //this.speechRecognition = SpeechRecognition;
+            this.speechRecognition.continuous = true;
+            //this.speechRecognition.interimResults = true;
+            this.speechRecognition.lang = 'en-us';
+            this.speechRecognition.maxAlternatives = 1;
 
             //recognition.onstart = () => {
             //    this.toasterService.showToaster("success", "Speech Search Status", "Speech Search is ACTIVATED");
             //};
 
-            SpeechRecognition.onresult = speech => {
+            this.speechRecognition.onresult = speech => {
                 let term: string = "";
                 if (speech.results) {
                     var result = speech.results[speech.resultIndex];
@@ -42,7 +44,7 @@ export class SpeechRecognitionService {
                         }
                         else {
                             term = _.trim(transcript);
-                            this.toasterService.showToaster("success", "I'm not sure, but I think you said", term);
+                            this.toasterService.showToaster("success", "Info", "Did you said? -> " + term + " , If not then say something else...");
                         }
                     }
                 }
@@ -51,17 +53,21 @@ export class SpeechRecognitionService {
                 });
             };
 
-            SpeechRecognition.onerror = error => {
+            this.speechRecognition.onerror = error => {
                 observer.error(error);
             };
 
-            SpeechRecognition.onend = () => {
+            this.speechRecognition.onend = () => {
                 observer.complete();
             };  
 
-            SpeechRecognition.start();
+            this.speechRecognition.start();
             this.toasterService.showToaster("success", "Speech Search Status", "Say something - We are listening !!!");
         });
+    }
+
+    DestroySpeechObject() {
+        this.speechRecognition.stop();
     }
 
 }

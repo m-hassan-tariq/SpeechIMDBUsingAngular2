@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { SearchMovieModel } from '../shared/model/search-movie.model';
@@ -17,7 +17,7 @@ import * as _ from "lodash";
     templateUrl: '../../Scripts/app/search-movies/search-movie-speech/search-movie-speech.component.html'
 })
 
-export class SpeechSearchMovieComponent implements OnInit {
+export class SpeechSearchMovieComponent implements OnInit, OnDestroy {
     model: SearchMovieModel;
     showSearchButton: boolean;
 
@@ -41,6 +41,10 @@ export class SpeechSearchMovieComponent implements OnInit {
         this.toasterService.showToaster("info", "Speech Search Movie", "Are you ready to explore movie search using SpeechAPI?");
         this.breadcrumbService.setBreadcrumbs("speechSearchMovie");
         this.urlHistoryService.setUrlHistoryObj("/movie/speechSearchMovie");
+    }
+
+    ngOnDestroy() {
+        this.speechRecognitionService.DestroySpeechObject();
     }
 
     activateSpeechSearchMovie(): void {

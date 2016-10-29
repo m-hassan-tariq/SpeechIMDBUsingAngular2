@@ -19,9 +19,11 @@
                     <p class="category">{{movieListModel.response == "True" ? "Total Records: " + movieListModel.totalResults : "No record."}}</p>
                 </div>
                 <br />
-                <div class="col-md-offset-4">
-                    <div class="slds-text-title--caps-normal slds-m-bottom--x-small">Showing {{pagination.start}} - {{pagination.end}} of {{movieListModel.totalResults}}</div>
-                    <ngl-pagination [(page)]="page" (pageChange)="refreshDataOnPageChange($event)" [total]="movieListModel.totalResults" limit="5" 
+                <div class="col-md-offset-4" *ngIf="movieListModel.totalResults">
+                    <div class="slds-text-title--caps-normal slds-m-bottom--x-small">
+                        Showing {{pagination.start}} - {{pagination.end}} of {{movieListModel.totalResults}}
+                    </div>
+                    <ngl-pagination [(page)]="page" (pageChange)="refreshDataOnPageChange($event)" [total]="movieListModel.totalResults" limit="5"
                                     boundaryNumbers="2" perPage="10" #pagination boundaryLinks></ngl-pagination>
                 </div>
                 <br />
@@ -83,13 +85,15 @@
 
                         <!-- No rows overlay -->
                         <template nglNoRowsOverlay>
-                            No movie(s) available for searched query !!! 
+                            No movie(s) available for searched query !!!
                         </template>
                     </table>
                     <br />
                     <br />
-                    <div class="col-md-offset-4">
-                        <div class="slds-text-title--caps-normal slds-m-bottom--x-small">Showing {{pagination.start}} - {{pagination.end}} of {{movieListModel.totalResults}}</div>
+                    <div class="col-md-offset-4" *ngIf="movieListModel.totalResults">
+                        <div class="slds-text-title--caps-normal slds-m-bottom--x-small">
+                            Showing {{pagination.start}} - {{pagination.end}} of {{movieListModel.totalResults}}
+                        </div>
                         <ngl-pagination [(page)]="page" (pageChange)="refreshDataOnPageChange($event)" [total]="movieListModel.totalResults" limit="5" boundaryNumbers="2" perPage="10" #pagination boundaryLinks></ngl-pagination>
                     </div>
                     <br />
