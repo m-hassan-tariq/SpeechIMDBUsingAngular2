@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.pageTitleService.setTitle("Movie Database Portal");
+        this.pageTitleService.setTitle("Dashboard");
         this.alertService.showAlert(true, "Welcome User - Dashboard has been loaded");
         this.breadcrumbService.setBreadcrumbs("dashboard");
         this.populateNewsData();

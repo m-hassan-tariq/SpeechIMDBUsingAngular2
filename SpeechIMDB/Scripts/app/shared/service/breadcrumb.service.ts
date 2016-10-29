@@ -31,7 +31,7 @@ export class BreadcrumbService {
 
         switch (page) {
             case 'dashboard':
-                this.itemBreadcrums.push({ label: 'Dashboard' });
+                this.itemBreadcrums.push({ label: '' });
                 break;
             case 'searchMovie':
                 this.itemBreadcrums.push({ label: 'Dashboard', routerLink: ['dashboard/home'] });
