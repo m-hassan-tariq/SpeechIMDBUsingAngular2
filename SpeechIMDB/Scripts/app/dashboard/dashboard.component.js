@@ -23,7 +23,7 @@ var DashboardComponent = (function () {
         this.newsList = [];
     }
     DashboardComponent.prototype.ngOnInit = function () {
-        this.pageTitleService.setTitle("Dashboard");
+        this.pageTitleService.setTitle("Using Voice to access Movie Database");
         this.alertService.showAlert(true, "Welcome User - Dashboard has been loaded");
         this.breadcrumbService.setBreadcrumbs("dashboard");
         this.populateNewsData();

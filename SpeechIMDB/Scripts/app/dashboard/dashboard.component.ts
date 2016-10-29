@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.pageTitleService.setTitle("Dashboard");
+        this.pageTitleService.setTitle("Using Voice to access Movie Database");
         this.alertService.showAlert(true, "Welcome User - Dashboard has been loaded");
         this.breadcrumbService.setBreadcrumbs("dashboard");
         this.populateNewsData();
