@@ -12,13 +12,15 @@ var core_1 = require('@angular/core');
 var alert_service_1 = require('../shared/service/alert.service');
 var page_title_service_1 = require('../shared/service/page-title.service');
 var breadcrumb_service_1 = require('../shared/service/breadcrumb.service');
+var loader_service_1 = require('../shared/service/loader.service');
 var web_api_observable_service_1 = require('../shared/service/web-api-observable.service');
 var DashboardComponent = (function () {
-    function DashboardComponent(pageTitleService, alertService, toasterService, breadcrumbService, webApiObservableService) {
+    function DashboardComponent(pageTitleService, alertService, toasterService, breadcrumbService, loaderService, webApiObservableService) {
         this.pageTitleService = pageTitleService;
         this.alertService = alertService;
         this.toasterService = toasterService;
         this.breadcrumbService = breadcrumbService;
+        this.loaderService = loaderService;
         this.webApiObservableService = webApiObservableService;
         this.newsList = [];
     }
@@ -30,11 +32,14 @@ var DashboardComponent = (function () {
     };
     DashboardComponent.prototype.populateNewsData = function () {
         var _this = this;
+        this.loaderService.displayLoader(true);
         this.webApiObservableService
             .getService("api/movie/GetMovieNews")
             .subscribe(function (result) {
             _this.newsList = result;
+            _this.loaderService.displayLoader(false);
         }, function (error) {
+            _this.loaderService.displayLoader(false);
             _this.toasterService.showToaster('error', 'Oops!! An error occurred', error);
         });
     };
@@ -54,7 +59,7 @@ var DashboardComponent = (function () {
             templateUrl: '../../Scripts/app/dashboard/dashboard.component.html',
             styleUrls: ['../../Scripts/app/dashboard/dashboard.component.css']
         }), 
-        __metadata('design:paramtypes', [page_title_service_1.PageTitleService, alert_service_1.AlertService, alert_service_1.ToasterService, breadcrumb_service_1.BreadcrumbService, web_api_observable_service_1.WebApiObservableService])
+        __metadata('design:paramtypes', [page_title_service_1.PageTitleService, alert_service_1.AlertService, alert_service_1.ToasterService, breadcrumb_service_1.BreadcrumbService, loader_service_1.LoaderService, web_api_observable_service_1.WebApiObservableService])
     ], DashboardComponent);
     return DashboardComponent;
 }());

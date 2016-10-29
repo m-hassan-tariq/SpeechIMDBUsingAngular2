@@ -3,6 +3,7 @@
 import { AlertService, AlertMessage, ToasterService } from '../shared/service/alert.service';
 import { PageTitleService } from '../shared/service/page-title.service';
 import { BreadcrumbService } from '../shared/service/breadcrumb.service';
+import { LoaderService } from '../shared/service/loader.service';
 
 import { NewsModel } from './shared/model/news.model'
 import { WebApiObservableService } from '../shared/service/web-api-observable.service';
@@ -22,6 +23,7 @@ export class DashboardComponent implements OnInit {
         private alertService: AlertService,
         private toasterService: ToasterService,
         private breadcrumbService: BreadcrumbService,
+        private loaderService: LoaderService,
         private webApiObservableService: WebApiObservableService) {
         this.newsList = [];
     }
@@ -34,13 +36,16 @@ export class DashboardComponent implements OnInit {
     }
 
     populateNewsData() {
+        this.loaderService.displayLoader(true);
         this.webApiObservableService
             .getService("api/movie/GetMovieNews")
             .subscribe(
             (result: NewsModel[]) => {
                 this.newsList = result;
+                this.loaderService.displayLoader(false);
             },
             (error) => {
+                this.loaderService.displayLoader(false);
                 this.toasterService.showToaster('error', 'Oops!! An error occurred', <any>error);
             });
     }
