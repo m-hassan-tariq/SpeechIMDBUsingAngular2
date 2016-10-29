@@ -7,7 +7,6 @@ import { PageTitleService } from '../../shared/service/page-title.service';
 import { ToasterService } from '../../shared/service/alert.service';
 import { BreadcrumbService } from '../../shared/service/breadcrumb.service';
 import { SearchMovieParameterDataService } from '../shared/service/search-movie-parameter-store.service';
-import { SearchMovieListDataService } from '../shared/service/search-movie-list-store.service';
 import { UrlHistoryService } from '../shared/service/url-history-store.service';
 import * as _ from "lodash";
 
@@ -23,7 +22,6 @@ export class SearchMovieComponent implements OnInit, DoCheck {
 
     constructor(
         private searchMovieParameterService: SearchMovieParameterDataService,
-        private searchMovieListDataService: SearchMovieListDataService,
         private pageTitleService: PageTitleService,
         private router: Router,
         private route: ActivatedRoute,
@@ -57,8 +55,6 @@ export class SearchMovieComponent implements OnInit, DoCheck {
         if (this.changeDetected) {
             //set movies search parameter store
             this.searchMovieParameterService.setSearchParamObj(this.model);
-            //reset movies list store
-            this.searchMovieListDataService.setMovieListObj(new MovieListModel());
         }
         this.router.navigate(['/movie/searchMovieList']);
     }

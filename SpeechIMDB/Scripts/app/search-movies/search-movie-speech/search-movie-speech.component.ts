@@ -8,7 +8,6 @@ import { ToasterService } from '../../shared/service/alert.service';
 import { BreadcrumbService } from '../../shared/service/breadcrumb.service';
 import { SpeechRecognitionService } from '../../shared/service/speech-recognition.service';
 import { SearchMovieParameterDataService } from '../shared/service/search-movie-parameter-store.service';
-import { SearchMovieListDataService } from '../shared/service/search-movie-list-store.service';
 import { UrlHistoryService } from '../shared/service/url-history-store.service';
 import * as _ from "lodash";
 
@@ -23,7 +22,6 @@ export class SpeechSearchMovieComponent implements OnInit, OnDestroy {
 
     constructor(
         private searchMovieParameterService: SearchMovieParameterDataService,
-        private searchMovieListDataService: SearchMovieListDataService,
         private pageTitleService: PageTitleService,
         private router: Router,
         private route: ActivatedRoute,
@@ -83,7 +81,6 @@ export class SpeechSearchMovieComponent implements OnInit, OnDestroy {
     searchMovie(): void {
         if (this.model.name) {
             this.searchMovieParameterService.setSearchParamObj(this.model);
-            this.searchMovieListDataService.setMovieListObj(new MovieListModel());
             this.router.navigate(['/movie/searchMovieList']);
         }
         else

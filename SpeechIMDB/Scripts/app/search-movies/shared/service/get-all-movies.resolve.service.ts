@@ -6,8 +6,7 @@ import { MovieListModel } from '../model/movie.model'
 import { WebApiObservableService } from '../../../shared/service/web-api-observable.service';
 import { WebApiPromiseService } from '../../../shared/service/web-api-promise.service';
 import { LoaderService } from '../../../shared/service/loader.service';
-import { SearchMovieParameterDataService } from './search-movie-parameter-store.service'
-import { SearchMovieListDataService } from './search-movie-list-store.service'
+import { SearchMovieParameterDataService } from './search-movie-parameter-store.service';
 
 @Injectable()
 export class GetAllMoviesResolve implements Resolve<MovieListModel> {
@@ -15,7 +14,6 @@ export class GetAllMoviesResolve implements Resolve<MovieListModel> {
 
     constructor(
         private searchMovieParameterService: SearchMovieParameterDataService,
-        private searchMovieListDataService: SearchMovieListDataService,
         private movieService: WebApiObservableService,
         private moviePromiseService: WebApiPromiseService,
         private loaderService: LoaderService) {
@@ -25,20 +23,13 @@ export class GetAllMoviesResolve implements Resolve<MovieListModel> {
     resolve(route: ActivatedRouteSnapshot): Promise<MovieListModel> | boolean {
         this.loaderService.displayLoader(true);
         this.searchMovieModel = this.searchMovieParameterService.getSearchParamObj();
-        let lstMovie: MovieListModel = this.searchMovieListDataService.getMovieListObj();
 
         //making sure that movie-list-data-service has data to avoid server round trip for same search query otherwise make a server trip
-        if (lstMovie.response) {
-            return Promise.resolve(lstMovie);
-        }
-        else {
-            return this.moviePromiseService
-                .getServiceWithComplexObjectAsQueryString('api/Movie/GetAllMovies', this.searchMovieModel)
-                .then((result: MovieListModel) => {
-                    this.searchMovieListDataService.setMovieListObj(result);
-                    return result;
-                })
-                .catch(error => console.log(error));
-        }
+        return this.moviePromiseService
+            .getServiceWithComplexObjectAsQueryString('api/Movie/GetAllMovies', this.searchMovieModel)
+            .then((result: MovieListModel) => {
+                return result;
+            })
+            .catch(error => console.log(error));
     }
 }
