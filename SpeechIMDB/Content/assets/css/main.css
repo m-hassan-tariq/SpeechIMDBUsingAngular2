@@ -370,7 +370,7 @@ Archive Styling
 }
 
 .archive .timeline-wrap article {
-    padding-bottom: 50px;
+    padding-bottom: 20px;
 }
 
 .archive main > header .breadcrumb li + li {
@@ -403,16 +403,16 @@ Archive Styling
 }
 
 .archive .timeline-wrap article {
-    padding-left: 180px;
+    padding-left: 140px;
 }
 
 .archive .timeline-wrap article figure {
     position: absolute;
     left: 0;
     top: 0;
-    height: 100%;
+    height: 130px;
     overflow: hidden;
-    width: 313px;
+    width: 120px;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -420,6 +420,17 @@ Archive Styling
 .articleVisual img{
     display: none;
 }
+
+.imageSize img{
+    width: 120px !important;
+    height: 130px !important;
+}
+
+img[_ngcontent-dby-5] {
+    max-width: 100%;
+    height: 130px;
+}
+
 .archive .timeline-wrap article figure.multiImages{
     max-width: 313px;
 }
@@ -428,12 +439,12 @@ Archive Styling
     background: #f2f4f5;
     border-radius: 5px;
     overflow: hidden;
-    padding-left: 350px;
+    padding-left: 135px;
     position: relative;
     font-size: 13px;
-    height: 270px;
+    height: 130px;
     line-height: 26px;
-    padding-right: 40px;
+    padding-right: 32px;
 }
 
 .archive .timeline-wrap article .article_inner .readmore{
