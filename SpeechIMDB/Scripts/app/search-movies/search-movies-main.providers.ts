@@ -5,5 +5,5 @@ import { SearchMovieParameterDataService } from './shared/service/search-movie-p
 export const MOVIE_PROVIDERS = [
     GetAllMoviesResolve,
     GetMovieDetailResolve,
-    SearchMovieParameterDataService
+    SearchMovieParameterDataService 
 ]
