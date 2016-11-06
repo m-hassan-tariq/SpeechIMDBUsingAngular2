@@ -2158,7 +2158,6 @@
     <Content Include="assets\styles\salesforce-lightning-design-system.min.css" />
     <Content Include="Content\assets\css\animate.min.css" />
     <Content Include="Content\assets\css\bootstrap.min.css" />
-    <Content Include="Content\assets\css\demo.css" />
     <Content Include="Content\assets\css\google-font.css" />
     <Content Include="Content\assets\css\lightning.css" />
     <Content Include="Content\assets\css\main.css" />
@@ -2178,24 +2177,13 @@
     <Content Include="Content\assets\img\favicon.png" />
     <Content Include="Content\assets\img\new_logo.png" />
     <Content Include="Content\assets\img\tim_80x80.png" />
-    <Content Include="Content\assets\js\bootstrap-checkbox-radio.js" />
-    <Content Include="Content\assets\js\bootstrap-notify.js" />
-    <Content Include="Content\assets\js\bootstrap.min.js" />
-    <Content Include="Content\assets\js\chartist.min.js" />
-    <Content Include="Content\assets\js\demo.js" />
-    <Content Include="Content\assets\js\jquery-1.10.2.js" />
-    <Content Include="Content\assets\js\paper-dashboard.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\assets\.DS_Store" />
-    <Content Include="Content\assets\css\.DS_Store" />
-    <Content Include="Content\assets\fonts\.DS_Store" />
     <Content Include="Content\assets\fonts\themify.eot" />
     <Content Include="Content\assets\fonts\themify.ttf" />
     <Content Include="Content\assets\fonts\themify.woff" />
     <Content Include="Content\assets\img\.DS_Store" />
     <Content Include="Content\assets\img\faces\.DS_Store" />
-    <Content Include="Content\assets\js\.DS_Store" />
     <Content Include="Content\assets\sass\.DS_Store" />
     <Content Include="Content\assets\sass\paper-dashboard.scss" />
     <Content Include="Content\assets\sass\paper\mixins\_buttons.scss" />
@@ -2360,6 +2348,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\fonts\icomoon.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\speechmoviesearch - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\speechmoviesearch - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
