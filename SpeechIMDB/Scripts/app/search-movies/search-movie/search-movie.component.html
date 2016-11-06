@@ -7,25 +7,30 @@
                 </div>
                 <div class="content">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <label>Movie Name</label>
                                 <input type="text" class="form-control border-input" name="txtSearchMovieName" id="txtSearchMovieName" value=""
                                        placeholder="Enter Movie Name" [(ngModel)]="model.name">
                             </div>
                         </div>
+                        <div class="col-md-2"></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <label>Year</label>
                                 <input type="text" class="form-control border-input" name="txtSearchMovieYear" id="txtSearchMovieYear" value=""
                                        placeholder="Enter Movie Year" [(ngModel)]="model.year">
                             </div>
                         </div>
+                        <div class="col-md-2"></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <label>Movie Name</label>
                                 <select type="text" class="form-control border-input dropdown" name="txtSearchType" id="txtSearchType" [(ngModel)]="model.type">
@@ -36,6 +41,7 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-2"></div>
                     </div>
                     <div class="text-center">
                         <button class="btn btn-info btn-fill btn-wd" name="btnSearchMovie" id="btnSearchMovie" (click)="searchMovie()">

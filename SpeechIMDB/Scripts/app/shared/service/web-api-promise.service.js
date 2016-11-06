@@ -18,24 +18,27 @@ var WebApiPromiseService = (function () {
         this.http = http;
         this.toasterService = toasterService;
         this.loaderService = loaderService;
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json', 'Accept': 'q=0.8;application/json;q=0.9' });
+        this.options = new http_1.RequestOptions({ headers: this.headers });
     }
     WebApiPromiseService.prototype.getService = function (url) {
         return this.http
-            .get(url)
+            .get(url, this.options)
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
     };
     WebApiPromiseService.prototype.getServiceWithDynamicQueryTerm = function (url, key, val) {
         return this.http
-            .get(url + "/?" + key + "=" + val)
+            .get(url + "/?" + key + "=" + val, this.options)
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
     };
     WebApiPromiseService.prototype.getServiceWithFixedQueryString = function (url, param) {
+        this.options = new http_1.RequestOptions({ headers: this.headers, search: 'query=' + param });
         return this.http
-            .get(url, { search: 'query=' + param })
+            .get(url, this.options)
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
@@ -48,38 +51,33 @@ var WebApiPromiseService = (function () {
                 params.set(key, val);
             }
         }
+        this.options = new http_1.RequestOptions({ headers: this.headers, search: params });
         return this.http
-            .get(url, { search: params })
+            .get(url, this.options)
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
     };
     WebApiPromiseService.prototype.createService = function (url, param) {
         var body = JSON.stringify(param);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
         return this.http
-            .post(url, body, options)
+            .post(url, body, this.options)
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
     };
     WebApiPromiseService.prototype.updateService = function (url, param) {
         var body = JSON.stringify(param);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
         return this.http
-            .put(url, body, options)
+            .put(url, body, this.options)
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
     };
     WebApiPromiseService.prototype.patchService = function (url, param) {
         var body = JSON.stringify(param);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
         return this.http
-            .patch(url, body, options)
+            .patch(url, body, this.options)
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
@@ -92,19 +90,16 @@ var WebApiPromiseService = (function () {
                 params.set(key, val);
             }
         }
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers, search: params });
+        this.options = new http_1.RequestOptions({ headers: this.headers, search: params });
         return this.http
-            .delete(url, options)
+            .delete(url, this.options)
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
     };
     WebApiPromiseService.prototype.deleteServiceWithId = function (url, key, val) {
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
         return this.http
-            .delete(url + "/?" + key + "=" + val, options)
+            .delete(url + "/?" + key + "=" + val, this.options)
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);

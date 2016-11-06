@@ -29,22 +29,25 @@ var WebApiObservableService = (function () {
         this.http = http;
         this.toasterService = toasterService;
         this.loaderService = loaderService;
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json', 'Accept': 'q=0.8;application/json;q=0.9' });
+        this.options = new http_1.RequestOptions({ headers: this.headers });
     }
     WebApiObservableService.prototype.getService = function (url) {
         return this.http
-            .get(url)
+            .get(url, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     WebApiObservableService.prototype.getServiceWithDynamicQueryTerm = function (url, key, val) {
         return this.http
-            .get(url + "/?" + key + "=" + val)
+            .get(url + "/?" + key + "=" + val, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     WebApiObservableService.prototype.getServiceWithFixedQueryString = function (url, param) {
+        this.options = new http_1.RequestOptions({ headers: this.headers, search: 'query=' + param });
         return this.http
-            .get(url, { search: 'query=' + param })
+            .get(url, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
@@ -56,35 +59,30 @@ var WebApiObservableService = (function () {
                 params.set(key, val);
             }
         }
+        this.options = new http_1.RequestOptions({ headers: this.headers, search: params });
         return this.http
-            .get(url, { search: params })
+            .get(url, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     WebApiObservableService.prototype.createService = function (url, param) {
         var body = JSON.stringify(param);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
         return this.http
-            .post(url, body, options)
+            .post(url, body, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     WebApiObservableService.prototype.updateService = function (url, param) {
         var body = JSON.stringify(param);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
         return this.http
-            .put(url, body, options)
+            .put(url, body, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     WebApiObservableService.prototype.patchService = function (url, param) {
         var body = JSON.stringify(param);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
         return this.http
-            .patch(url, body, options)
+            .patch(url, body, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
@@ -96,18 +94,15 @@ var WebApiObservableService = (function () {
                 params.set(key, val);
             }
         }
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers, search: params });
+        this.options = new http_1.RequestOptions({ headers: this.headers, search: params });
         return this.http
-            .delete(url, options)
+            .delete(url, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     WebApiObservableService.prototype.deleteServiceWithId = function (url, key, val) {
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
         return this.http
-            .delete(url + "/?" + key + "=" + val, options)
+            .delete(url + "/?" + key + "=" + val, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };

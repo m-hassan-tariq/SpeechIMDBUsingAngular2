@@ -20,112 +20,95 @@ import { LoaderService } from './loader.service';
 
 @Injectable()
 export class WebApiObservableService {
+    headers: Headers;
+    options: RequestOptions;
 
     constructor(private http: Http,
         private toasterService: ToasterService,
         private loaderService: LoaderService) {
+        this.headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'q=0.8;application/json;q=0.9' });
+        this.options = new RequestOptions({ headers: this.headers });
     }
 
-    getService(url : string): Observable<any> {
+    getService(url: string): Observable<any> {
         return this.http
-            .get(url)
+            .get(url, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    getServiceWithDynamicQueryTerm(url: string, key: string, val: string ): Observable<any> {
+    getServiceWithDynamicQueryTerm(url: string, key: string, val: string): Observable<any> {
         return this.http
-            .get(url + "/?"+ key + "=" + val)
+            .get(url + "/?" + key + "=" + val, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     getServiceWithFixedQueryString(url: string, param: any): Observable<any> {
+        this.options = new RequestOptions({ headers: this.headers, search: 'query=' + param });
         return this.http
-            .get(url, { search: 'query=' + param })
+            .get(url, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     getServiceWithComplexObjectAsQueryString(url: string, param: any): Observable<any> {
         let params: URLSearchParams = new URLSearchParams();
-
         for (var key in param) {
             if (param.hasOwnProperty(key)) {
                 let val = param[key];
                 params.set(key, val);
             }
         }
-
+        this.options = new RequestOptions({ headers: this.headers, search: params });
         return this.http
-            .get(url, { search: params })
+            .get(url, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     createService(url: string, param: any): Observable<any> {
-
         let body = JSON.stringify(param);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-
         return this.http
-            .post(url, body, options)
+            .post(url, body, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     updateService(url: string, param: any): Observable<any> {
-
         let body = JSON.stringify(param);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-
         return this.http
-            .put(url, body, options)
+            .put(url, body, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     patchService(url: string, param: any): Observable<any> {
-
         let body = JSON.stringify(param);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-
         return this.http
-            .patch(url, body, options)
+            .patch(url, body, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     deleteService(url: string, param: any): Observable<any> {
-
         let params: URLSearchParams = new URLSearchParams();
-
         for (var key in param) {
             if (param.hasOwnProperty(key)) {
                 let val = param[key];
                 params.set(key, val);
             }
         }
-
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers, search: params });
-
+        this.options = new RequestOptions({ headers: this.headers, search: params });
         return this.http
-            .delete(url, options)
+            .delete(url, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     deleteServiceWithId(url: string, key: string, val: string): Observable<any> {
-
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-
         return this.http
-            .delete(url + "/?" + key + "=" + val, options)
+            .delete(url + "/?" + key + "=" + val, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -138,7 +121,7 @@ export class WebApiObservableService {
     private handleError(error: any) {
         let errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); 
+        console.error(errMsg);
         this.toasterService.showToaster('error', 'Oops!! An error occurred', errMsg);
         this.loaderService.displayLoader(false);
         return Observable.throw(errMsg);
