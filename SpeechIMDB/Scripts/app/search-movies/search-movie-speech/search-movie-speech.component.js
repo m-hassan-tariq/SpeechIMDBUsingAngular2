@@ -48,14 +48,17 @@ var SpeechSearchMovieComponent = (function () {
             .subscribe(
         //listener
         function (value) {
+            console.log(value);
             _this.filterTerm(value);
         }, 
         //errror
         function (error) {
+            _this.activateSpeechSearchMovie();
             _this.toasterService.showToaster("error", "Error: Speech Search", error.message);
         }, 
         //completion
         function () {
+            _this.activateSpeechSearchMovie();
             _this.showSearchButton = true;
         });
     };

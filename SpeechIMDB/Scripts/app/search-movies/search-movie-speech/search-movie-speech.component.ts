@@ -52,14 +52,17 @@ export class SpeechSearchMovieComponent implements OnInit, OnDestroy {
             .subscribe(
             //listener
             (value) => {
+                console.log(value);
                 this.filterTerm(value);
             },
             //errror
             (error) => {
+                this.activateSpeechSearchMovie();
                 this.toasterService.showToaster("error", "Error: Speech Search", (<Error>error).message);
             },
              //completion
             () => {
+                this.activateSpeechSearchMovie();
                 this.showSearchButton = true;
             });
     }
