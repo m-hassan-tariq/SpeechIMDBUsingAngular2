@@ -53,12 +53,14 @@ var SpeechSearchMovieComponent = (function () {
         }, 
         //errror
         function (error) {
-            _this.activateSpeechSearchMovie();
+            //uncomment below line if you want browser to listen to you continous
+            //this.activateSpeechSearchMovie();
             _this.toasterService.showToaster("error", "Error: Speech Search", error.message);
         }, 
         //completion
         function () {
-            _this.activateSpeechSearchMovie();
+            //uncomment below line if you want browser to listen to you continous
+            //this.activateSpeechSearchMovie();
             _this.showSearchButton = true;
         });
     };
