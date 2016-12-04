@@ -3,7 +3,7 @@ Speech based Search Movie Web App using Angular2, TypeScript, BING API, ASP.NET 
 
 This web application assist you to search movies and seasons through voice. Just say any keyword from movie and season name and then command by saying term **search** to look from millions of record rapidly.
 
-**[Project Website]**(https://m-hassan-tariq.github.io/SpeechIMDBUsingAngular2/)
+**[Project Website](https://m-hassan-tariq.github.io/SpeechIMDBUsingAngular2/)**
 
 -------------
 
